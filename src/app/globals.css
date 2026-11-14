@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Surface Tokens */
+  --bg-surface: #FAF8F5;          /* Warm Ivory page background */
+  --bg-surface-elevated: #FFFFFF; /* Pure White card / container background */
+  --bg-surface-muted: #F4EFEA;    /* Secondary surface */
+  --bg-surface-dark: #0B132B;     /* Slate Navy for Footer */
+  
+  /* Text Tokens */
+  --text-primary: #0B132B;        /* Slate Navy for headings and primary copy */
+  --text-secondary: #334155;      /* Slate-700 for subtitles and secondary copy */
+  --text-muted: #64748B;          /* Slate-500 for captions, timestamps, disclaimers */
+  --text-inverse: #F8FAFC;        /* Slate-50 for copy on dark backgrounds */
+  
+  /* Interactive Accent Tokens */
+  --accent-teal: #0D9488;         /* Teal-600 */
+  --accent-teal-dark: #0F766E;    /* Teal-700 */
+  --accent-teal-hover: #115E59;   /* Teal-800 */
+  --accent-teal-light: #CCFBF1;   /* Teal-100 */
+  
+  /* Secondary / Roadmap Tokens */
+  --accent-amber: #D97706;        /* Amber-600 */
+  --accent-amber-dark: #B45309;   /* Amber-700 */
+  --accent-amber-light: #FEF3C7;  /* Amber-100 */
+
+  /* Border & Divider Tokens */
+  --border-light: #E2E8F0;
+  --border-warm: #E7E2DA;
+  --border-focus: #0D9488;
+}
+
+/* Base Body Styling */
+body {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+}
+
+/* Universal Focus-Visible Standard */
+:focus-visible {
+  outline: 2px solid #0D9488;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #0D9488;
+  outline-offset: 2px;
+}
+
+footer :focus-visible,
+.dark-surface :focus-visible {
+  outline: 2px solid #2DD4BF;
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling enabled by default */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Strict Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
