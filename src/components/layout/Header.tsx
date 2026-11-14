@@ -98,7 +98,7 @@ export function Header() {
             className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded-md"
             aria-label={`${siteConfig.brand.name} Homepage`}
           >
-            <BrandLogoMark className="w-8 h-8 mr-2.5 flex-shrink-0" />
+            <BrandLogoMark className="h-10 w-auto mr-2.5 flex-shrink-0" />
             <span className="font-bold text-slate-900 tracking-tight text-lg">
               {brandPrimary}
             </span>

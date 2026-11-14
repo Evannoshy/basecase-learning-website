@@ -17,7 +17,7 @@ export function Footer() {
           {/* Column 1: Brand & Academy Overview */}
           <div className="space-y-4">
             <div className="flex items-center">
-              <BrandLogoMark className="w-8 h-8 mr-2.5 flex-shrink-0" />
+              <BrandLogoMark className="h-10 w-auto mr-2.5 flex-shrink-0" />
               <span className="font-bold text-white tracking-tight text-lg">
                 {siteConfig.brand.name}
               </span>
