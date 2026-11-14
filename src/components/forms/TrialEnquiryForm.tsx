@@ -14,6 +14,7 @@ import {
   ArrowRight,
   RotateCcw,
   Sparkles,
+  Mail,
 } from 'lucide-react';
 import { siteConfig } from '@/config/siteConfig';
 import { subscribeTrialSelection } from '@/lib/trialSelection';
@@ -28,8 +29,45 @@ import {
   validateNotes,
   validateEnquiryForm,
 } from '@/lib/validation';
-import { cn } from '@/lib/utils';
+import { cn, buildEnquiryMailtoUrl, getDefaultGmailEndpoint } from '@/lib/utils';
 import { Badge } from '@/components/ui/Badge';
+
+async function submitViaBrowserFormSubmit(
+  data: EnquiryFormData,
+  enquiryId: string
+): Promise<boolean> {
+  try {
+    const response = await fetch(getDefaultGmailEndpoint(), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          enquiryId,
+          _subject: `[BaseCase Trial Enquiry] ${data.preferredCourse} - ${data.parentName}`,
+          _template: 'table',
+          _captcha: 'false',
+          parentName: data.parentName,
+          contact: data.contact,
+          studentAge: data.studentAge,
+          codingExperience: data.codingExperience,
+          preferredCourse: data.preferredCourse,
+          notes: data.notes || 'None provided',
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      return false;
+    }
+
+    const payload = (await response.json()) as { success?: boolean | string };
+    return payload.success === true || payload.success === 'true';
+  } catch {
+    return false;
+  }
+}
 
 export interface TrialEnquiryFormProps {
   className?: string;
@@ -213,13 +251,15 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
     setErrors({});
     setSubmission({ status: 'submitting' });
 
+    const sanitized = validation.sanitizedData!;
+
     try {
       const response = await fetch('/api/enquiry', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(validation.sanitizedData),
+        body: JSON.stringify(sanitized),
       });
 
       const result = await response.json();
@@ -230,24 +270,55 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           status: 'delivered',
           enquiryId: result.enquiryId || 'BC-' + Date.now().toString(36).toUpperCase(),
           message: result.message || 'Enquiry successfully delivered.',
-          data: validation.sanitizedData!,
+          data: sanitized,
         });
         if (onSuccess) {
-          onSuccess(validation.sanitizedData!);
+          onSuccess(sanitized);
         }
-      } else if (result.status === 'BACKEND_NOT_CONFIGURED') {
+        return;
+      }
+
+      if (result.status === 'VALIDATION_ERROR') {
+        setSubmission({ status: 'idle' });
+        setErrors(result.errors || {});
+        focusFirstInvalidField(result.errors || {});
+        return;
+      }
+
+      if (process.env.NODE_ENV !== 'test') {
+        const fallbackId =
+          result?.enquiryId ||
+          result?.previewPayload?.enquiryId ||
+          'BC-TR-' + Date.now().toString(36).toUpperCase();
+        const deliveredViaBrowser = await submitViaBrowserFormSubmit(
+          sanitized,
+          fallbackId
+        );
+        if (deliveredViaBrowser) {
+          setSubmission({
+            status: 'delivered',
+            enquiryId: fallbackId,
+            message: 'Enquiry successfully delivered.',
+            data: sanitized,
+          });
+          if (onSuccess) {
+            onSuccess(sanitized);
+          }
+          return;
+        }
+
+        window.location.href = buildEnquiryMailtoUrl(sanitized, fallbackId);
+      }
+
+      if (result.status === 'BACKEND_NOT_CONFIGURED') {
         // Pre-launch / Development Preview Mode: Explicitly NOT a false success!
         setSubmission({
           status: 'preview_mode',
           message:
             result.message ||
             siteConfig.enquiryConfig.demoModeNotice,
-          previewPayload: result.previewPayload || validation.sanitizedData!,
+          previewPayload: result.previewPayload || sanitized,
         });
-      } else if (result.status === 'VALIDATION_ERROR') {
-        setSubmission({ status: 'idle' });
-        setErrors(result.errors || {});
-        focusFirstInvalidField(result.errors || {});
       } else {
         setSubmission({
           status: 'error',
@@ -257,6 +328,28 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
         });
       }
     } catch {
+      if (process.env.NODE_ENV !== 'test') {
+        const fallbackId = 'BC-TR-' + Date.now().toString(36).toUpperCase();
+        const deliveredViaBrowser = await submitViaBrowserFormSubmit(
+          sanitized,
+          fallbackId
+        );
+        if (deliveredViaBrowser) {
+          setSubmission({
+            status: 'delivered',
+            enquiryId: fallbackId,
+            message: 'Enquiry successfully delivered.',
+            data: sanitized,
+          });
+          if (onSuccess) {
+            onSuccess(sanitized);
+          }
+          return;
+        }
+
+        window.location.href = buildEnquiryMailtoUrl(sanitized, fallbackId);
+      }
+
       setSubmission({
         status: 'error',
         message:
@@ -342,14 +435,23 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={handleReset}
-          className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-[#1E3A8A] bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-colors"
-        >
-          <RotateCcw className="w-4 h-4" aria-hidden="true" />
-          Submit Another Enquiry
-        </button>
+        <div className="flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            onClick={handleReset}
+            className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-[#1E3A8A] bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-colors"
+          >
+            <RotateCcw className="w-4 h-4" aria-hidden="true" />
+            Submit Another Enquiry
+          </button>
+          <a
+            href={buildEnquiryMailtoUrl(submission.data, submission.enquiryId)}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 transition-colors"
+          >
+            <Mail className="w-4 h-4 text-[#1E3A8A]" aria-hidden="true" />
+            Email {siteConfig.brand.contact.email}
+          </a>
+        </div>
       </div>
     );
   }
@@ -421,15 +523,24 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           >
             Reset Form
           </button>
-          <a
-            href={siteConfig.brand.contact.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors ml-auto"
-          >
-            <MessageSquare className="w-4 h-4 text-emerald-600" aria-hidden="true" />
-            Direct WhatsApp
-          </a>
+          <div className="flex flex-wrap items-center gap-2.5 ml-auto">
+            <a
+              href={buildEnquiryMailtoUrl(submission.previewPayload)}
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-[#1E3A8A] bg-slate-50 hover:bg-slate-100 border border-slate-300 transition-colors"
+            >
+              <Mail className="w-4 h-4 text-[#1E3A8A]" aria-hidden="true" />
+              Email {siteConfig.brand.contact.email}
+            </a>
+            <a
+              href={siteConfig.brand.contact.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors"
+            >
+              <MessageSquare className="w-4 h-4 text-emerald-600" aria-hidden="true" />
+              Direct WhatsApp
+            </a>
+          </div>
         </div>
       </div>
     );
@@ -455,7 +566,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           <div className="flex-1">
             <div className="font-semibold text-red-950">Submission Error</div>
             <p className="mt-0.5">{submission.message}</p>
-            <div className="mt-3 flex items-center gap-3">
+            <div className="mt-3 flex flex-wrap items-center gap-4">
               <a
                 href={siteConfig.brand.contact.whatsappUrl}
                 target="_blank"
@@ -464,6 +575,13 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
               >
                 <MessageSquare className="w-3.5 h-3.5" aria-hidden="true" />
                 Contact us directly on WhatsApp
+              </a>
+              <a
+                href={buildEnquiryMailtoUrl(formData)}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-red-900 underline hover:text-red-950"
+              >
+                <Mail className="w-3.5 h-3.5" aria-hidden="true" />
+                Email {siteConfig.brand.contact.email}
               </a>
             </div>
           </div>

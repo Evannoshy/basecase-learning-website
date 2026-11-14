@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { POST, GET } from '@/app/api/enquiry/route';
+import { getDefaultGmailEndpoint } from '@/lib/utils';
 
 describe('/api/enquiry Route Handler - Backend Safety & Honest Delivery Protocol', () => {
   const originalEnv = process.env.ENQUIRY_WEBHOOK_URL;
@@ -463,6 +464,12 @@ describe('/api/enquiry Route Handler - Backend Safety & Honest Delivery Protocol
       expect(res.headers.get('Allow')).toBe('POST');
       expect(data.success).toBe(false);
       expect(data.status).toBe('METHOD_NOT_ALLOWED');
+    });
+
+    it('resolves the default FormSubmit Gmail endpoint to basecaselearning@gmail.com', () => {
+      expect(getDefaultGmailEndpoint()).toBe(
+        'https://formsubmit.co/ajax/basecaselearning@gmail.com'
+      );
     });
   });
 });

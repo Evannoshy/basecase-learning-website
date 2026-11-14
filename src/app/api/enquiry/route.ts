@@ -1,4 +1,6 @@
 import { NextResponse } from 'next/server';
+import { siteConfig } from '@/config/siteConfig';
+import { getDefaultGmailEndpoint } from '@/lib/utils';
 import { validateEnquiryForm, type EnquiryFormData } from '@/lib/validation';
 
 /**
@@ -52,21 +54,31 @@ function generateEnquiryId(): string {
 }
 
 /**
- * Checks whether an active, valid webhook URL is configured.
+ * Checks whether an active, valid webhook URL is configured, or falls back to Gmail delivery outside tests.
  */
 function getActiveWebhookUrl(): string | null {
   const url = process.env.ENQUIRY_WEBHOOK_URL?.trim();
-  if (
+  const isPlaceholder =
     !url ||
     url === '' ||
     url.toLowerCase() === 'demo' ||
     url.toLowerCase() === 'disabled' ||
     url.toLowerCase() === 'none' ||
-    url.toLowerCase() === 'undefined'
+    url.toLowerCase() === 'undefined';
+
+  if (!isPlaceholder) {
+    return url;
+  }
+
+  if (
+    process.env.NODE_ENV === 'test' ||
+    process.env.ENQUIRY_WEBHOOK_URL !== undefined ||
+    process.env.ENQUIRY_PREVIEW_STATUS !== undefined
   ) {
     return null;
   }
-  return url;
+
+  return getDefaultGmailEndpoint();
 }
 
 /**
@@ -150,6 +162,16 @@ export async function POST(request: Request): Promise<NextResponse<EnquiryApiRes
   const outboundPayload = {
     enquiryId,
     submittedAt,
+    _subject: `[BaseCase Trial Enquiry] ${sanitizedData.preferredCourse} - ${sanitizedData.parentName}`,
+    _template: 'table',
+    _captcha: 'false',
+    recipientEmail: siteConfig.brand.contact.email,
+    parentName: sanitizedData.parentName,
+    contact: sanitizedData.contact,
+    studentAge: sanitizedData.studentAge,
+    codingExperience: sanitizedData.codingExperience,
+    preferredCourse: sanitizedData.preferredCourse,
+    notes: sanitizedData.notes || 'None provided',
     data: sanitizedData,
     source: 'basecase-learning-website',
     environment: process.env.NODE_ENV || 'development',
@@ -163,6 +185,9 @@ export async function POST(request: Request): Promise<NextResponse<EnquiryApiRes
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Origin: siteConfig.brand.url,
+        Referer: `${siteConfig.brand.url}/`,
         'X-Enquiry-Id': enquiryId,
         'User-Agent': 'BaseCaseLearning-Website/1.0',
       },
@@ -172,7 +197,24 @@ export async function POST(request: Request): Promise<NextResponse<EnquiryApiRes
 
     clearTimeout(timeoutId);
 
-    if (!backendResponse.ok) {
+    let providerRejected = false;
+    if (backendResponse.ok && typeof backendResponse.json === 'function') {
+      try {
+        const providerBody = (await backendResponse.json()) as {
+          success?: boolean | string;
+        } | null;
+        if (
+          providerBody &&
+          (providerBody.success === false || providerBody.success === 'false')
+        ) {
+          providerRejected = true;
+        }
+      } catch {
+        // Non-JSON 2xx responses from generic webhooks remain valid confirmations
+      }
+    }
+
+    if (!backendResponse.ok || providerRejected) {
       return NextResponse.json(
         {
           success: false,

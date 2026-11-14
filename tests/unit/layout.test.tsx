@@ -9,7 +9,7 @@ import { FloatingContactCta } from '@/components/layout/FloatingContactCta';
 import { CookieBanner } from '@/components/layout/CookieBanner';
 import { Badge } from '@/components/ui/Badge';
 import { siteConfig } from '@/config/siteConfig';
-import { resolveSectionHref } from '@/lib/utils';
+import { resolveSectionHref, buildEnquiryMailtoUrl } from '@/lib/utils';
 import robots from '@/app/robots';
 import sitemap from '@/app/sitemap';
 import HomePage from '@/app/page';
@@ -473,5 +473,32 @@ describe('resolveSectionHref Helper', () => {
     expect(resolveSectionHref('#mentors', '/pricing')).toBe('/#mentors');
     expect(resolveSectionHref('#trial-enquiry', '/pricing')).toBe('#trial-enquiry');
     expect(resolveSectionHref('/pricing', '/pricing')).toBe('/pricing');
+  });
+});
+
+describe('buildEnquiryMailtoUrl Helper', () => {
+  it('builds a mailto URL addressed to basecaselearning@gmail.com with encoded enquiry fields', () => {
+    const mailto = buildEnquiryMailtoUrl(
+      {
+        parentName: 'Rachel Tan',
+        contact: '+65 9123 4567',
+        studentAge: 14,
+        codingExperience: 'Complete Beginner (Never coded before)',
+        preferredCourse: 'Beginner Python',
+        notes: 'Prefer Saturday morning.',
+      },
+      'BC-TR-202611-TEST01'
+    );
+
+    expect(mailto.startsWith('mailto:basecaselearning@gmail.com?')).toBe(true);
+    const decoded = decodeURIComponent(mailto);
+    expect(decoded).toContain('subject=[BaseCase Trial Enquiry] Beginner Python - Rachel Tan');
+    expect(decoded).toContain('Enquiry ID: BC-TR-202611-TEST01');
+    expect(decoded).toContain('Parent / Guardian Name: Rachel Tan');
+    expect(decoded).toContain('Contact Info: +65 9123 4567');
+    expect(decoded).toContain('Student Age: 14');
+    expect(decoded).toContain('Coding Experience: Complete Beginner (Never coded before)');
+    expect(decoded).toContain('Preferred Course: Beginner Python');
+    expect(decoded).toContain('Additional Notes: Prefer Saturday morning.');
   });
 });
