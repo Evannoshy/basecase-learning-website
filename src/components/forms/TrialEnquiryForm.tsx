@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import Link from 'next/link';
 import {
   CheckCircle2,
   AlertCircle,
@@ -792,7 +793,24 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           <Shield className="w-4 h-4 text-[#1E3A8A] flex-shrink-0 mt-0.5" aria-hidden="true" />
           <div>
             <span className="font-semibold text-slate-700">Privacy &amp; Data Protection: </span>
-            {siteConfig.enquiryConfig.privacyGuarantee}
+            <span>{siteConfig.enquiryConfig.privacyGuarantee}</span>{' '}
+            <span>
+              Read our{' '}
+              <Link
+                href="/privacy"
+                className="font-semibold text-[#1E3A8A] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
+              >
+                Privacy Policy
+              </Link>{' '}
+              and{' '}
+              <Link
+                href="/cookies"
+                className="font-semibold text-[#1E3A8A] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
+              >
+                Cookie Policy
+              </Link>
+              .
+            </span>
           </div>
         </div>
       </div>

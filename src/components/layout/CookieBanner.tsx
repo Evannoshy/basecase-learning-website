@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { ChevronDown, ChevronUp, ShieldCheck } from 'lucide-react';
 import {
   COOKIE_CONSENT_EVENT,
   CookieChoice,
@@ -11,6 +12,7 @@ import {
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
+  const [showSummary, setShowSummary] = useState(false);
 
   useEffect(() => {
     const syncVisibility = () => {
@@ -39,11 +41,21 @@ export function CookieBanner() {
     <div
       role="region"
       aria-label="Cookie notice"
-      className="fixed inset-x-3 bottom-16 md:bottom-6 md:left-6 md:right-auto md:max-w-md z-50 bg-white border border-slate-300 rounded-lg shadow-lg p-4 sm:p-5 text-slate-700"
+      className="fixed inset-x-3 bottom-16 md:bottom-6 md:left-6 md:right-auto md:max-w-md z-50 bg-white border border-slate-300 border-t-4 border-t-[#1E3A8A] rounded-lg shadow-lg p-4 sm:p-5 text-slate-700"
     >
-      <p className="text-sm font-semibold text-slate-900">Cookies on this site</p>
-      <p className="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed">
-        We use cookies to keep the site working properly and understand basic page traffic. Read our{' '}
+      <div className="flex items-center gap-2">
+        <ShieldCheck className="w-4 h-4 text-[#1E3A8A] flex-shrink-0" aria-hidden="true" />
+        <p className="text-sm font-bold text-slate-900">Cookies on this site</p>
+      </div>
+      <p className="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+        We use essential browser storage to keep forms and preferences working properly, and handle any enquiry details under Singapore&apos;s PDPA. Read our{' '}
+        <Link
+          href="/privacy"
+          className="font-semibold text-[#1E3A8A] hover:text-[#1E40AF] underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
+        >
+          Privacy Policy
+        </Link>{' '}
+        and{' '}
         <Link
           href="/cookies"
           className="font-semibold text-[#1E3A8A] hover:text-[#1E40AF] underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
@@ -52,6 +64,43 @@ export function CookieBanner() {
         </Link>
         .
       </p>
+
+      <div className="mt-2.5">
+        <button
+          type="button"
+          onClick={() => setShowSummary((prev) => !prev)}
+          aria-expanded={showSummary}
+          aria-controls="cookie-toast-privacy-summary"
+          className="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 hover:text-[#1E3A8A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded transition-colors"
+        >
+          <span>Quick Privacy Summary</span>
+          {showSummary ? (
+            <ChevronUp className="w-3.5 h-3.5" aria-hidden="true" />
+          ) : (
+            <ChevronDown className="w-3.5 h-3.5" aria-hidden="true" />
+          )}
+        </button>
+
+        {showSummary && (
+          <ul
+            id="cookie-toast-privacy-summary"
+            className="mt-2 p-3 rounded-md bg-slate-50 border border-slate-200 space-y-1.5 text-xs text-slate-600 leading-relaxed list-disc pl-6"
+          >
+            <li>
+              Essential storage remembers your cookie choice (
+              <code className="font-mono text-[11px] text-slate-800">basecase_cookie_consent</code>
+              ).
+            </li>
+            <li>
+              Trial enquiry details (name, contact, student age/level) are used only to reply to your booking request under Singapore&apos;s PDPA.
+            </li>
+            <li>
+              We never sell student or parent data or run third-party ad trackers.
+            </li>
+          </ul>
+        )}
+      </div>
+
       <div className="mt-3.5 flex items-center gap-2.5">
         <button
           type="button"

@@ -1,5 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import React from 'react';
+import fs from 'fs';
+import path from 'path';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -12,7 +14,15 @@ import sitemap from '@/app/sitemap';
 import HomePage from '@/app/page';
 import PricingPage from '@/app/pricing/page';
 import CookiesPage from '@/app/cookies/page';
+import PrivacyPage from '@/app/privacy/page';
 import { CookiePreferencesControl } from '@/components/layout/CookiePreferencesControl';
+
+vi.mock('next/font/google', () => ({
+  Plus_Jakarta_Sans: () => ({ variable: '--font-sans' }),
+  JetBrains_Mono: () => ({ variable: '--font-mono' }),
+}));
+
+import { metadata as layoutMetadata } from '@/app/layout';
 
 describe('Header Component', () => {
   it('renders brand identity and logo', () => {
@@ -226,14 +236,23 @@ describe('FloatingContactCta Component', () => {
 });
 
 describe('CookieBanner Component', () => {
-  it('renders cookie notice when no prior consent is saved and hides on Accept All', () => {
+  it('renders cookie notice with Privacy Policy & Cookie Policy links, inline summary toggle, and hides on Accept All', () => {
     window.localStorage.removeItem('basecase_cookie_consent');
     render(<CookieBanner />);
 
     const region = screen.getByRole('region', { name: /cookie notice/i });
     expect(region).toBeInTheDocument();
     expect(screen.getByText('Cookies on this site')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /privacy policy/i })).toHaveAttribute('href', '/privacy');
     expect(screen.getByRole('link', { name: /cookie policy/i })).toHaveAttribute('href', '/cookies');
+
+    const summaryToggle = screen.getByRole('button', { name: /quick privacy summary/i });
+    expect(summaryToggle).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.queryByText(/we never sell student or parent data/i)).not.toBeInTheDocument();
+
+    fireEvent.click(summaryToggle);
+    expect(summaryToggle).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByText(/we never sell student or parent data/i)).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: /accept all/i }));
     expect(window.localStorage.getItem('basecase_cookie_consent')).toBe('accepted');
@@ -258,7 +277,23 @@ describe('CookieBanner Component', () => {
   });
 });
 
-describe('SEO Metadata Routes & Structured Data', () => {
+describe('SEO Metadata Routes, Icons & Structured Data', () => {
+  it('declares favicon and SVG app icon files on disk and in root layout metadata', () => {
+    const projectRoot = process.cwd();
+    expect(fs.existsSync(path.join(projectRoot, 'src/app/icon.svg'))).toBe(true);
+    expect(fs.existsSync(path.join(projectRoot, 'public/icon.svg'))).toBe(true);
+    expect(fs.existsSync(path.join(projectRoot, 'public/favicon.svg'))).toBe(true);
+
+    expect(layoutMetadata.icons).toEqual({
+      icon: [
+        { url: '/icon.svg', type: 'image/svg+xml' },
+        { url: '/favicon.svg', type: 'image/svg+xml' },
+      ],
+      shortcut: ['/icon.svg'],
+      apple: [{ url: '/icon.svg', type: 'image/svg+xml' }],
+    });
+  });
+
   it('generates robots.txt pointing to canonical sitemap URL', () => {
     const result = robots();
     expect(result.rules).toEqual({
@@ -269,9 +304,9 @@ describe('SEO Metadata Routes & Structured Data', () => {
     expect(result.sitemap).toBe(`${siteConfig.brand.url}/sitemap.xml`);
   });
 
-  it('generates sitemap.xml with canonical homepage, pricing, and cookies URLs', () => {
+  it('generates sitemap.xml with canonical homepage, pricing, cookies, and privacy URLs', () => {
     const entries = sitemap();
-    expect(entries).toHaveLength(3);
+    expect(entries).toHaveLength(4);
     expect(entries[0].url).toBe(siteConfig.brand.url);
     expect(entries[0].changeFrequency).toBe('weekly');
     expect(entries[0].priority).toBe(1);
@@ -286,6 +321,11 @@ describe('SEO Metadata Routes & Structured Data', () => {
     expect(entries[2].changeFrequency).toBe('monthly');
     expect(entries[2].priority).toBe(0.5);
     expect(entries[2].lastModified).toBeInstanceOf(Date);
+
+    expect(entries[3].url).toBe(`${siteConfig.brand.url}/privacy`);
+    expect(entries[3].changeFrequency).toBe('monthly');
+    expect(entries[3].priority).toBe(0.5);
+    expect(entries[3].lastModified).toBeInstanceOf(Date);
   });
 
   it('renders JSON-LD structured data with EducationalOrganization, Course, and FAQPage schemas on HomePage', () => {
@@ -365,5 +405,27 @@ describe('CookiesPage & CookiePreferencesControl', () => {
     render(<CookiePreferencesControl />);
     expect(screen.getByTestId('cookie-consent-status')).toHaveTextContent('Accepted All');
     window.localStorage.removeItem('basecase_cookie_consent');
+  });
+});
+
+describe('PrivacyPage Component', () => {
+  it('renders Singapore PDPA Privacy Policy sections, contact links, /cookies links, and preference control', () => {
+    window.localStorage.removeItem('basecase_cookie_consent');
+    render(<PrivacyPage />);
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Privacy Policy' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /back to home/i })).toHaveAttribute('href', '/');
+    expect(screen.getByRole('heading', { level: 2, name: /1\. Personal Data We Collect/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: /4\. Retention, Access, Correction & Withdrawal/i })).toBeInTheDocument();
+    expect(screen.getAllByRole('link', { name: /cookie policy/i })[0]).toHaveAttribute('href', '/cookies');
+    expect(screen.getByRole('link', { name: siteConfig.brand.contact.email })).toHaveAttribute(
+      'href',
+      `mailto:${siteConfig.brand.contact.email}`
+    );
+    expect(screen.getByRole('link', { name: siteConfig.brand.contact.phoneDisplay })).toHaveAttribute(
+      'href',
+      siteConfig.brand.contact.whatsappUrl
+    );
+    expect(screen.getByTestId('cookie-consent-status')).toHaveTextContent('No preference saved yet');
   });
 });

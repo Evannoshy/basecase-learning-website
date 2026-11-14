@@ -49,7 +49,16 @@ export default function CookiesPage() {
             <ArrowLeft className="w-4 h-4" aria-hidden="true" />
             <span>Back to Home</span>
           </Link>
-          <span className="text-slate-500 font-medium">Cookie Policy</span>
+          <div className="flex items-center gap-3 text-slate-500 font-medium">
+            <Link
+              href="/privacy"
+              className="hover:text-[#1E3A8A] underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
+            >
+              Privacy Policy
+            </Link>
+            <span aria-hidden="true">/</span>
+            <span className="text-slate-700">Cookie Policy</span>
+          </div>
         </div>
       </div>
 
@@ -161,7 +170,14 @@ export default function CookiesPage() {
               You can also block, inspect, or delete cookies and site data at any time through your browser settings (Chrome, Safari, Firefox, or Edge).
             </p>
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-              Under Singapore&apos;s PDPA, any personal information you choose to enter in our trial enquiry form is used solely to reply to your enquiry about classes. If you have questions about privacy or cookies, contact us at{' '}
+              Under Singapore&apos;s PDPA, any personal information you choose to enter in our trial enquiry form is used solely to reply to your enquiry about classes, as explained in our{' '}
+              <Link
+                href="/privacy"
+                className="font-semibold text-[#1E3A8A] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
+              >
+                Privacy Policy
+              </Link>
+              . If you have questions about privacy or cookies, contact us at{' '}
               <a
                 href={`mailto:${brand.contact.email}`}
                 className="font-semibold text-[#1E3A8A] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
