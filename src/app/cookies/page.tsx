@@ -126,30 +126,28 @@ export default function CookiesPage() {
               3. Cookie &amp; Local Storage Reference
             </h2>
             <div className="rounded-xl border border-slate-300 overflow-hidden shadow-sm">
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
-                  <thead className="bg-slate-100 text-xs uppercase tracking-wider text-slate-700">
-                    <tr>
-                      <th scope="col" className="px-5 py-3.5 font-semibold">Name / Key</th>
-                      <th scope="col" className="px-5 py-3.5 font-semibold">Category</th>
-                      <th scope="col" className="px-5 py-3.5 font-semibold">Purpose</th>
-                      <th scope="col" className="px-5 py-3.5 font-semibold">Retention</th>
+              <table className="w-full divide-y divide-slate-200 text-left text-sm">
+                <thead className="bg-slate-100 text-xs uppercase tracking-wider text-slate-700">
+                  <tr>
+                    <th scope="col" className="px-4 py-3.5 font-semibold md:w-[22%]">Name / Key</th>
+                    <th scope="col" className="px-4 py-3.5 font-semibold md:w-[20%]">Category</th>
+                    <th scope="col" className="px-4 py-3.5 font-semibold md:w-[38%]">Purpose</th>
+                    <th scope="col" className="px-4 py-3.5 font-semibold md:w-[20%]">Retention</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200 bg-white">
+                  {cookieInventory.map((item) => (
+                    <tr key={item.name} className="hover:bg-slate-50 transition-colors align-top">
+                      <td className="px-4 py-4 font-mono text-xs font-semibold text-slate-900 break-all sm:break-words">
+                        {item.name}
+                      </td>
+                      <td className="px-4 py-4 text-slate-700">{item.type}</td>
+                      <td className="px-4 py-4 text-slate-600 leading-relaxed">{item.purpose}</td>
+                      <td className="px-4 py-4 text-slate-600">{item.duration}</td>
                     </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-200 bg-white">
-                    {cookieInventory.map((item) => (
-                      <tr key={item.name} className="hover:bg-slate-50 transition-colors">
-                        <td className="px-5 py-4 font-mono text-xs sm:text-sm font-semibold text-slate-900 whitespace-nowrap">
-                          {item.name}
-                        </td>
-                        <td className="px-5 py-4 text-slate-700 whitespace-nowrap">{item.type}</td>
-                        <td className="px-5 py-4 text-slate-600 leading-relaxed">{item.purpose}</td>
-                        <td className="px-5 py-4 text-slate-600 whitespace-nowrap">{item.duration}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </section>
 
