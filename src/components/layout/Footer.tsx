@@ -79,6 +79,14 @@ export function Footer() {
                 </li>
                 <li>
                   <a
+                    href="/pricing"
+                    className="hover:text-teal-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded transition-colors"
+                  >
+                    Tuition Fees &amp; Pricing
+                  </a>
+                </li>
+                <li>
+                  <a
                     href="#faqs"
                     className="hover:text-teal-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded transition-colors"
                   >

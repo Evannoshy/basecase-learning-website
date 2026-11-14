@@ -10,6 +10,7 @@ import { siteConfig } from '@/config/siteConfig';
 import robots from '@/app/robots';
 import sitemap from '@/app/sitemap';
 import HomePage from '@/app/page';
+import PricingPage from '@/app/pricing/page';
 
 describe('Header Component', () => {
   it('renders brand identity and logo', () => {
@@ -256,13 +257,18 @@ describe('SEO Metadata Routes & Structured Data', () => {
     expect(result.sitemap).toBe(`${siteConfig.brand.url}/sitemap.xml`);
   });
 
-  it('generates sitemap.xml with canonical homepage URL', () => {
+  it('generates sitemap.xml with canonical homepage and pricing URLs', () => {
     const entries = sitemap();
-    expect(entries).toHaveLength(1);
+    expect(entries).toHaveLength(2);
     expect(entries[0].url).toBe(siteConfig.brand.url);
     expect(entries[0].changeFrequency).toBe('weekly');
     expect(entries[0].priority).toBe(1);
     expect(entries[0].lastModified).toBeInstanceOf(Date);
+
+    expect(entries[1].url).toBe(`${siteConfig.brand.url}/pricing`);
+    expect(entries[1].changeFrequency).toBe('weekly');
+    expect(entries[1].priority).toBe(0.9);
+    expect(entries[1].lastModified).toBeInstanceOf(Date);
   });
 
   it('renders JSON-LD structured data with EducationalOrganization, Course, and FAQPage schemas on HomePage', () => {
@@ -290,5 +296,26 @@ describe('SEO Metadata Routes & Structured Data', () => {
     expect(faqNode).toBeDefined();
     expect(faqNode.mainEntity).toHaveLength(siteConfig.faqs.length);
     expect(faqNode.mainEntity[0]['@type']).toBe('Question');
+  });
+});
+
+describe('PricingPage Component', () => {
+  it('renders pricing heading, all 3 editable SGD tiers, and the trial enquiry section', () => {
+    render(<PricingPage />);
+
+    expect(
+      screen.getByRole('heading', { level: 1, name: siteConfig.pricing.headline })
+    ).toBeInTheDocument();
+
+    expect(screen.getByRole('heading', { level: 2, name: '1-on-1 Trial & Consultation' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: 'Small-Group Weekly Tuition' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: '1-on-1 Private Mentorship' })).toBeInTheDocument();
+
+    expect(screen.getByText('S$40')).toBeInTheDocument();
+    expect(screen.getByText('S$280')).toBeInTheDocument();
+    expect(screen.getByText('S$85')).toBeInTheDocument();
+
+    expect(screen.getByRole('link', { name: /back to home/i })).toHaveAttribute('href', '/');
+    expect(document.getElementById('trial-enquiry')).toBeInTheDocument();
   });
 });

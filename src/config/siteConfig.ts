@@ -160,6 +160,36 @@ export interface FAQItem {
   answer: string;
 }
 
+export interface PricingTier {
+  id: string;
+  name: string;
+  badge?: string;
+  price: string;
+  billingCycle: string;
+  summary: string;
+  features: string[];
+  ctaText: string;
+  ctaHref: string;
+  isFeatured?: boolean;
+}
+
+export interface PricingFaq {
+  question: string;
+  answer: string;
+}
+
+export interface PricingConfig {
+  headline: string;
+  subheadline: string;
+  placeholderNotice: string;
+  tiers: PricingTier[];
+  includedItems: {
+    title: string;
+    description: string;
+  }[];
+  pricingFaqs: PricingFaq[];
+}
+
 export interface CourseRecommenderGoal {
   id: string;
   label: string;
@@ -199,6 +229,7 @@ export interface SiteConfig {
   progressionStages: ProgressionStage[];
   faqs: FAQItem[];
   enquiryConfig: EnquiryConfig;
+  pricing: PricingConfig;
 }
 
 export const siteConfig: SiteConfig = {
@@ -247,6 +278,7 @@ export const siteConfig: SiteConfig = {
     { label: "How Learning Works", href: "#how-learning-works" },
     { label: "Mentors", href: "#mentors" },
     { label: "Progression", href: "#progression" },
+    { label: "Pricing", href: "/pricing" },
     { label: "FAQs", href: "#faqs" },
     { label: "Book a coding trial", href: "#trial-enquiry", isCta: true },
   ],
@@ -683,6 +715,104 @@ export const siteConfig: SiteConfig = {
       "WhatsApp help when stuck on code between lessons",
       "Clear summary notes & reference code after each topic",
       "Small-group pace with direct mentor feedback",
+    ],
+  },
+
+  /* Editable placeholder pricing tiers — update SGD rates and billing cycles below as needed. */
+  pricing: {
+    headline: "Tuition Fees & Class Packages",
+    subheadline:
+      "Transparent, small-group coding tuition and 1-on-1 mentorship rates for secondary, JC, and IB students in Singapore.",
+    placeholderNotice:
+      "Sample rate guide shown below — final term schedules and fee details are confirmed with parents during consultation before enrolment.",
+    tiers: [
+      {
+        id: "trial-consultation",
+        name: "1-on-1 Trial & Consultation",
+        badge: "Start Here",
+        price: "S$40",
+        billingCycle: "per 60-min session",
+        summary: "Diagnostic coding session & parent debrief — waived upon enrolment.",
+        features: [
+          "1-on-1 diagnostic coding activity with an NUS Computing tutor",
+          "Assess current logic comfort (zero experience needed)",
+          "Laptop and Python / VS Code environment setup check",
+          "Plain-English parent feedback & track recommendation",
+        ],
+        ctaText: "Book a coding trial",
+        ctaHref: "#trial-enquiry",
+        isFeatured: false,
+      },
+      {
+        id: "small-group-weekly",
+        name: "Small-Group Weekly Tuition",
+        badge: "Most Popular",
+        price: "S$280",
+        billingCycle: "per month (4 lessons)",
+        summary: "Structured weekly 2-hour classes in small groups of 3–6 students.",
+        features: [
+          "4 weekly 2-hour coached sessions (Beginner Python or Web Dev)",
+          "Small class ratio of 3–6 students per table",
+          "Step-by-step practice sheets & guided debugging reviews",
+          "WhatsApp homework and project Q&A between lessons",
+          "End-of-module working project walkthrough for parents",
+        ],
+        ctaText: "Enquire for group slots",
+        ctaHref: "#trial-enquiry",
+        isFeatured: true,
+      },
+      {
+        id: "private-mentorship",
+        name: "1-on-1 Private Mentorship",
+        badge: "Custom Pace",
+        price: "S$85",
+        billingCycle: "per hour",
+        summary: "Individual coaching for O-Level / A-Level / IB Computing or custom projects.",
+        features: [
+          "Dedicated 1-on-1 NUS Computing mentor matched to goals",
+          "Flexible pacing for school Computing or portfolio builds",
+          "Focused trace-table, algorithm, and code-review coaching",
+          "Flexible lesson timing around CCA and exam schedules",
+        ],
+        ctaText: "Request 1-on-1 coaching",
+        ctaHref: "#trial-enquiry",
+        isFeatured: false,
+      },
+    ],
+    includedItems: [
+      {
+        title: "No Registration or Deposit Fees",
+        description: "Pay strictly for classes attended — no hidden admin charges, software fees, or lock-in contracts.",
+      },
+      {
+        title: "All Free Developer Tools",
+        description: "Students learn on standard tools (Python 3, VS Code, HTML/CSS/JS) with zero paid subscriptions required.",
+      },
+      {
+        title: "Between-Lesson WhatsApp Support",
+        description: "Students can message their mentor when stuck on practice bugs instead of waiting a full week.",
+      },
+      {
+        title: "Regular Parent Progress Notes",
+        description: "Short written updates on topics mastered, debugging habits, and upcoming module goals.",
+      },
+    ],
+    pricingFaqs: [
+      {
+        question: "Is the trial fee credited if we enrol?",
+        answer:
+          "Yes — if your child continues into our weekly small-group or 1-on-1 programme, the S$40 trial fee is waived against your first month of tuition.",
+      },
+      {
+        question: "What happens if my child misses a weekly lesson due to school or CCA?",
+        answer:
+          "Let us know ahead of time on WhatsApp and we will arrange a catch-up slot or a short 1-on-1 recap before the next class so your child does not fall behind.",
+      },
+      {
+        question: "How does billing work for months with 5 weeks or public holidays?",
+        answer:
+          "Monthly group packages cover 4 scheduled lessons. Any 5th-week sessions or public-holiday reschedules are adjusted transparently in advance during term confirmation.",
+      },
     ],
   },
 };
