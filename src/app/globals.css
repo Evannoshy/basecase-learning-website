@@ -66,6 +66,27 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Continuous Top Announcement Marquee */
+@keyframes announcement-marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-announcement-marquee {
+  display: flex;
+  width: max-content;
+  animation: announcement-marquee 28s linear infinite;
+}
+
+.animate-announcement-marquee:hover,
+.animate-announcement-marquee:focus-within {
+  animation-play-state: paused;
+}
+
 /* Strict Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
   html {

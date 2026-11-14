@@ -75,6 +75,15 @@ describe('Header Component', () => {
     expect(toggleButton).toHaveAttribute('aria-expanded', 'false');
     expect(drawer).toHaveClass('hidden');
   });
+
+  it('renders a moving top announcement marquee with an aria-hidden loop track', () => {
+    render(<Header />);
+    const marquee = screen.getByTestId('top-announcement-marquee');
+    expect(marquee).toHaveClass('animate-announcement-marquee');
+    expect(marquee.children).toHaveLength(2);
+    expect(marquee.children[0]).not.toHaveAttribute('aria-hidden', 'true');
+    expect(marquee.children[1]).toHaveAttribute('aria-hidden', 'true');
+  });
 });
 
 describe('Footer Component', () => {
