@@ -522,7 +522,7 @@ export const siteConfig: SiteConfig = {
       degreeProgram: "Double Degree: BComp (Computer Science) & BBA (Finance)",
       institution: "National University of Singapore (Undergraduate)",
       teachingExperience:
-        "Over 2 years of volunteer tutoring for national-exam students (creating concise summary notes that helped A-Level students jump from U to B), NUS Product Management Club curriculum team member, and speaker across 70 schools for RSAF Total Defence Sharing.",
+        "Over 4 years of teaching N-Levels, O-Levels, and A-Levels, NUS Product Club Curriculum Design team, Experience in real world software systems.",
       scholarships: [
         "Residential College 4 (RC4)",
         "NUS Venture Initiation Programme",
