@@ -32,11 +32,10 @@ describe('Hero Section Component', () => {
     });
   });
 
-  it('renders programming visual card with class definition and terminal dots without stock photos', () => {
+  it('renders classroom hero photo placeholder without external img tags', () => {
     const { container } = render(<Hero />);
-    expect(screen.getByText('quiz_project.py')).toBeInTheDocument();
-    expect(screen.getByText('StudentProject')).toBeInTheDocument();
-    expect(screen.getByText(/\$ python quiz_project\.py/i)).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /Classroom & Mentorship Hero Photo/i })).toBeInTheDocument();
+    expect(screen.getByText('Why Parents & Students Choose Us')).toBeInTheDocument();
 
     // Verify zero generic stock img tags in Hero
     const images = container.querySelectorAll('img');

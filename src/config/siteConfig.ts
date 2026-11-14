@@ -207,16 +207,15 @@ export const siteConfig: SiteConfig = {
     shortName: "BaseCase",
     tagline: "Practical coding classes for secondary, pre-poly/JC, and pre-university students in Singapore.",
     description: "Small-group coding classes led by NUS Computing undergraduates, focused on clear fundamentals and projects students can explain.",
-    url: "https://basecaselearning.com",
+    url: "https://basecase-learning-website.vercel.app",
     foundedYear: 2026,
     targetDemographic: "Secondary, pre-poly/JC, and pre-university students in Singapore",
     contact: {
-      // TODO: Update with confirmed launch contact details before going live
-      email: "enquiries@basecaselearning.com",
-      phone: "+65 8123 4567",
-      phoneDisplay: "+65 8123 4567",
-      whatsappNumber: "6581234567",
-      whatsappUrl: "https://wa.me/6581234567?text=Hi%20BaseCase%20Learning%2C%20I%20would%20like%20to%20enquire%20about%20a%20coding%20trial.",
+      email: "basecaselearning@gmail.com",
+      phone: "+65 9350 9168",
+      phoneDisplay: "+65 9350 9168",
+      whatsappNumber: "6593509168",
+      whatsappUrl: "https://wa.me/6593509168?text=Hi%20BaseCase%20Learning%2C%20I%20would%20like%20to%20enquire%20about%20a%20coding%20trial.",
       location: "Singapore",
       locationDetail: "Singapore (Format & location TBC)",
     },
@@ -265,7 +264,7 @@ export const siteConfig: SiteConfig = {
   hero: {
     headline: "Learn to code. Build something you’re proud of.",
     subheadline:
-      "Guided coding classes taught by NUS Computing students. Learn how programs work, build real projects, and get clear answers when you get stuck.",
+      "The best investment for your Child's future",
     badgeText: "Singapore Coding Academy • Secondary & Pre-U",
     primaryCta: {
       text: "Book a coding trial",
@@ -508,7 +507,7 @@ export const siteConfig: SiteConfig = {
       stageBadge: "Available Now",
       isAvailableNow: true,
       status: "available",
-      targetAudience: "Secondary 1–4, IP & Pre-U Beginners",
+      targetAudience: "Secondary 1–4, IB & Pre-U Beginners",
       description: "Core problem-solving in Python: variables, branching, loops, functions, and basic debugging.",
       topics: [
         "Step-by-step logic",
@@ -621,7 +620,7 @@ export const siteConfig: SiteConfig = {
       "Secondary 4 / O-Level",
       "Junior College 1",
       "Junior College 2 / A-Level",
-      "Integrated Programme (IP) Sec 3–4 / JC",
+      "International Baccalaureate (IB)",
       "Pre-Polytechnic / Other",
     ],
     experienceLevels: [

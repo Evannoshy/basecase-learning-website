@@ -5,6 +5,7 @@ import { siteConfig } from '@/config/siteConfig';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { FloatingContactCta } from '@/components/layout/FloatingContactCta';
+import { CookieBanner } from '@/components/layout/CookieBanner';
 
 const fontSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -35,20 +36,30 @@ export const metadata: Metadata = {
   },
   description: siteConfig.brand.description,
   applicationName: siteConfig.brand.name,
+  category: 'education',
+  alternates: {
+    canonical: '/',
+  },
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
   authors: [{ name: siteConfig.brand.name, url: siteConfig.brand.url }],
   creator: siteConfig.brand.name,
   publisher: siteConfig.brand.name,
   keywords: [
     'BaseCase Learning',
+    'coding tuition Singapore',
+    'Python tuition Singapore',
+    'secondary school coding classes Singapore',
+    'JC computing tuition Singapore',
+    'O-Level computing tuition Singapore',
+    'A-Level H2 computing tuition',
+    'NUS computing tutors',
+    'coding classes for teens Singapore',
+    'web development classes for students Singapore',
+    'AI classes for secondary students Singapore',
     'Coding academy Singapore',
-    'Secondary school coding Singapore',
-    'Junior College coding',
-    'Python for teenagers Singapore',
-    'Web development course Singapore',
     'Computational thinking',
-    'NUS Computing student mentors',
-    'O-Level Computing 7155',
-    'A-Level H2 Computing 9569',
   ],
   formatDetection: {
     email: false,
@@ -91,7 +102,7 @@ export default function RootLayout({
       lang="en"
       className={`${fontSans.variable} ${fontMono.variable} scroll-smooth`}
     >
-      <body className="min-h-screen bg-[#FAF8F5] text-[#0B132B] font-sans antialiased selection:bg-teal-100 selection:text-teal-900">
+      <body className="min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-teal-100 selection:text-teal-900">
         {/* WCAG AA Visible Skip-to-Main-Content Anchor */}
         <a
           href="#main-content"
@@ -112,6 +123,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <FloatingContactCta />
+          <CookieBanner />
         </div>
       </body>
     </html>

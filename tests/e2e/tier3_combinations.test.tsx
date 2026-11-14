@@ -85,15 +85,6 @@ describe('Tier 3: Cross-Feature Combinations (E2E Integration Verification)', ()
       expect(courseSelect).toHaveValue('Introductory Web Development');
       expect(screen.getByText(/course pre-selected:/i)).toBeInTheDocument();
 
-      // Verifies 2-column trial walkthrough ("What Happens in a Trial Class") is rendered beside the form
-      const enquirySection = document.getElementById('trial-enquiry')!;
-      expect(
-        within(enquirySection).getByRole('heading', { name: /what happens in a trial class/i })
-      ).toBeInTheDocument();
-      expect(within(enquirySection).getByText('Quick Setup & Chat')).toBeInTheDocument();
-      expect(within(enquirySection).getByText('Hands-On Mini Build')).toBeInTheDocument();
-      expect(within(enquirySection).getByText('Parent Debrief & Next Steps')).toBeInTheDocument();
-
       // Still allows manual switching to all options
       await user.selectOptions(courseSelect, 'Introductory Web Development');
       expect(courseSelect).toHaveValue('Introductory Web Development');

@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer
       role="contentinfo"
-      className="bg-[#0B132B] text-slate-100 pt-16 pb-12 border-t border-slate-800"
+      className="bg-[#0F172A] text-slate-100 pt-16 pb-12 border-t border-slate-800"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 3-Column Grid */}
@@ -15,14 +15,16 @@ export function Footer() {
           {/* Column 1: Brand & Academy Overview */}
           <div className="space-y-4">
             <div className="flex items-center">
-              <span className="font-mono text-teal-400 font-bold text-lg mr-1.5">&gt;_</span>
+              <span
+                className="w-7 h-7 rounded bg-teal-700 text-white font-bold text-xs inline-flex items-center justify-center mr-2 tracking-tight flex-shrink-0"
+                aria-hidden="true"
+              >
+                BC
+              </span>
               <span className="font-bold text-white tracking-tight text-lg">
                 {siteConfig.brand.name}
               </span>
             </div>
-            <p className="font-mono text-xs text-teal-400">
-              {'// basecase_learning'}
-            </p>
             <p className="text-sm text-slate-300 leading-relaxed">
               {siteConfig.brand.description}
             </p>

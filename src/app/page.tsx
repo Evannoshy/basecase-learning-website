@@ -1,5 +1,4 @@
 import React from 'react';
-import { siteConfig } from '@/config/siteConfig';
 import { Hero } from '@/components/sections/Hero';
 import { Courses } from '@/components/sections/Courses';
 import { Showcase } from '@/components/sections/Showcase';
@@ -8,16 +7,85 @@ import { Mentors } from '@/components/sections/Mentors';
 import { Progression } from '@/components/sections/Progression';
 import { Faq } from '@/components/sections/Faq';
 import { TrialEnquiryForm } from '@/components/forms/TrialEnquiryForm';
+import { PhotoPlaceholder } from '@/components/ui/PhotoPlaceholder';
+import { siteConfig } from '@/config/siteConfig';
+
+function sanitizeJsonLdText(value: string): string {
+  return value
+    .replace(/<script\b[\s\S]*?<\/script>/gi, '')
+    .replace(/<\/?[a-z][^>]*>/gi, '')
+    .trim();
+}
+
+function buildHomeJsonLd() {
+  const baseUrl = siteConfig.brand.url;
+  const orgId = `${baseUrl}/#organization`;
+  const orgName = sanitizeJsonLdText(siteConfig.brand.name) || 'BaseCase Learning';
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'EducationalOrganization',
+        '@id': orgId,
+        name: orgName,
+        url: baseUrl,
+        description: sanitizeJsonLdText(siteConfig.brand.description),
+        email: siteConfig.brand.contact.email,
+        telephone: siteConfig.brand.contact.phone,
+        areaServed: {
+          '@type': 'Country',
+          name: 'Singapore',
+        },
+      },
+      {
+        '@type': 'ItemList',
+        '@id': `${baseUrl}/#courses`,
+        name: 'Coding Courses at BaseCase Learning',
+        itemListElement: siteConfig.courses.map((course, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          item: {
+            '@type': 'Course',
+            name: sanitizeJsonLdText(course.title),
+            description: sanitizeJsonLdText(`${course.tagline}. ${course.intendedLearner}`),
+            provider: {
+              '@id': orgId,
+            },
+          },
+        })),
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': `${baseUrl}/#faq`,
+        mainEntity: siteConfig.faqs.map((faq) => ({
+          '@type': 'Question',
+          name: sanitizeJsonLdText(faq.question),
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: sanitizeJsonLdText(faq.answer),
+          },
+        })),
+      },
+    ],
+  };
+}
 
 export default function HomePage() {
-  const { trialSteps, trialLogisticsNote } = siteConfig.enquiryConfig;
+  const jsonLd = buildHomeJsonLd();
 
   return (
-    <div className="space-y-0">
-      {/* 1. Hero Section */}
+    <div className="space-y-0 bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+        }}
+      />
+      {/* 1. Hero Section + Why BaseCase 4-Card Visual Strip */}
       <Hero />
 
-      {/* 2. Course Options */}
+      {/* 2. Course Options (Image-Topped Programme Cards) */}
       <Courses />
 
       {/* 3. Project Showcase & Interactive Lab */}
@@ -26,7 +94,7 @@ export default function HomePage() {
       {/* 4. How Learning Works Pedagogy */}
       <HowLearningWorks />
 
-      {/* 5. Meet the Mentors */}
+      {/* 5. Meet the Mentors (3:4 Headshot Portrait Cards) */}
       <Mentors />
 
       {/* 6. Learning Progression Pathway */}
@@ -35,51 +103,36 @@ export default function HomePage() {
       {/* 7. Parent FAQs */}
       <Faq />
 
-      {/* 8. Trial Enquiry Section (2-Column: Trial Walkthrough + Enquiry Form) */}
+      {/* 8. Trial Enquiry Section (2-Column: Consultation Photo + Enquiry Form) */}
       <section
         id="trial-enquiry"
         aria-labelledby="enquiry-heading"
-        className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        className="py-16 sm:py-24 bg-white border-t border-slate-200 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-medium bg-teal-100 text-teal-800 border border-teal-200 mb-4">
+          <p className="text-xs font-bold uppercase tracking-widest text-teal-700">
             Trial Booking
-          </span>
-          <h2 id="enquiry-heading" className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+          </p>
+          <h2 id="enquiry-heading" className="mt-2 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
             Book a Coding Trial
           </h2>
-          <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+          <div className="w-12 h-1 bg-teal-700 mx-auto mt-4" aria-hidden="true" />
+          <p className="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
             Leave your details below and we’ll follow up to arrange a trial session.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Left Column: What Happens in a Trial */}
+          {/* Left Column: Consultation Photo Slot */}
           <div className="lg:col-span-5">
-            <div className="p-6 sm:p-8 rounded-2xl bg-white border border-slate-200 shadow-sm">
-              <h3 className="text-xl font-bold text-[#0B132B] tracking-tight">
-                What Happens in a Trial Class
-              </h3>
-              <ol className="mt-5 space-y-5">
-                {trialSteps.map((item) => (
-                  <li key={item.step} className="flex items-start gap-3.5">
-                    <span className="w-7 h-7 rounded-full bg-teal-700 text-white font-mono text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
-                      {item.step}
-                    </span>
-                    <div>
-                      <p className="text-sm font-bold text-slate-900">{item.title}</p>
-                      <p className="mt-0.5 text-sm text-slate-600 leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-
-              <p className="mt-6 pt-4 border-t border-slate-100 text-xs text-slate-500 leading-relaxed">
-                {trialLogisticsNote}
-              </p>
-            </div>
+            <PhotoPlaceholder
+              title="Trial Class & Consultation Photo"
+              aspectRatio="4:3"
+              dimensions="800 × 600 px"
+              shotGuide="Friendly photo of a tutor speaking with a student and parent during a 1-on-1 trial consultation."
+              fileHint="public/images/trial-consultation.jpg"
+              className="shadow-sm"
+            />
           </div>
 
           {/* Right Column: Accessible Trial Enquiry Form */}

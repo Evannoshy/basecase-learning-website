@@ -46,7 +46,7 @@ describe('Adversarial Stress Testing: siteConfig Invariants & Schema Strictness'
     expect(() => new URL(siteConfig.brand.url)).not.toThrow();
     const parsed = new URL(siteConfig.brand.url);
     expect(parsed.protocol).toBe('https:');
-    expect(parsed.hostname).toBe('basecaselearning.com');
+    expect(parsed.hostname).toBe('basecase-learning-website.vercel.app');
   });
 
   it('validates contact details against strict communication patterns', () => {
@@ -62,7 +62,7 @@ describe('Adversarial Stress Testing: siteConfig Invariants & Schema Strictness'
 
     // WhatsApp URL and number
     expect(contact.whatsappUrl).toMatch(/^https:\/\/wa\.me\/65\d{8}/);
-    expect(contact.whatsappNumber).toBe('6581234567');
+    expect(contact.whatsappNumber).toBe('6593509168');
   });
 
   it('audits negative constraints: zero prohibited claims or fabricated endorsements', () => {

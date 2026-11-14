@@ -1,6 +1,5 @@
 import React from 'react';
 import { siteConfig, FAQItem } from '@/config/siteConfig';
-import { Badge } from '@/components/ui/Badge';
 import { Accordion } from '@/components/ui/Accordion';
 import { cn } from '@/lib/utils';
 
@@ -21,26 +20,29 @@ export function Faq({ faqs = siteConfig.faqs, className }: FaqProps) {
     <section
       id="faqs"
       aria-labelledby="faqs-heading"
-      className={cn('py-16 sm:py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8', className)}
+      className={cn('py-16 sm:py-20 bg-slate-50 border-t border-slate-200', className)}
     >
-      {/* Section Header */}
-      <div className="text-center max-w-3xl mx-auto mb-12">
-        <Badge variant="teal" size="md" className="mb-3">
-          FAQs
-        </Badge>
-        <h2
-          id="faqs-heading"
-          className="text-3xl sm:text-4xl font-extrabold text-[#0B132B] tracking-tight"
-        >
-          Parent Questions
-        </h2>
-        <p className="mt-4 text-lg text-slate-700 leading-relaxed">
-          Common questions on beginners, laptops, progress updates, and AI tools.
-        </p>
-      </div>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <p className="text-xs font-bold uppercase tracking-widest text-teal-700">
+            FAQs
+          </p>
+          <h2
+            id="faqs-heading"
+            className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight"
+          >
+            Parent Questions
+          </h2>
+          <div className="w-12 h-1 bg-teal-700 mx-auto mt-4" aria-hidden="true" />
+          <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
+            Common questions on beginners, laptops, progress updates, and AI tools.
+          </p>
+        </div>
 
-      {/* Accessible Disclosure Accordion */}
-      <Accordion items={accordionItems} allowMultiple={true} defaultOpenId="faq-beginner" />
+        {/* Accessible Disclosure Accordion */}
+        <Accordion items={accordionItems} allowMultiple={true} defaultOpenId="faq-beginner" />
+      </div>
     </section>
   );
 }

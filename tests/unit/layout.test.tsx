@@ -4,8 +4,12 @@ import { render, screen, fireEvent, act } from '@testing-library/react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { FloatingContactCta } from '@/components/layout/FloatingContactCta';
+import { CookieBanner } from '@/components/layout/CookieBanner';
 import { Badge } from '@/components/ui/Badge';
 import { siteConfig } from '@/config/siteConfig';
+import robots from '@/app/robots';
+import sitemap from '@/app/sitemap';
+import HomePage from '@/app/page';
 
 describe('Header Component', () => {
   it('renders brand identity and logo', () => {
@@ -206,5 +210,85 @@ describe('FloatingContactCta Component', () => {
     } finally {
       window.IntersectionObserver = originalIo;
     }
+  });
+});
+
+describe('CookieBanner Component', () => {
+  it('renders cookie notice when no prior consent is saved and hides on Accept All', () => {
+    window.localStorage.removeItem('basecase_cookie_consent');
+    render(<CookieBanner />);
+
+    const region = screen.getByRole('region', { name: /cookie notice/i });
+    expect(region).toBeInTheDocument();
+    expect(screen.getByText('Cookies on this site')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: /accept all/i }));
+    expect(window.localStorage.getItem('basecase_cookie_consent')).toBe('accepted');
+    expect(screen.queryByRole('region', { name: /cookie notice/i })).not.toBeInTheDocument();
+  });
+
+  it('stores declined choice and hides on Essential Only', () => {
+    window.localStorage.removeItem('basecase_cookie_consent');
+    render(<CookieBanner />);
+
+    fireEvent.click(screen.getByRole('button', { name: /essential only/i }));
+    expect(window.localStorage.getItem('basecase_cookie_consent')).toBe('declined');
+    expect(screen.queryByRole('region', { name: /cookie notice/i })).not.toBeInTheDocument();
+  });
+
+  it('does not render when consent choice already exists in localStorage', () => {
+    window.localStorage.setItem('basecase_cookie_consent', 'accepted');
+    render(<CookieBanner />);
+
+    expect(screen.queryByRole('region', { name: /cookie notice/i })).not.toBeInTheDocument();
+    window.localStorage.removeItem('basecase_cookie_consent');
+  });
+});
+
+describe('SEO Metadata Routes & Structured Data', () => {
+  it('generates robots.txt pointing to canonical sitemap URL', () => {
+    const result = robots();
+    expect(result.rules).toEqual({
+      userAgent: '*',
+      allow: '/',
+      disallow: ['/api/'],
+    });
+    expect(result.sitemap).toBe(`${siteConfig.brand.url}/sitemap.xml`);
+  });
+
+  it('generates sitemap.xml with canonical homepage URL', () => {
+    const entries = sitemap();
+    expect(entries).toHaveLength(1);
+    expect(entries[0].url).toBe(siteConfig.brand.url);
+    expect(entries[0].changeFrequency).toBe('weekly');
+    expect(entries[0].priority).toBe(1);
+    expect(entries[0].lastModified).toBeInstanceOf(Date);
+  });
+
+  it('renders JSON-LD structured data with EducationalOrganization, Course, and FAQPage schemas on HomePage', () => {
+    const { container } = render(<HomePage />);
+    const script = container.querySelector('script[type="application/ld+json"]');
+    expect(script).not.toBeNull();
+
+    const parsed = JSON.parse(script?.textContent || '{}');
+    expect(parsed['@context']).toBe('https://schema.org');
+    expect(Array.isArray(parsed['@graph'])).toBe(true);
+
+    const orgNode = parsed['@graph'].find((node: { '@type': string }) => node['@type'] === 'EducationalOrganization');
+    expect(orgNode).toBeDefined();
+    expect(orgNode.name).toBe(siteConfig.brand.name);
+    expect(orgNode.url).toBe(siteConfig.brand.url);
+    expect(orgNode.email).toBe(siteConfig.brand.contact.email);
+    expect(orgNode.telephone).toBe(siteConfig.brand.contact.phone);
+
+    const courseListNode = parsed['@graph'].find((node: { '@type': string }) => node['@type'] === 'ItemList');
+    expect(courseListNode).toBeDefined();
+    expect(courseListNode.itemListElement).toHaveLength(siteConfig.courses.length);
+    expect(courseListNode.itemListElement[0].item['@type']).toBe('Course');
+
+    const faqNode = parsed['@graph'].find((node: { '@type': string }) => node['@type'] === 'FAQPage');
+    expect(faqNode).toBeDefined();
+    expect(faqNode.mainEntity).toHaveLength(siteConfig.faqs.length);
+    expect(faqNode.mainEntity[0]['@type']).toBe('Question');
   });
 });

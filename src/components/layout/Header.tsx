@@ -51,7 +51,28 @@ export function Header() {
   const brandSecondary = brandRest.join(' ');
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[#E2E8F0]/80 bg-[#FAF8F5]/90 backdrop-blur-md transition-colors">
+    <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md transition-colors">
+      {/* Slim Top Utility Announcement Bar (Zenith / EduFirst style) */}
+      <div className="bg-[#0F172A] text-slate-200 text-xs py-2 border-b border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+          <p className="truncate font-medium">
+            Small-Group Coding Tuition in Singapore (Sec · JC · Pre-U) — Taught by NUS Computing Undergrads
+          </p>
+          <div className="hidden sm:flex items-center gap-4 flex-shrink-0">
+            <span className="text-emerald-300 font-semibold">Trial Enquiries Open</span>
+            <span className="text-slate-600" aria-hidden="true">|</span>
+            <a
+              href={siteConfig.brand.contact.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-200 hover:text-white underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded"
+            >
+              WhatsApp: {siteConfig.brand.contact.phoneDisplay}
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 sm:h-20 items-center justify-between">
           {/* Brand Logo / Home Anchor */}
@@ -60,7 +81,12 @@ export function Header() {
             className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 rounded-md"
             aria-label={`${siteConfig.brand.name} Homepage`}
           >
-            <span className="font-mono text-teal-600 font-bold mr-1.5 text-lg">&gt;_</span>
+            <span
+              className="w-7 h-7 rounded bg-[#0F172A] text-white font-bold text-xs inline-flex items-center justify-center mr-2 tracking-tight flex-shrink-0"
+              aria-hidden="true"
+            >
+              BC
+            </span>
             <span className="font-bold text-slate-900 tracking-tight text-lg">
               {brandPrimary}
             </span>
@@ -85,7 +111,7 @@ export function Header() {
               >
                 <span>{item.label}</span>
                 {item.badge && (
-                  <span className="ml-1.5 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono font-medium bg-amber-100 text-amber-800 border border-amber-200">
+                  <span className="ml-1.5 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
                     {item.badge}
                   </span>
                 )}
@@ -97,7 +123,7 @@ export function Header() {
           <div className="hidden md:flex items-center">
             <a
               href={ctaLink.href}
-              className="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-teal-700 hover:bg-teal-800 rounded-lg shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600 transition-colors"
+              className="inline-flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-white bg-[#0F766E] hover:bg-[#115E59] rounded-md shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600 transition-colors"
             >
               {ctaLink.label}
             </a>
@@ -112,7 +138,7 @@ export function Header() {
               aria-expanded={isOpen}
               aria-controls="mobile-navigation-drawer"
               aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
-              className="p-2 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+              className="p-2 rounded-md text-slate-700 hover:text-slate-900 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
             >
               {isOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
             </button>
@@ -126,7 +152,7 @@ export function Header() {
         role="dialog"
         aria-modal="true"
         aria-label="Mobile Navigation Menu"
-        className={`md:hidden transition-all duration-200 ease-in-out border-b border-[#E2E8F0] bg-[#FAF8F5] ${
+        className={`md:hidden transition-all duration-200 ease-in-out border-b border-slate-200 bg-white ${
           isOpen ? 'block' : 'hidden'
         }`}
       >
@@ -140,7 +166,7 @@ export function Header() {
             >
               <span>{item.label}</span>
               {item.badge && (
-                <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200">
+                <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200">
                   {item.badge}
                 </span>
               )}
@@ -151,7 +177,7 @@ export function Header() {
             <a
               href={ctaLink.href}
               onClick={closeMenu}
-              className="w-full inline-flex items-center justify-center px-4 py-2.5 text-base font-semibold text-white bg-teal-700 hover:bg-teal-800 rounded-lg shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600 transition-colors"
+              className="w-full inline-flex items-center justify-center px-4 py-2.5 text-base font-semibold text-white bg-[#0F766E] hover:bg-[#115E59] rounded-md shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600 transition-colors"
             >
               {ctaLink.label}
             </a>

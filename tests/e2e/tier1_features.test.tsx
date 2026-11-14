@@ -157,9 +157,8 @@ describe('Tier 1: Feature Coverage (E2E Full Platform Verification)', () => {
         expect(within(hero).getByText(hl)).toBeInTheDocument();
       });
 
-      // Code preview card
-      expect(within(hero).getAllByText(/quiz_project\.py/i).length).toBeGreaterThanOrEqual(1);
-      expect(within(hero).getByText(/Python 3\.12/i)).toBeInTheDocument();
+      // Classroom hero photo placeholder
+      expect(within(hero).getByRole('img', { name: /Classroom & Mentorship Hero Photo/i })).toBeInTheDocument();
     });
   });
 

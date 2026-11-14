@@ -4,13 +4,13 @@
 
 :root {
   /* Surface Tokens */
-  --bg-surface: #FAF8F5;          /* Warm Ivory page background */
+  --bg-surface: #FFFFFF;          /* Clean White tuition page background */
   --bg-surface-elevated: #FFFFFF; /* Pure White card / container background */
-  --bg-surface-muted: #F4EFEA;    /* Secondary surface */
-  --bg-surface-dark: #0B132B;     /* Slate Navy for Footer */
+  --bg-surface-muted: #F8FAFC;    /* Crisp Slate-50 secondary section band */
+  --bg-surface-dark: #0F172A;     /* Deep Slate Navy for announcement bar & Footer */
   
   /* Text Tokens */
-  --text-primary: #0B132B;        /* Slate Navy for headings and primary copy */
+  --text-primary: #0F172A;        /* Slate-900 for headings and primary copy */
   --text-secondary: #334155;      /* Slate-700 for subtitles and secondary copy */
   --text-muted: #64748B;          /* Slate-500 for captions, timestamps, disclaimers */
   --text-inverse: #F8FAFC;        /* Slate-50 for copy on dark backgrounds */

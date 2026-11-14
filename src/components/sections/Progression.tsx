@@ -17,21 +17,22 @@ export function Progression({
     <section
       id="progression"
       aria-labelledby="progression-heading"
-      className={cn('py-16 sm:py-24 bg-white border-t border-slate-200/80', className)}
+      className={cn('py-16 sm:py-20 bg-white border-t border-slate-200', className)}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <Badge variant="teal" size="md" className="mb-3">
-            Pathway
-          </Badge>
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <p className="text-xs font-bold uppercase tracking-widest text-teal-700">
+            Student Pathway
+          </p>
           <h2
             id="progression-heading"
-            className="text-3xl sm:text-4xl font-extrabold text-[#0B132B] tracking-tight"
+            className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight"
           >
             Learning Progression
           </h2>
-          <p className="mt-4 text-lg text-slate-700 leading-relaxed">
+          <div className="w-12 h-1 bg-teal-700 mx-auto mt-4" aria-hidden="true" />
+          <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
             Start with core coding concepts, move into guided projects, and grow toward independent builds. Secondary and JC school tuition tracks are planned for later.
           </p>
         </div>
@@ -44,16 +45,16 @@ export function Progression({
               <div
                 key={stage.level}
                 className={cn(
-                  'relative flex flex-col justify-between rounded-2xl p-6 transition-all',
+                  'relative flex flex-col justify-between rounded-lg p-6 transition-all border border-slate-200 border-t-4 shadow-sm',
                   isAvailable
-                    ? 'bg-white border-2 border-teal-600/60 shadow-sm'
-                    : 'bg-slate-50/70 border-2 border-dashed border-slate-300'
+                    ? 'bg-white border-t-teal-700'
+                    : 'bg-slate-50/70 border-t-amber-500 border-dashed'
                 )}
               >
                 <div>
                   {/* Top Level Indicator & Availability Badge */}
                   <div className="flex items-center justify-between mb-4">
-                    <span className="font-mono text-sm font-bold text-slate-700">
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-700">
                       LEVEL 0{stage.level}
                     </span>
                     <Badge variant={isAvailable ? 'teal' : 'amber'}>
@@ -68,13 +69,13 @@ export function Progression({
                     {stage.targetAudience}
                   </p>
 
-                  <p className="mt-3 text-sm text-slate-700 leading-relaxed">
+                  <p className="mt-3 text-sm text-slate-600 leading-relaxed">
                     {stage.description}
                   </p>
 
                   {/* Key Topics List */}
                   <div className="mt-5 pt-4 border-t border-slate-200/80">
-                    <strong className="text-xs font-mono font-bold uppercase tracking-wider text-slate-700 block mb-2">
+                    <strong className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-2">
                       Syllabus Focus:
                     </strong>
                     <ul className="space-y-1.5 text-xs text-slate-700">
@@ -106,7 +107,7 @@ export function Progression({
                       <ArrowRight className="w-3.5 h-3.5 ml-1" aria-hidden="true" />
                     </a>
                   ) : (
-                    <span className="inline-flex items-center text-xs font-mono text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded border border-amber-200">
+                    <span className="inline-flex items-center text-xs font-semibold text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded border border-amber-200">
                       <Clock className="w-3 h-3 mr-1" aria-hidden="true" />
                       Planned (Not Open Yet)
                     </span>
@@ -118,7 +119,7 @@ export function Progression({
         </div>
 
         {/* Future Plans Notice */}
-        <div className="mt-12 text-center text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto">
+        <div className="mt-10 text-center text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto">
           <p>
             * Note: Levels 1 and 2 are available at launch. Independent building and Secondary / JC subject tuition are future plans and are not open for enrolment yet.
           </p>
