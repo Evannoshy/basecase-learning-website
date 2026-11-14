@@ -1,11 +1,13 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { MessageSquare, ArrowRight } from 'lucide-react';
 import { siteConfig } from '@/config/siteConfig';
-import { cn } from '@/lib/utils';
+import { cn, resolveSectionHref } from '@/lib/utils';
 
 export function FloatingContactCta() {
+  const pathname = usePathname();
   const [isHiddenAtFormOrFooter, setIsHiddenAtFormOrFooter] = useState(false);
 
   useEffect(() => {
@@ -35,7 +37,7 @@ export function FloatingContactCta() {
 
     targets.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
 
   return (
     <>
@@ -75,7 +77,7 @@ export function FloatingContactCta() {
       >
         <div className="w-full flex items-center gap-2.5">
           <a
-            href="#trial-enquiry"
+            href={resolveSectionHref('#trial-enquiry', pathname)}
             tabIndex={isHiddenAtFormOrFooter ? -1 : undefined}
             className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-[#1E3A8A] hover:bg-[#1E40AF] text-white text-sm font-semibold shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#1E3A8A] transition-colors"
           >

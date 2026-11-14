@@ -9,6 +9,7 @@ import { FloatingContactCta } from '@/components/layout/FloatingContactCta';
 import { CookieBanner } from '@/components/layout/CookieBanner';
 import { Badge } from '@/components/ui/Badge';
 import { siteConfig } from '@/config/siteConfig';
+import { resolveSectionHref } from '@/lib/utils';
 import robots from '@/app/robots';
 import sitemap from '@/app/sitemap';
 import HomePage from '@/app/page';
@@ -440,5 +441,36 @@ describe('PrivacyPage Component', () => {
       siteConfig.brand.contact.whatsappUrl
     );
     expect(screen.getByTestId('cookie-consent-status')).toHaveTextContent('No preference saved yet');
+  });
+});
+
+describe('resolveSectionHref Helper', () => {
+  it('preserves bare hash hrefs on the homepage and when pathname is null', () => {
+    expect(resolveSectionHref('#courses', '/')).toBe('#courses');
+    expect(resolveSectionHref('#main-content', '/')).toBe('#main-content');
+    expect(resolveSectionHref('#trial-enquiry', '/')).toBe('#trial-enquiry');
+    expect(resolveSectionHref('#courses', null)).toBe('#courses');
+    expect(resolveSectionHref('#main-content', null)).toBe('#main-content');
+  });
+
+  it('resolves section links back to homepage paths on /cookies and /privacy', () => {
+    for (const subpage of ['/cookies', '/privacy']) {
+      expect(resolveSectionHref('#main-content', subpage)).toBe('/');
+      expect(resolveSectionHref('#courses', subpage)).toBe('/#courses');
+      expect(resolveSectionHref('#how-learning-works', subpage)).toBe('/#how-learning-works');
+      expect(resolveSectionHref('#projects', subpage)).toBe('/#projects');
+      expect(resolveSectionHref('#mentors', subpage)).toBe('/#mentors');
+      expect(resolveSectionHref('#faqs', subpage)).toBe('/#faqs');
+      expect(resolveSectionHref('#trial-enquiry', subpage)).toBe('/#trial-enquiry');
+      expect(resolveSectionHref('/pricing', subpage)).toBe('/pricing');
+    }
+  });
+
+  it('keeps #trial-enquiry local on /pricing while pointing other section hashes back to homepage', () => {
+    expect(resolveSectionHref('#main-content', '/pricing')).toBe('/');
+    expect(resolveSectionHref('#courses', '/pricing')).toBe('/#courses');
+    expect(resolveSectionHref('#mentors', '/pricing')).toBe('/#mentors');
+    expect(resolveSectionHref('#trial-enquiry', '/pricing')).toBe('#trial-enquiry');
+    expect(resolveSectionHref('/pricing', '/pricing')).toBe('/pricing');
   });
 });

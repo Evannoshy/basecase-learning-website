@@ -1,9 +1,14 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { siteConfig } from '@/config/siteConfig';
 import { BrandLogoMark } from '@/components/ui/BrandLogoMark';
+import { resolveSectionHref } from '@/lib/utils';
 
 export function Footer() {
+  const pathname = usePathname();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -36,7 +41,7 @@ export function Footer() {
               <ul className="space-y-2.5 text-sm text-slate-300">
                 <li>
                   <a
-                    href="#courses"
+                    href={resolveSectionHref('#courses', pathname)}
                     className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
                     Beginner Python
@@ -44,7 +49,7 @@ export function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#courses"
+                    href={resolveSectionHref('#courses', pathname)}
                     className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
                     Introductory Web Dev
@@ -52,7 +57,7 @@ export function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#how-learning-works"
+                    href={resolveSectionHref('#how-learning-works', pathname)}
                     className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
                     How Learning Works
@@ -60,7 +65,7 @@ export function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#projects"
+                    href={resolveSectionHref('#projects', pathname)}
                     className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
                     Example Projects
@@ -68,7 +73,7 @@ export function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#mentors"
+                    href={resolveSectionHref('#mentors', pathname)}
                     className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
                     Meet the Mentors
@@ -84,7 +89,7 @@ export function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#faqs"
+                    href={resolveSectionHref('#faqs', pathname)}
                     className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
                     Parent FAQs
@@ -131,7 +136,7 @@ export function Footer() {
             </ul>
             <div className="mt-4">
               <a
-                href="#trial-enquiry"
+                href={resolveSectionHref('#trial-enquiry', pathname)}
                 className="inline-flex items-center text-xs font-semibold text-white underline hover:text-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded"
               >
                 Book a coding trial enquiry &rarr;

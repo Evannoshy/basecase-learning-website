@@ -2,11 +2,14 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { siteConfig } from '@/config/siteConfig';
 import { BrandLogoMark } from '@/components/ui/BrandLogoMark';
+import { resolveSectionHref } from '@/lib/utils';
 
 export function Header() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -94,7 +97,7 @@ export function Header() {
         <div className="flex h-16 sm:h-20 items-center justify-between">
           {/* Brand Logo / Home Anchor */}
           <a
-            href="#main-content"
+            href={resolveSectionHref('#main-content', pathname)}
             className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded-md"
             aria-label={`${siteConfig.brand.name} Homepage`}
           >
@@ -117,7 +120,7 @@ export function Header() {
             {navLinks.map((item) => (
               <a
                 key={item.label}
-                href={item.href}
+                href={resolveSectionHref(item.href, pathname)}
                 className="group flex items-center text-sm font-medium text-slate-700 hover:text-[#1E3A8A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded-md py-1 transition-colors"
                 title={item.tooltip}
               >
@@ -134,7 +137,7 @@ export function Header() {
           {/* Desktop CTA Button (>= 768px / md) */}
           <div className="hidden md:flex items-center">
             <a
-              href={ctaLink.href}
+              href={resolveSectionHref(ctaLink.href, pathname)}
               className="inline-flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-white bg-[#1E3A8A] hover:bg-[#1E40AF] rounded-md shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#1E3A8A] transition-colors"
             >
               {ctaLink.label}
@@ -172,7 +175,7 @@ export function Header() {
           {navLinks.map((item) => (
             <a
               key={item.label}
-              href={item.href}
+              href={resolveSectionHref(item.href, pathname)}
               onClick={closeMenu}
               className="flex items-center justify-between py-2 text-base font-medium text-slate-700 hover:text-[#1E3A8A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded-md"
             >
@@ -187,7 +190,7 @@ export function Header() {
 
           <div className="pt-4 mt-2 border-t border-slate-200">
             <a
-              href={ctaLink.href}
+              href={resolveSectionHref(ctaLink.href, pathname)}
               onClick={closeMenu}
               className="w-full inline-flex items-center justify-center px-4 py-2.5 text-base font-semibold text-white bg-[#1E3A8A] hover:bg-[#1E40AF] rounded-md shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#1E3A8A] transition-colors"
             >
