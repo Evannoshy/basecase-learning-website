@@ -37,7 +37,7 @@ const stepPhotos = [
 const weeklyDeliverables = [
   {
     title: 'Summary Notes & Cheat Sheets',
-    detail: 'Concise printed and PDF topic sheets covering substitution traces, memory-frame diagrams, and common pitfalls.',
+    detail: 'Concise printed and PDF topic sheets covering key syntax, logic traces, and common pitfalls.',
   },
   {
     title: 'Graded Practice Worksheets',

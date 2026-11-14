@@ -193,7 +193,7 @@ describe('Progression Section Component', () => {
 
   it('renders syllabus focus topics and phased tuition extension notice', () => {
     render(<Progression />);
-    expect(screen.getByText('Functions, base cases & substitution tracing')).toBeInTheDocument();
+    expect(screen.getByText('Functions, loops & base cases')).toBeInTheDocument();
     expect(screen.getByText('O-Level Computing (7155)')).toBeInTheDocument();
     expect(screen.getByText('A-Level H2 Computing (9569)')).toBeInTheDocument();
 
