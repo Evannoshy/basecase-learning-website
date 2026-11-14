@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { siteConfig } from '@/config/siteConfig';
+import { BrandLogoMark } from '@/components/ui/BrandLogoMark';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -16,12 +17,7 @@ export function Footer() {
           {/* Column 1: Brand & Academy Overview */}
           <div className="space-y-4">
             <div className="flex items-center">
-              <span
-                className="w-7 h-7 rounded bg-[#1E3A8A] text-white font-bold text-xs inline-flex items-center justify-center mr-2 tracking-tight flex-shrink-0"
-                aria-hidden="true"
-              >
-                BC
-              </span>
+              <BrandLogoMark className="w-8 h-8 mr-2.5 flex-shrink-0" />
               <span className="font-bold text-white tracking-tight text-lg">
                 {siteConfig.brand.name}
               </span>

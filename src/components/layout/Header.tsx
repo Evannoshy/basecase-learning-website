@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { siteConfig } from '@/config/siteConfig';
+import { BrandLogoMark } from '@/components/ui/BrandLogoMark';
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -97,12 +98,7 @@ export function Header() {
             className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded-md"
             aria-label={`${siteConfig.brand.name} Homepage`}
           >
-            <span
-              className="w-7 h-7 rounded bg-[#1E3A8A] text-white font-bold text-xs inline-flex items-center justify-center mr-2 tracking-tight flex-shrink-0"
-              aria-hidden="true"
-            >
-              BC
-            </span>
+            <BrandLogoMark className="w-8 h-8 mr-2.5 flex-shrink-0" />
             <span className="font-bold text-slate-900 tracking-tight text-lg">
               {brandPrimary}
             </span>

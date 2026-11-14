@@ -25,10 +25,14 @@ vi.mock('next/font/google', () => ({
 import { metadata as layoutMetadata } from '@/app/layout';
 
 describe('Header Component', () => {
-  it('renders brand identity and logo', () => {
+  it('renders brand identity and SVG graphic logo mark', () => {
     render(<Header />);
     const brandLinks = screen.getAllByRole('link', { name: new RegExp(siteConfig.brand.name, 'i') });
     expect(brandLinks.length).toBeGreaterThan(0);
+
+    const logoMark = screen.getByTestId('brand-logo-mark');
+    expect(logoMark.tagName.toLowerCase()).toBe('svg');
+    expect(screen.queryByText('BC')).not.toBeInTheDocument();
   });
 
   it('renders desktop navigation links and CTA button', () => {
@@ -97,12 +101,16 @@ describe('Header Component', () => {
 });
 
 describe('Footer Component', () => {
-  it('renders contentinfo landmark and brand summary', () => {
+  it('renders contentinfo landmark, SVG graphic logo mark, and brand summary', () => {
     render(<Footer />);
     const footer = screen.getByRole('contentinfo');
     expect(footer).toBeInTheDocument();
     expect(screen.getAllByText(siteConfig.brand.name).length).toBeGreaterThan(0);
     expect(screen.getByText(siteConfig.brand.description)).toBeInTheDocument();
+
+    const logoMark = screen.getByTestId('brand-logo-mark');
+    expect(logoMark.tagName.toLowerCase()).toBe('svg');
+    expect(screen.queryByText('BC')).not.toBeInTheDocument();
   });
 
   it('renders secondary navigation links and enquiries section', () => {
@@ -278,11 +286,16 @@ describe('CookieBanner Component', () => {
 });
 
 describe('SEO Metadata Routes, Icons & Structured Data', () => {
-  it('declares favicon and SVG app icon files on disk and in root layout metadata', () => {
+  it('declares favicon and SVG app icon files with graphic crest mark on disk and in root layout metadata', () => {
     const projectRoot = process.cwd();
-    expect(fs.existsSync(path.join(projectRoot, 'src/app/icon.svg'))).toBe(true);
+    const appIconPath = path.join(projectRoot, 'src/app/icon.svg');
+    expect(fs.existsSync(appIconPath)).toBe(true);
     expect(fs.existsSync(path.join(projectRoot, 'public/icon.svg'))).toBe(true);
     expect(fs.existsSync(path.join(projectRoot, 'public/favicon.svg'))).toBe(true);
+
+    const iconSvg = fs.readFileSync(appIconPath, 'utf-8');
+    expect(iconSvg).toContain('<path');
+    expect(iconSvg).not.toContain('>BC<');
 
     expect(layoutMetadata.icons).toEqual({
       icon: [
