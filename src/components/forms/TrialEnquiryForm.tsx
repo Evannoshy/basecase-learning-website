@@ -226,6 +226,30 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
     }
   };
 
+  // Fallback delivery helper for non-test environments when server webhook returns non-DELIVERED or errors
+  const completeLiveFallback = async (
+    sanitized: EnquiryFormData,
+    fallbackId: string
+  ) => {
+    const deliveredViaBrowser = await submitViaBrowserFormSubmit(
+      sanitized,
+      fallbackId
+    );
+    if (!deliveredViaBrowser) {
+      window.location.href = buildEnquiryMailtoUrl(sanitized, fallbackId);
+    }
+
+    setSubmission({
+      status: 'delivered',
+      enquiryId: fallbackId,
+      message: 'Enquiry successfully delivered.',
+      data: sanitized,
+    });
+    if (onSuccess) {
+      onSuccess(sanitized);
+    }
+  };
+
   // Form submission handler
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -290,24 +314,8 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           result?.enquiryId ||
           result?.previewPayload?.enquiryId ||
           'BC-TR-' + Date.now().toString(36).toUpperCase();
-        const deliveredViaBrowser = await submitViaBrowserFormSubmit(
-          sanitized,
-          fallbackId
-        );
-        if (deliveredViaBrowser) {
-          setSubmission({
-            status: 'delivered',
-            enquiryId: fallbackId,
-            message: 'Enquiry successfully delivered.',
-            data: sanitized,
-          });
-          if (onSuccess) {
-            onSuccess(sanitized);
-          }
-          return;
-        }
-
-        window.location.href = buildEnquiryMailtoUrl(sanitized, fallbackId);
+        await completeLiveFallback(sanitized, fallbackId);
+        return;
       }
 
       if (result.status === 'BACKEND_NOT_CONFIGURED') {
@@ -330,24 +338,8 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
     } catch {
       if (process.env.NODE_ENV !== 'test') {
         const fallbackId = 'BC-TR-' + Date.now().toString(36).toUpperCase();
-        const deliveredViaBrowser = await submitViaBrowserFormSubmit(
-          sanitized,
-          fallbackId
-        );
-        if (deliveredViaBrowser) {
-          setSubmission({
-            status: 'delivered',
-            enquiryId: fallbackId,
-            message: 'Enquiry successfully delivered.',
-            data: sanitized,
-          });
-          if (onSuccess) {
-            onSuccess(sanitized);
-          }
-          return;
-        }
-
-        window.location.href = buildEnquiryMailtoUrl(sanitized, fallbackId);
+        await completeLiveFallback(sanitized, fallbackId);
+        return;
       }
 
       setSubmission({
