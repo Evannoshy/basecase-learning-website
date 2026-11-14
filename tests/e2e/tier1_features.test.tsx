@@ -241,13 +241,12 @@ describe('Tier 1: Feature Coverage (E2E Full Platform Verification)', () => {
       expect(within(section).getAllByRole('button', { name: /expand code snippet/i }).length).toBe(expandBtns.length);
     });
 
-    it('renders playable interactive Python Logic Quiz runner', () => {
+    it('renders sample project gallery without the interactive Python Logic Quiz widget', () => {
       renderFullSite();
-      expect(screen.getByRole('heading', { name: /interactive python logic quiz/i })).toBeInTheDocument();
-      expect(screen.getByText(/try it live/i)).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /run code & check answer/i })).toBeInTheDocument();
-      expect(screen.getByRole('progressbar', { name: /quiz progress/i })).toBeInTheDocument();
-      expect(screen.getByRole('radiogroup')).toBeInTheDocument();
+      const section = document.getElementById('projects')!;
+      expect(within(section).queryByRole('heading', { name: /interactive python logic quiz/i })).not.toBeInTheDocument();
+      expect(within(section).getByRole('heading', { name: /sample project gallery/i })).toBeInTheDocument();
+      expect(within(section).getAllByRole('link', { name: /course details/i }).length).toBe(3);
     });
   });
 

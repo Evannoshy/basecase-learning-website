@@ -6,7 +6,6 @@ import HomePage from '@/app/page';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { siteConfig } from '@/config/siteConfig';
-import { QUIZ_QUESTIONS } from '@/components/showcase/InteractiveProject';
 
 function renderFullSite() {
   return render(
@@ -100,46 +99,23 @@ describe('Tier 3: Cross-Feature Combinations (E2E Integration Verification)', ()
   });
 
   // =========================================================================
-  // 3. Interactive Quiz Completion Flow to Trial Booking
+  // 3. Project Showcase Filtering & Course Details Navigation
   // =========================================================================
-  describe('3. Interactive Quiz Completion Flow to Trial Booking', () => {
-    it('completes all 4 quiz questions with 100% score and navigates via CTA to course curriculum', () => {
+  describe('3. Project Showcase Filtering & Course Details Navigation', () => {
+    it('filters project showcase by track, expands code preview, and links to courses', () => {
       renderFullSite();
+      const projects = document.getElementById('projects')!;
+      const filterGroup = within(projects).getByRole('group', { name: /filter projects by track/i });
 
-      // Solve all 4 questions sequentially
-      QUIZ_QUESTIONS.forEach((q, idx) => {
-        // Question badge
-        expect(
-          screen.getByText(`Question ${idx + 1} of ${QUIZ_QUESTIONS.length}`)
-        ).toBeInTheDocument();
+      fireEvent.click(within(filterGroup).getByRole('button', { name: 'Python' }));
+      expect(within(projects).getByText('Python Quiz Game')).toBeInTheDocument();
 
-        // Select correct option
-        const radios = screen.getAllByRole('radio');
-        fireEvent.click(radios[q.correctOptionIndex]);
+      const expandBtn = within(projects).getAllByRole('button', { name: /expand code snippet/i })[0];
+      fireEvent.click(expandBtn);
+      expect(expandBtn).toHaveAttribute('aria-expanded', 'true');
 
-        // Click run code
-        const runBtn = screen.getByRole('button', {
-          name: /run code & check answer/i,
-        });
-        fireEvent.click(runBtn);
-
-        // Advance to next question or final score
-        if (idx + 1 < QUIZ_QUESTIONS.length) {
-          const nextBtn = screen.getByRole('button', { name: /next question/i });
-          fireEvent.click(nextBtn);
-        } else {
-          const finishBtn = screen.getByRole('button', { name: /view final score/i });
-          fireEvent.click(finishBtn);
-        }
-      });
-
-      // Completion screen verification
-      expect(screen.getByRole('heading', { name: /quiz completed!/i })).toBeInTheDocument();
-      expect(screen.getByText(/outstanding!/i)).toBeInTheDocument();
-
-      // CTA link from quiz completion points to #courses
-      const exploreBtn = screen.getByRole('link', { name: /explore beginner python/i });
-      expect(exploreBtn).toHaveAttribute('href', '#courses');
+      const courseLink = within(projects).getAllByRole('link', { name: /course details/i })[0];
+      expect(courseLink).toHaveAttribute('href', '#courses');
     });
   });
 

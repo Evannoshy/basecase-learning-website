@@ -6,7 +6,6 @@ import HomePage from '@/app/page';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { siteConfig } from '@/config/siteConfig';
-import { QUIZ_QUESTIONS } from '@/components/showcase/InteractiveProject';
 
 function renderFullSite() {
   return render(
@@ -148,25 +147,7 @@ describe('Tier 4: Real-World Scenarios (End-to-End User Journeys)', () => {
     fireEvent.click(expandBtn);
     expect(within(projects).getAllByRole('button', { name: /collapse code snippet/i }).length).toBeGreaterThan(0);
 
-    // 2. Takes interactive logic quiz (4 questions)
-    QUIZ_QUESTIONS.forEach((q, idx) => {
-      const radios = screen.getAllByRole('radio');
-      fireEvent.click(radios[q.correctOptionIndex]);
-      const runBtn = screen.getByRole('button', { name: /run code & check answer/i });
-      fireEvent.click(runBtn);
-
-      if (idx + 1 < QUIZ_QUESTIONS.length) {
-        fireEvent.click(screen.getByRole('button', { name: /next question/i }));
-      } else {
-        fireEvent.click(screen.getByRole('button', { name: /view final score/i }));
-      }
-    });
-
-    // 3. Verifies perfect score screen
-    expect(screen.getByRole('heading', { name: /quiz completed!/i })).toBeInTheDocument();
-    expect(screen.getByText(/outstanding!/i)).toBeInTheDocument();
-
-    // 4. Reviews 4-stage pedagogy
+    // 2. Reviews 4-stage pedagogy
     const pedagogy = document.getElementById('how-learning-works')!;
     expect(pedagogy.textContent).toContain('Independent Practice Drills');
 
