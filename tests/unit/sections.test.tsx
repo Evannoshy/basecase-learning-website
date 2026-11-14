@@ -111,10 +111,10 @@ describe('Courses Section Component', () => {
 describe('HowLearningWorks Section Component', () => {
   it('renders all 4 pedagogical stages in sequential order', () => {
     render(<HowLearningWorks />);
-    expect(screen.getByRole('heading', { level: 3, name: 'Understand the Concept' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 3, name: 'Build with Guidance' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 3, name: 'Solve a Challenge' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 3, name: 'Get Feedback & Improve' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: 'Concept Breakdown & Notes' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: 'Guided Class Walkthrough' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: 'Independent Practice Drills' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: '1-on-1 Code Review & Feedback' })).toBeInTheDocument();
 
     expect(screen.getByText('Step 01')).toBeInTheDocument();
     expect(screen.getByText('Step 02')).toBeInTheDocument();

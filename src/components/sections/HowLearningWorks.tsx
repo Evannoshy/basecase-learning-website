@@ -1,5 +1,5 @@
 import React from 'react';
-import { Lightbulb, Code2, Bug, CheckCircle } from 'lucide-react';
+import { BookOpen, Code2, Bug, CheckCircle2, ClipboardCheck } from 'lucide-react';
 import { siteConfig, LearningStage } from '@/config/siteConfig';
 import { PhotoPlaceholder } from '@/components/ui/PhotoPlaceholder';
 import { cn } from '@/lib/utils';
@@ -9,7 +9,49 @@ export interface HowLearningWorksProps {
   className?: string;
 }
 
-const stageIcons = [Lightbulb, Code2, Bug, CheckCircle];
+const stageIcons = [BookOpen, Code2, Bug, ClipboardCheck];
+
+const stepPhotos = [
+  {
+    title: 'Step 1: Concept Notes Photo',
+    shotGuide: 'Tutor explaining a visual logic diagram and printed summary notes to 2–3 students at a table.',
+    fileHint: 'public/images/lesson-step-1.jpg',
+  },
+  {
+    title: 'Step 2: Guided Walkthrough Photo',
+    shotGuide: 'Tutor demonstrating code step by step on a screen while students follow along on their laptops.',
+    fileHint: 'public/images/lesson-step-2.jpg',
+  },
+  {
+    title: 'Step 3: Practice Drills Photo',
+    shotGuide: 'Students working independently on practice coding exercises and checking error messages.',
+    fileHint: 'public/images/lesson-step-3.jpg',
+  },
+  {
+    title: 'Step 4: 1-on-1 Marking Photo',
+    shotGuide: "Tutor reviewing a student's code line by line and giving 1-on-1 feedback.",
+    fileHint: 'public/images/lesson-step-4.jpg',
+  },
+];
+
+const weeklyDeliverables = [
+  {
+    title: 'Summary Notes & Cheat Sheets',
+    detail: 'Concise printed and PDF topic sheets covering syntax, logic diagrams, and common pitfalls.',
+  },
+  {
+    title: 'Graded Practice Worksheets',
+    detail: 'Step-by-step drills moving from guided warm-ups to challenge and school-style questions.',
+  },
+  {
+    title: '1-on-1 Code Marking in Class',
+    detail: 'Individual line-by-line review during every session so weak spots are corrected immediately.',
+  },
+  {
+    title: 'WhatsApp Support & Parent Updates',
+    detail: 'Homework help between weekly lessons plus regular notes to keep parents updated on progress.',
+  },
+];
 
 export function HowLearningWorks({
   stages = siteConfig.learningStages,
@@ -25,75 +67,116 @@ export function HowLearningWorks({
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <p className="text-xs font-bold uppercase tracking-widest text-teal-700">
-            How Lessons Run
+            Our Teaching Methodology
           </p>
           <h2
             id="how-learning-works-heading"
             className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight"
           >
-            How Learning Works
+            How Our Weekly Lessons Work
           </h2>
           <div className="w-12 h-1 bg-teal-700 mx-auto mt-4" aria-hidden="true" />
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-            Students learn best by thinking through problems, writing code themselves, and fixing their own mistakes—not copying syntax off a slide.
+            Every 2-hour weekly class follows a structured 4-part tuition format—combining summary notes, worked examples, timed practice drills, and 1-on-1 tutor marking.
           </p>
         </div>
 
-        {/* 4-Stage Connected Process Cards */}
+        {/* 4-Stage Structured Tuition Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {stages.map((stage, idx) => {
             const Icon = stageIcons[idx % stageIcons.length];
+            const photo = stepPhotos[idx % stepPhotos.length];
+
             return (
-              <div
+              <article
                 key={stage.step}
-                className="relative flex flex-col bg-white rounded-lg border border-slate-200 border-t-4 border-t-teal-700 p-6 shadow-sm hover:shadow transition-shadow"
+                className="flex flex-col bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
               >
-                {/* Step Header */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-bold uppercase tracking-wider text-teal-800 bg-teal-50 border border-teal-200 px-2.5 py-0.5 rounded">
+                {/* Dark Navy Tuition Step Bar */}
+                <div className="bg-[#0F172A] text-white px-4 py-2.5 flex items-center justify-between gap-2">
+                  <span className="text-xs font-bold uppercase tracking-wider text-teal-300">
                     {stage.badge}
                   </span>
-                  <div className="p-2 rounded-lg bg-slate-50 text-teal-700 border border-slate-200/70">
-                    <Icon className="w-5 h-5" aria-hidden="true" />
-                  </div>
+                  <span className="text-[11px] font-medium text-slate-200 truncate">
+                    {stage.subtitle}
+                  </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-slate-900 tracking-tight">
-                  {stage.title}
-                </h3>
-                <p className="text-xs font-semibold text-teal-700 uppercase tracking-wider mt-0.5">
-                  {stage.subtitle}
-                </p>
+                {/* Lesson Step Photo Placeholder */}
+                <PhotoPlaceholder
+                  title={photo.title}
+                  aspectRatio="16:10"
+                  dimensions="800 × 500 px"
+                  shotGuide={photo.shotGuide}
+                  fileHint={photo.fileHint}
+                  className="rounded-none border-0 border-b-2 border-dashed border-slate-300"
+                />
 
-                <p className="mt-3 text-sm text-slate-600 leading-relaxed">
-                  {stage.description}
-                </p>
-              </div>
+                {/* Stage Content */}
+                <div className="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-start justify-between gap-2 mb-2.5">
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight leading-snug">
+                        {stage.title}
+                      </h3>
+                      <span className="p-1.5 rounded-md bg-teal-50 text-teal-700 border border-teal-200/80 flex-shrink-0">
+                        <Icon className="w-4 h-4" aria-hidden="true" />
+                      </span>
+                    </div>
+
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      {stage.description}
+                    </p>
+                  </div>
+
+                  {/* Tutor's Role Callout */}
+                  <div className="mt-4 pt-3 border-t border-slate-100 bg-slate-50 rounded-lg p-3 text-xs text-slate-700 leading-relaxed">
+                    <span className="font-semibold text-slate-900 block mb-0.5">
+                      Tutor&apos;s Role:
+                    </span>
+                    <span>{stage.mentorRole}</span>
+                  </div>
+                </div>
+              </article>
             );
           })}
         </div>
 
-        {/* Classroom in Action Feature Banner (Flex layout preserves first .grid selector expectations) */}
-        <div className="mt-10 bg-slate-50 rounded-xl border border-slate-200 p-6 sm:p-8 flex flex-col lg:flex-row gap-8 items-center">
+        {/* Weekly Tuition Deliverables Banner (Flex preserves first .grid test invariant) */}
+        <div className="mt-10 bg-slate-50 rounded-xl border border-slate-200 border-t-4 border-t-teal-700 p-6 sm:p-8 flex flex-col lg:flex-row gap-8 items-center shadow-sm">
           <div className="w-full lg:w-1/2">
             <PhotoPlaceholder
-              title="90-Minute Lesson in Action"
+              title="Weekly Small-Group Class & Notes"
               aspectRatio="16:9"
               dimensions="1000 × 560 px"
-              shotGuide="Wide shot of a typical class session: tutor reviewing logic on a screen while students test solutions on laptops."
+              shotGuide="Wide shot of a typical 2-hour tuition class with printed summary sheets and laptops open."
               fileHint="public/images/classroom-method.jpg"
             />
           </div>
-          <div className="w-full lg:w-1/2 space-y-3">
-            <p className="text-xs font-bold uppercase tracking-widest text-teal-700">
-              Inside Every Session
-            </p>
-            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
-              Structured Practice Instead of Passive Slides
-            </h3>
-            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-              We open each lesson with a short worked concept, move straight into guided coding together, give students solo mini-challenges to test their grasp, and close with individual feedback on how to clean up and debug their code.
-            </p>
+          <div className="w-full lg:w-1/2 space-y-4">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-teal-700">
+                Every Weekly Lesson
+              </p>
+              <h3 className="mt-1 text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+                What Students Receive Every Week
+              </h3>
+            </div>
+
+            <ul className="space-y-3">
+              {weeklyDeliverables.map((item) => (
+                <li key={item.title} className="flex items-start gap-2.5 text-sm">
+                  <CheckCircle2
+                    className="w-4 h-4 text-teal-700 mt-0.5 flex-shrink-0"
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <span className="font-semibold text-slate-900">{item.title}: </span>
+                    <span className="text-slate-600">{item.detail}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

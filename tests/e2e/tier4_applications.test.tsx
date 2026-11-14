@@ -167,7 +167,7 @@ describe('Tier 4: Real-World Scenarios (End-to-End User Journeys)', () => {
 
     // 4. Reviews 4-stage pedagogy
     const pedagogy = document.getElementById('how-learning-works')!;
-    expect(pedagogy.textContent).toContain('Solve a Challenge');
+    expect(pedagogy.textContent).toContain('Independent Practice Drills');
 
     // 5. Proceeds to trial enquiry form
     await user.type(screen.getByLabelText(/parent \/ guardian name/i), 'Dr. Raymond Goh');

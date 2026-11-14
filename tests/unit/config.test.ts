@@ -64,10 +64,10 @@ describe('Central siteConfig Integrity and Completeness', () => {
     expect(siteConfig.learningStages).toHaveLength(4);
     const titles = siteConfig.learningStages.map((s) => s.title);
     expect(titles).toEqual([
-      'Understand the Concept',
-      'Build with Guidance',
-      'Solve a Challenge',
-      'Get Feedback & Improve',
+      'Concept Breakdown & Notes',
+      'Guided Class Walkthrough',
+      'Independent Practice Drills',
+      '1-on-1 Code Review & Feedback',
     ]);
 
     siteConfig.learningStages.forEach((stage) => {
