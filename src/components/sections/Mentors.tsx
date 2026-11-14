@@ -100,7 +100,7 @@ export function Mentors({
                 {/* Scholarships & Innovation Programmes (Typographic Only - NEG-07) */}
                 <div className="mb-5">
                   <span className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-2">
-                    Scholarships &amp; Innovation Programmes
+                    Part of:
                   </span>
                   <div className="flex flex-wrap gap-1.5">
                     {mentor.scholarships.map((scholarship) => (
