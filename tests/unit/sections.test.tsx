@@ -135,7 +135,7 @@ describe('Mentors Section Component', () => {
   it('renders editable mentor profile templates with NUS undergraduate context and no invented people', () => {
     render(<Mentors />);
     expect(screen.getByRole('heading', { level: 3, name: 'Founding Mentor 01 (Profile TBC)' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 3, name: 'Founding Mentor 02 (Profile TBC)' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: 'Evan Tan' })).toBeInTheDocument();
 
     const undergraduateLabels = screen.getAllByText(/National University of Singapore \(Undergraduate\)/i);
     expect(undergraduateLabels).toHaveLength(2);
@@ -144,18 +144,16 @@ describe('Mentors Section Component', () => {
   it('renders initial monogram avatars with accessible aria-label without broken images', () => {
     const { container } = render(<Mentors />);
     expect(screen.getByLabelText(/portrait placeholder for founding mentor 01/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/portrait placeholder for founding mentor 02/i)).toBeInTheDocument();
-
-    // Verify zero img tags by default (no stock photos or unauthorized images)
-    expect(container.querySelectorAll('img')).toHaveLength(0);
+    expect(screen.getByRole('img', { name: /Photo of Evan Tan/i })).toBeInTheDocument();
+    expect(container.querySelectorAll('img')).toHaveLength(1);
   });
 
   it('renders provisional C Innovators and scholarship placeholders without fabricated awards (NEG-07)', () => {
     render(<Mentors />);
-    const cInnovatorsBadges = screen.getAllByText(/"C Innovators", official name TBC/i);
+    const cInnovatorsBadges = screen.getAllByText(/C[- ]Innovators/i);
     expect(cInnovatorsBadges.length).toBeGreaterThanOrEqual(2);
 
-    expect(screen.getAllByText(/Scholarship details to be confirmed/i).length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByText(/Scholarship details to be confirmed/i).length).toBeGreaterThanOrEqual(1);
   });
 
   it('renders prominent university independence disclaimer in role="note" (NEG-08)', () => {

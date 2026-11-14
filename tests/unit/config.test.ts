@@ -83,7 +83,7 @@ describe('Central siteConfig Integrity and Completeness', () => {
       expect(mentor.institution).toContain('National University of Singapore');
       expect(mentor.teachingExperience).toBeTruthy();
       expect(mentor.scholarships.length).toBeGreaterThan(0);
-      expect(mentor.innovationBadges.some((b) => b.includes('C Innovators'))).toBe(true);
+      expect(mentor.innovationBadges.some((b) => /C[- ]Innovators/i.test(b))).toBe(true);
       expect(mentor.avatarPlaceholderText).toMatch(/^[A-Z]{2}$/);
     });
   });

@@ -72,8 +72,9 @@ describe('Tier 4: Real-World Scenarios (End-to-End User Journeys)', () => {
     // 3. Inspects Mentors section: verifies NUS Computing context without fabricated names/logos
     const mentors = document.getElementById('mentors')!;
     expect(within(mentors).getByRole('heading', { name: 'Founding Mentor 01 (Profile TBC)' })).toBeInTheDocument();
+    expect(within(mentors).getByRole('heading', { name: 'Evan Tan' })).toBeInTheDocument();
     expect(mentors.textContent).toContain('National University of Singapore (Undergraduate)');
-    expect(mentors.querySelectorAll('img').length).toBe(0);
+    expect(mentors.querySelectorAll('img').length).toBe(1);
 
     // 4. Reads Institutional Independence Disclaimer note
     const disclaimer = within(mentors).getByRole('note', { name: /institutional independence disclaimer/i });

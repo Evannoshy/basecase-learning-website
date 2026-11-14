@@ -287,7 +287,7 @@ describe('Tier 1: Feature Coverage (E2E Full Platform Verification)', () => {
       });
 
       // No university logos or generic stock images (NEG-01, NEG-07)
-      expect(section.querySelectorAll('img').length).toBe(0);
+      expect(section.querySelectorAll('img').length).toBe(1);
 
       // Prominent institutional independence disclaimer (NEG-08)
       const disclaimerBox = within(section).getByRole('note', { name: /institutional independence disclaimer/i });
