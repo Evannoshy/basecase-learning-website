@@ -40,11 +40,11 @@ export default function CookiesPage() {
   return (
     <div className="bg-white">
       {/* Top Breadcrumb Bar */}
-      <div className="bg-slate-50 border-b border-slate-200">
+      <div className="bg-slate-50 border-b border-slate-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4 text-xs sm:text-sm">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 font-medium text-slate-700 hover:text-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 rounded transition-colors"
+            className="inline-flex items-center gap-1.5 font-medium text-slate-700 hover:text-[#1E3A8A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded transition-colors"
           >
             <ArrowLeft className="w-4 h-4" aria-hidden="true" />
             <span>Back to Home</span>
@@ -58,7 +58,7 @@ export default function CookiesPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           {/* Title Block */}
           <header className="border-b border-slate-200 pb-8">
-            <p className="text-xs font-bold uppercase tracking-widest text-teal-700">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#1E3A8A]">
               Privacy &amp; Browser Storage
             </p>
             <h1 className="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
@@ -92,7 +92,7 @@ export default function CookiesPage() {
               2. How We Use Cookies
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-5">
+              <div className="rounded-lg border border-slate-300 bg-slate-50 p-5">
                 <h3 className="text-base font-bold text-slate-900">
                   Strictly Necessary / Essential
                 </h3>
@@ -100,7 +100,7 @@ export default function CookiesPage() {
                   Required so the website functions reliably—such as remembering your cookie notice selection and keeping interactive forms working cleanly. These cannot be switched off without resetting browser storage.
                 </p>
               </div>
-              <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-5">
+              <div className="rounded-lg border border-slate-300 bg-slate-50 p-5">
                 <h3 className="text-base font-bold text-slate-900">
                   Optional Analytics &amp; Performance
                 </h3>
@@ -116,10 +116,10 @@ export default function CookiesPage() {
             <h2 id="section-cookie-reference" className="text-xl font-bold text-slate-900">
               3. Cookie &amp; Local Storage Reference
             </h2>
-            <div className="rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+            <div className="rounded-xl border border-slate-300 overflow-hidden shadow-sm">
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
-                  <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-600">
+                  <thead className="bg-slate-100 text-xs uppercase tracking-wider text-slate-700">
                     <tr>
                       <th scope="col" className="px-5 py-3.5 font-semibold">Name / Key</th>
                       <th scope="col" className="px-5 py-3.5 font-semibold">Category</th>
@@ -129,7 +129,7 @@ export default function CookiesPage() {
                   </thead>
                   <tbody className="divide-y divide-slate-200 bg-white">
                     {cookieInventory.map((item) => (
-                      <tr key={item.name} className="hover:bg-slate-50/70 transition-colors">
+                      <tr key={item.name} className="hover:bg-slate-50 transition-colors">
                         <td className="px-5 py-4 font-mono text-xs sm:text-sm font-semibold text-slate-900 whitespace-nowrap">
                           {item.name}
                         </td>
@@ -164,7 +164,7 @@ export default function CookiesPage() {
               Under Singapore&apos;s PDPA, any personal information you choose to enter in our trial enquiry form is used solely to reply to your enquiry about classes. If you have questions about privacy or cookies, contact us at{' '}
               <a
                 href={`mailto:${brand.contact.email}`}
-                className="font-semibold text-teal-700 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 rounded"
+                className="font-semibold text-[#1E3A8A] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
               >
                 {brand.contact.email}
               </a>{' '}
@@ -173,7 +173,7 @@ export default function CookiesPage() {
                 href={brand.contact.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-teal-700 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 rounded"
+                className="font-semibold text-[#1E3A8A] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
               >
                 {brand.contact.phoneDisplay}
               </a>

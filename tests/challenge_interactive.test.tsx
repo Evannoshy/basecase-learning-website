@@ -201,9 +201,9 @@ describe('Empirical Challenge: Interactive Python Logic Quiz Runner', () => {
       expect(radios[2].className).toContain('border-rose-500');
       expect(radios[2].className).toContain('bg-rose-50');
 
-      // Option 1 & 3 (unselected options): dimmed
-      expect(radios[1].className).toContain('opacity-70');
-      expect(radios[3].className).toContain('opacity-70');
+      // Option 1 & 3 (unselected options): solid muted styling
+      expect(radios[1].className).toContain('text-slate-500');
+      expect(radios[3].className).toContain('text-slate-500');
     });
   });
 

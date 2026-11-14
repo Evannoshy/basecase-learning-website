@@ -48,7 +48,7 @@ export function PhotoPlaceholder({
           <span>Photo · {aspectRatio}</span>
         </span>
         {dimensions && (
-          <span className="text-slate-600 bg-white/90 px-1.5 py-0.5 rounded border border-slate-200 whitespace-nowrap">
+          <span className="text-slate-600 bg-white px-1.5 py-0.5 rounded border border-slate-300 whitespace-nowrap">
             {dimensions}
           </span>
         )}

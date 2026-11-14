@@ -82,7 +82,7 @@ export function Hero({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Text Column */}
           <div className="lg:col-span-6 text-center lg:text-left">
-            <p className="text-xs font-bold uppercase tracking-widest text-teal-700 mb-3">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#1E3A8A] mb-3">
               {activeBadgeText}
             </p>
 
@@ -101,14 +101,14 @@ export function Hero({
             <div className="mt-7 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
               <a
                 href={activePrimaryCta.href}
-                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 text-base font-semibold text-white bg-[#0F766E] hover:bg-[#115E59] rounded-md shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600 transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 text-base font-semibold text-white bg-[#1E3A8A] hover:bg-[#1E40AF] rounded-md shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#1E3A8A] transition-colors"
               >
                 <span>{activePrimaryCta.text}</span>
                 <ArrowRight className="w-4 h-4 ml-2" aria-hidden="true" />
               </a>
               <a
                 href={activeSecondaryCta.href}
-                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 text-base font-semibold text-slate-800 bg-white hover:bg-slate-50 border border-slate-300 rounded-md shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600 transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 text-base font-semibold text-slate-800 bg-white hover:bg-slate-50 border border-slate-300 rounded-md shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#1E3A8A] transition-colors"
               >
                 <span>{activeSecondaryCta.text}</span>
                 <BookOpen className="w-4 h-4 ml-2 text-slate-500" aria-hidden="true" />
@@ -120,7 +120,7 @@ export function Hero({
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm text-slate-700">
                 {activeHighlights.map((item) => (
                   <li key={item} className="flex items-start text-left">
-                    <CheckCircle2 className="w-4 h-4 text-teal-600 mr-2 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                    <CheckCircle2 className="w-4 h-4 text-[#1E3A8A] mr-2 mt-0.5 flex-shrink-0" aria-hidden="true" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -144,7 +144,7 @@ export function Hero({
         {/* Bottom 4-Card "Why BaseCase Learning" Visual Grid (Zenith / EduFirst style) */}
         <div className="mt-14 pt-12 border-t border-slate-200">
           <div className="text-center max-w-2xl mx-auto mb-8">
-            <p className="text-xs font-bold uppercase tracking-widest text-teal-700">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#1E3A8A]">
               The BaseCase Approach
             </p>
             <h2 className="mt-1.5 text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">

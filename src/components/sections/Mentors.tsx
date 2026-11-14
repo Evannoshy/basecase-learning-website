@@ -21,12 +21,12 @@ export function Mentors({
     <section
       id="mentors"
       aria-labelledby="mentors-heading"
-      className={cn('py-16 sm:py-20 bg-slate-50 border-t border-slate-200', className)}
+      className={cn('py-16 sm:py-20 bg-slate-50 border-t border-slate-300', className)}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <p className="text-xs font-bold uppercase tracking-widest text-teal-700">
+          <p className="text-xs font-bold uppercase tracking-widest text-[#1E3A8A]">
             Our Teaching Team
           </p>
           <h2
@@ -35,7 +35,7 @@ export function Mentors({
           >
             Meet the Mentors
           </h2>
-          <div className="w-12 h-1 bg-teal-700 mx-auto mt-4" aria-hidden="true" />
+          <div className="w-12 h-1 bg-[#1E3A8A] mx-auto mt-4" aria-hidden="true" />
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
             Led by NUS Computing students who explain concepts plainly and help students build projects they understand. Individual mentor details and official programme names are placeholders until confirmed before launch.
           </p>
@@ -46,7 +46,7 @@ export function Mentors({
           {mentors.map((mentor) => (
             <article
               key={mentor.id}
-              className="flex flex-col justify-between bg-white rounded-xl border border-slate-200 shadow-sm p-6 sm:p-7"
+              className="flex flex-col justify-between bg-white rounded-xl border border-slate-300 border-t-4 border-t-[#1E3A8A] shadow-sm p-6 sm:p-7"
             >
               <div>
                 {mentor.statusLabel && (
@@ -65,7 +65,7 @@ export function Mentors({
                       alt={`Photo of ${mentor.name}`}
                       width={192}
                       height={256}
-                      className="w-full sm:w-44 aspect-[3/4] rounded-lg object-cover border border-slate-200 flex-shrink-0"
+                      className="w-full sm:w-44 aspect-[3/4] rounded-lg object-cover border border-slate-300 flex-shrink-0"
                     />
                   ) : (
                     <div className="w-full sm:w-48 flex-shrink-0">
@@ -84,7 +84,7 @@ export function Mentors({
                     <h3 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
                       {mentor.name}
                     </h3>
-                    <p className="text-sm font-semibold text-teal-700 mt-0.5">
+                    <p className="text-sm font-semibold text-[#1E3A8A] mt-0.5">
                       {mentor.role}
                     </p>
                     <p className="text-xs text-slate-500 font-medium mt-1">
@@ -119,9 +119,9 @@ export function Mentors({
                 </div>
 
                 {/* Teaching Experience */}
-                <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-200/80 mb-5 text-xs text-slate-700">
+                <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-300 mb-5 text-xs text-slate-700">
                   <div className="flex items-start">
-                    <BookOpen className="w-4 h-4 text-teal-600 mr-2 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                    <BookOpen className="w-4 h-4 text-[#1E3A8A] mr-2 mt-0.5 flex-shrink-0" aria-hidden="true" />
                     <div>
                       <strong className="text-slate-900 font-semibold block mb-0.5">
                         Teaching &amp; Mentorship Experience:
@@ -151,8 +151,8 @@ export function Mentors({
 
               {/* Teaching Approach Quote */}
               {mentor.highlightQuote && (
-                <div className="pt-4 border-t border-slate-100 italic text-xs text-slate-600 flex items-start">
-                  <Quote className="w-3.5 h-3.5 text-teal-600 mr-1.5 mt-0.5 flex-shrink-0 rotate-180" aria-hidden="true" />
+                <div className="pt-4 border-t border-slate-200 italic text-xs text-slate-600 flex items-start">
+                  <Quote className="w-3.5 h-3.5 text-[#1E3A8A] mr-1.5 mt-0.5 flex-shrink-0 rotate-180" aria-hidden="true" />
                   <span>&ldquo;{mentor.highlightQuote}&rdquo;</span>
                 </div>
               )}
@@ -164,7 +164,7 @@ export function Mentors({
         <aside
           role="note"
           aria-label="Institutional Independence Disclaimer"
-          className="p-5 rounded-lg bg-white border border-slate-200 text-slate-700 text-xs sm:text-sm leading-relaxed"
+          className="p-5 rounded-lg bg-white border border-slate-300 text-slate-700 text-xs sm:text-sm leading-relaxed"
         >
           <div className="flex items-start space-x-3">
             <Info className="w-5 h-5 text-slate-500 mt-0.5 flex-shrink-0" aria-hidden="true" />

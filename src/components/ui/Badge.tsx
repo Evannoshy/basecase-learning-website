@@ -14,10 +14,10 @@ export function Badge({
   ...props
 }: BadgeProps) {
   const variantStyles = {
-    default: 'bg-teal-50 text-teal-800 border-teal-200/80',
-    teal: 'bg-teal-100 text-teal-800 border-teal-200',
-    amber: 'bg-amber-100 text-amber-800 border-amber-200',
-    slate: 'bg-slate-100 text-slate-800 border-slate-200',
+    default: 'bg-slate-100 text-slate-800 border-slate-300',
+    teal: 'bg-teal-100 text-teal-800 border-teal-300',
+    amber: 'bg-amber-100 text-amber-800 border-amber-300',
+    slate: 'bg-slate-100 text-slate-800 border-slate-300',
     outline: 'bg-transparent text-slate-700 border-slate-300',
   };
 

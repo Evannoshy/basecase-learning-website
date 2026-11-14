@@ -102,7 +102,7 @@ export default function RootLayout({
       lang="en"
       className={`${fontSans.variable} ${fontMono.variable} scroll-smooth`}
     >
-      <body className="min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-teal-100 selection:text-teal-900">
+      <body className="min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-blue-100 selection:text-blue-950">
         {/* WCAG AA Visible Skip-to-Main-Content Anchor */}
         <a
           href="#main-content"

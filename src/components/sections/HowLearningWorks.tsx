@@ -61,12 +61,12 @@ export function HowLearningWorks({
     <section
       id="how-learning-works"
       aria-labelledby="how-learning-works-heading"
-      className={cn('py-16 sm:py-20 bg-white border-t border-slate-200', className)}
+      className={cn('py-16 sm:py-20 bg-white border-t border-slate-300', className)}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <p className="text-xs font-bold uppercase tracking-widest text-teal-700">
+          <p className="text-xs font-bold uppercase tracking-widest text-[#1E3A8A]">
             Our Teaching Methodology
           </p>
           <h2
@@ -75,7 +75,7 @@ export function HowLearningWorks({
           >
             How Our Weekly Lessons Work
           </h2>
-          <div className="w-12 h-1 bg-teal-700 mx-auto mt-4" aria-hidden="true" />
+          <div className="w-12 h-1 bg-[#1E3A8A] mx-auto mt-4" aria-hidden="true" />
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
             Every 2-hour weekly class follows a structured 4-part tuition format—combining summary notes, worked examples, timed practice drills, and 1-on-1 tutor marking.
           </p>
@@ -90,14 +90,14 @@ export function HowLearningWorks({
             return (
               <article
                 key={stage.step}
-                className="flex flex-col bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                className="flex flex-col bg-white rounded-xl border border-slate-300 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
               >
-                {/* Dark Navy Tuition Step Bar */}
-                <div className="bg-[#0F172A] text-white px-4 py-2.5 flex items-center justify-between gap-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-teal-300">
+                {/* Solid Academic Navy Tuition Step Bar */}
+                <div className="bg-[#1E3A8A] text-white px-4 py-2.5 flex items-center justify-between gap-2 dark-surface">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#FACC15]">
                     {stage.badge}
                   </span>
-                  <span className="text-[11px] font-medium text-slate-200 truncate">
+                  <span className="text-[11px] font-medium text-white truncate">
                     {stage.subtitle}
                   </span>
                 </div>
@@ -119,7 +119,7 @@ export function HowLearningWorks({
                       <h3 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight leading-snug">
                         {stage.title}
                       </h3>
-                      <span className="p-1.5 rounded-md bg-teal-50 text-teal-700 border border-teal-200/80 flex-shrink-0">
+                      <span className="p-1.5 rounded-md bg-slate-100 text-[#1E3A8A] border border-slate-300 flex-shrink-0">
                         <Icon className="w-4 h-4" aria-hidden="true" />
                       </span>
                     </div>
@@ -130,7 +130,7 @@ export function HowLearningWorks({
                   </div>
 
                   {/* Tutor's Role Callout */}
-                  <div className="mt-4 pt-3 border-t border-slate-100 bg-slate-50 rounded-lg p-3 text-xs text-slate-700 leading-relaxed">
+                  <div className="mt-4 pt-3 border-t border-slate-200 bg-slate-50 rounded-lg p-3 text-xs text-slate-700 leading-relaxed">
                     <span className="font-semibold text-slate-900 block mb-0.5">
                       Tutor&apos;s Role:
                     </span>
@@ -143,7 +143,7 @@ export function HowLearningWorks({
         </div>
 
         {/* Weekly Tuition Deliverables Banner (Flex preserves first .grid test invariant) */}
-        <div className="mt-10 bg-slate-50 rounded-xl border border-slate-200 border-t-4 border-t-teal-700 p-6 sm:p-8 flex flex-col lg:flex-row gap-8 items-center shadow-sm">
+        <div className="mt-10 bg-slate-50 rounded-xl border border-slate-300 border-t-4 border-t-[#1E3A8A] p-6 sm:p-8 flex flex-col lg:flex-row gap-8 items-center shadow-sm">
           <div className="w-full lg:w-1/2">
             <PhotoPlaceholder
               title="Weekly Small-Group Class & Notes"
@@ -155,7 +155,7 @@ export function HowLearningWorks({
           </div>
           <div className="w-full lg:w-1/2 space-y-4">
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-teal-700">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#1E3A8A]">
                 Every Weekly Lesson
               </p>
               <h3 className="mt-1 text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
@@ -167,7 +167,7 @@ export function HowLearningWorks({
               {weeklyDeliverables.map((item) => (
                 <li key={item.title} className="flex items-start gap-2.5 text-sm">
                   <CheckCircle2
-                    className="w-4 h-4 text-teal-700 mt-0.5 flex-shrink-0"
+                    className="w-4 h-4 text-[#1E3A8A] mt-0.5 flex-shrink-0"
                     aria-hidden="true"
                   />
                   <div>

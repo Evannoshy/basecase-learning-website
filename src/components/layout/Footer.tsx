@@ -17,7 +17,7 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center">
               <span
-                className="w-7 h-7 rounded bg-teal-700 text-white font-bold text-xs inline-flex items-center justify-center mr-2 tracking-tight flex-shrink-0"
+                className="w-7 h-7 rounded bg-[#1E3A8A] text-white font-bold text-xs inline-flex items-center justify-center mr-2 tracking-tight flex-shrink-0"
                 aria-hidden="true"
               >
                 BC
@@ -41,7 +41,7 @@ export function Footer() {
                 <li>
                   <a
                     href="#courses"
-                    className="hover:text-teal-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded transition-colors"
+                    className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
                     Beginner Python
                   </a>
@@ -49,7 +49,7 @@ export function Footer() {
                 <li>
                   <a
                     href="#courses"
-                    className="hover:text-teal-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded transition-colors"
+                    className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
                     Introductory Web Dev
                   </a>
@@ -57,7 +57,7 @@ export function Footer() {
                 <li>
                   <a
                     href="#how-learning-works"
-                    className="hover:text-teal-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded transition-colors"
+                    className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
                     How Learning Works
                   </a>
@@ -65,7 +65,7 @@ export function Footer() {
                 <li>
                   <a
                     href="#projects"
-                    className="hover:text-teal-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded transition-colors"
+                    className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
                     Example Projects
                   </a>
@@ -73,7 +73,7 @@ export function Footer() {
                 <li>
                   <a
                     href="#mentors"
-                    className="hover:text-teal-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded transition-colors"
+                    className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
                     Meet the Mentors
                   </a>
@@ -81,7 +81,7 @@ export function Footer() {
                 <li>
                   <a
                     href="/pricing"
-                    className="hover:text-teal-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded transition-colors"
+                    className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
                     Tuition Fees &amp; Pricing
                   </a>
@@ -89,7 +89,7 @@ export function Footer() {
                 <li>
                   <a
                     href="#faqs"
-                    className="hover:text-teal-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded transition-colors"
+                    className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
                     Parent FAQs
                   </a>
@@ -108,7 +108,7 @@ export function Footer() {
                 <span className="text-slate-400 block">Email:</span>
                 <a
                   href={`mailto:${siteConfig.brand.contact.email}`}
-                  className="text-teal-400 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded"
+                  className="text-white underline hover:text-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded"
                 >
                   {siteConfig.brand.contact.email}
                 </a>
@@ -119,7 +119,7 @@ export function Footer() {
                   href={siteConfig.brand.contact.whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-teal-400 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded"
+                  className="text-white underline hover:text-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded"
                 >
                   {siteConfig.brand.contact.phoneDisplay}
                 </a>
@@ -136,7 +136,7 @@ export function Footer() {
             <div className="mt-4">
               <a
                 href="#trial-enquiry"
-                className="inline-flex items-center text-xs font-semibold text-teal-400 hover:text-teal-300 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded"
+                className="inline-flex items-center text-xs font-semibold text-white underline hover:text-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded"
               >
                 Book a coding trial enquiry &rarr;
               </a>
@@ -146,7 +146,7 @@ export function Footer() {
 
         {/* Separator and Consolidated Notices */}
         <div className="mt-12 pt-8 border-t border-slate-800 space-y-4">
-          <div className="bg-slate-900/70 rounded-lg p-4 border border-slate-800 text-xs text-slate-400 leading-relaxed space-y-1.5">
+          <div className="bg-slate-900 rounded-lg p-4 border border-slate-800 text-xs text-slate-300 leading-relaxed space-y-1.5">
             <p>{siteConfig.brand.disclaimers.universityIndependence}</p>
             <p>
               {siteConfig.brand.disclaimers.operationalPricing} We only collect the contact details needed to answer your trial enquiry under Singapore’s PDPA.
@@ -154,12 +154,12 @@ export function Footer() {
           </div>
 
           {/* Copyright & Legal Links Line */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500 pt-2">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400 pt-2">
             <p>&copy; {currentYear} {siteConfig.brand.name}. All rights reserved.</p>
             <div className="flex items-center gap-4">
               <Link
                 href="/cookies"
-                className="text-slate-300 hover:text-teal-400 underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded transition-colors"
+                className="text-slate-200 hover:text-white underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
               >
                 Cookie Policy
               </Link>

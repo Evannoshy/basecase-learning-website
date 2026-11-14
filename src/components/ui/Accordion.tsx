@@ -62,7 +62,7 @@ export function Accordion({
                 aria-controls={panelId}
                 onClick={() => toggleItem(item.id)}
                 onKeyDown={(e) => handleKeyDown(e, item.id)}
-                className="group flex w-full items-center justify-between text-left font-semibold text-slate-900 hover:text-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 rounded-md py-1 transition-colors"
+                className="group flex w-full items-center justify-between text-left font-semibold text-slate-900 hover:text-[#1E3A8A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded-md py-1 transition-colors"
               >
                 <span className="text-base sm:text-lg pr-4 flex-1">
                   {item.question}
@@ -71,8 +71,8 @@ export function Accordion({
                   <ChevronDown
                     aria-hidden="true"
                     className={cn(
-                      'w-5 h-5 text-slate-500 group-hover:text-teal-600 transition-transform duration-200 ease-in-out',
-                      isOpen && 'rotate-180 text-teal-700'
+                      'w-5 h-5 text-slate-500 group-hover:text-[#1E3A8A] transition-transform duration-200 ease-in-out',
+                      isOpen && 'rotate-180 text-[#1E3A8A]'
                     )}
                   />
                 </span>

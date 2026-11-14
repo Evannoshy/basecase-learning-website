@@ -54,9 +54,9 @@ export function FloatingContactCta() {
           target="_blank"
           rel="noopener noreferrer"
           tabIndex={isHiddenAtFormOrFooter ? -1 : undefined}
-          className="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-[#0B132B] hover:bg-slate-800 text-white text-sm font-semibold shadow-lg border border-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600 transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-[#1E3A8A] hover:bg-[#1E40AF] text-white text-sm font-semibold shadow-lg border border-blue-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#1E3A8A] transition-colors"
         >
-          <MessageSquare className="w-4 h-4 text-teal-400" aria-hidden="true" />
+          <MessageSquare className="w-4 h-4 text-white" aria-hidden="true" />
           <span>Ask on WhatsApp</span>
         </a>
       </div>
@@ -67,7 +67,7 @@ export function FloatingContactCta() {
         aria-label="Quick trial booking bar"
         aria-hidden={isHiddenAtFormOrFooter}
         className={cn(
-          'flex md:hidden fixed inset-x-0 bottom-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-2.5 shadow-[0_-4px_16px_rgba(11,19,43,0.08)] transition-transform duration-200',
+          'flex md:hidden fixed inset-x-0 bottom-0 z-40 bg-white border-t border-slate-300 px-4 py-2.5 shadow-md transition-transform duration-200',
           isHiddenAtFormOrFooter
             ? 'translate-y-full pointer-events-none'
             : 'translate-y-0'
@@ -77,7 +77,7 @@ export function FloatingContactCta() {
           <a
             href="#trial-enquiry"
             tabIndex={isHiddenAtFormOrFooter ? -1 : undefined}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-teal-700 hover:bg-teal-800 text-white text-sm font-semibold shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600 transition-colors"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-[#1E3A8A] hover:bg-[#1E40AF] text-white text-sm font-semibold shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#1E3A8A] transition-colors"
           >
             <span>Book a Trial</span>
             <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -87,9 +87,9 @@ export function FloatingContactCta() {
             target="_blank"
             rel="noopener noreferrer"
             tabIndex={isHiddenAtFormOrFooter ? -1 : undefined}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 border border-slate-300 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600 transition-colors"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 border border-slate-300 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#1E3A8A] transition-colors"
           >
-            <MessageSquare className="w-4 h-4 text-teal-700" aria-hidden="true" />
+            <MessageSquare className="w-4 h-4 text-[#1E3A8A]" aria-hidden="true" />
             <span>WhatsApp Us</span>
           </a>
         </div>

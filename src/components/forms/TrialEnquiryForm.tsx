@@ -287,16 +287,16 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
     return (
       <div
         className={cn(
-          'p-8 sm:p-10 rounded-2xl bg-white border border-teal-200/80 shadow-sm max-w-2xl mx-auto',
+          'p-8 sm:p-10 rounded-2xl bg-white border border-slate-300 border-t-4 border-t-[#1E3A8A] shadow-sm max-w-2xl mx-auto',
           className
         )}
       >
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-12 h-12 rounded-full bg-teal-100 flex items-center justify-center flex-shrink-0 text-teal-700">
+          <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-[#1E3A8A]">
             <CheckCircle2 className="w-7 h-7" aria-hidden="true" />
           </div>
           <div>
-            <Badge variant="teal" size="sm" className="mb-1">
+            <Badge variant="default" size="sm" className="mb-1">
               Enquiry ID: {submission.enquiryId}
             </Badge>
             <h3 className="text-2xl font-bold text-slate-900">
@@ -307,33 +307,33 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
 
         <p className="text-slate-700 leading-relaxed mb-6">
           Thank you, <span className="font-semibold">{submission.data.parentName}</span>. Your trial request for{' '}
-          <span className="font-semibold text-teal-800">{submission.data.preferredCourse}</span> has been logged with our admissions team.
+          <span className="font-semibold text-[#1E3A8A]">{submission.data.preferredCourse}</span> has been logged with our admissions team.
         </p>
 
         {/* Post-submission Next Steps */}
-        <div className="space-y-4 p-5 rounded-xl bg-teal-50/60 border border-teal-100 mb-8">
-          <h4 className="text-sm font-bold uppercase tracking-wider text-teal-900">
+        <div className="space-y-4 p-5 rounded-xl bg-slate-50 border border-slate-300 mb-8">
+          <h4 className="text-sm font-bold uppercase tracking-wider text-slate-900">
             Next Steps &amp; Trial Logistics
           </h4>
 
-          <div className="flex items-start gap-3 text-sm text-teal-950">
-            <Clock className="w-5 h-5 text-teal-700 flex-shrink-0 mt-0.5" aria-hidden="true" />
+          <div className="flex items-start gap-3 text-sm text-slate-800">
+            <Clock className="w-5 h-5 text-[#1E3A8A] flex-shrink-0 mt-0.5" aria-hidden="true" />
             <div>
               <span className="font-semibold">24-Hour Review: </span>
               {siteConfig.enquiryConfig.trialTimelineNotice}
             </div>
           </div>
 
-          <div className="flex items-start gap-3 text-sm text-teal-950">
-            <MessageSquare className="w-5 h-5 text-teal-700 flex-shrink-0 mt-0.5" aria-hidden="true" />
+          <div className="flex items-start gap-3 text-sm text-slate-800">
+            <MessageSquare className="w-5 h-5 text-[#1E3A8A] flex-shrink-0 mt-0.5" aria-hidden="true" />
             <div>
               <span className="font-semibold">Consultation &amp; Placement: </span>
               A mentor will contact your preferred channel ({submission.data.contact}) to confirm readiness, address any questions, and arrange scheduling.
             </div>
           </div>
 
-          <div className="flex items-start gap-3 text-sm text-teal-950">
-            <Laptop className="w-5 h-5 text-teal-700 flex-shrink-0 mt-0.5" aria-hidden="true" />
+          <div className="flex items-start gap-3 text-sm text-slate-800">
+            <Laptop className="w-5 h-5 text-[#1E3A8A] flex-shrink-0 mt-0.5" aria-hidden="true" />
             <div>
               <span className="font-semibold">Hardware Preparation: </span>
               Students only need a standard laptop (Windows, Mac, or Chromebook) with Google Chrome. No prior software installation is necessary.
@@ -344,7 +344,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
         <button
           type="button"
           onClick={handleReset}
-          className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-teal-700 bg-teal-50 hover:bg-teal-100 border border-teal-200 transition-colors"
+          className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-[#1E3A8A] bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-colors"
         >
           <RotateCcw className="w-4 h-4" aria-hidden="true" />
           Submit Another Enquiry
@@ -376,7 +376,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           </div>
         </div>
 
-        <div className="p-4 rounded-xl bg-amber-50 border border-amber-200/80 mb-6 text-sm text-amber-950 leading-relaxed">
+        <div className="p-4 rounded-xl bg-amber-50 border border-amber-300 mb-6 text-sm text-amber-950 leading-relaxed">
           <p className="font-semibold text-amber-900 mb-1">
             Backend Delivery Notice:
           </p>
@@ -396,11 +396,11 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
             Production User Journey (When Live Webhook is Connected):
           </div>
           <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4 text-teal-600 flex-shrink-0" aria-hidden="true" />
+            <Clock className="w-4 h-4 text-[#1E3A8A] flex-shrink-0" aria-hidden="true" />
             <span>Reply within 24 hours via WhatsApp or email</span>
           </div>
           <div className="flex items-center gap-2">
-            <Laptop className="w-4 h-4 text-teal-600 flex-shrink-0" aria-hidden="true" />
+            <Laptop className="w-4 h-4 text-[#1E3A8A] flex-shrink-0" aria-hidden="true" />
             <span>Laptop-ready online / hybrid session confirmed with parent</span>
           </div>
         </div>
@@ -416,7 +416,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           <button
             type="button"
             onClick={handleReset}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-teal-700 bg-teal-50 hover:bg-teal-100 border border-teal-200 transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-[#1E3A8A] bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-colors"
           >
             Reset Form
           </button>
@@ -473,10 +473,10 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
       {prefilledNotice && (
         <div
           role="status"
-          className="mb-6 px-4 py-2.5 rounded-xl bg-teal-50 border border-teal-200 flex items-center justify-between gap-3 text-xs sm:text-sm text-teal-900"
+          className="mb-6 px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-300 flex items-center justify-between gap-3 text-xs sm:text-sm text-slate-900"
         >
           <span className="inline-flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-teal-700 flex-shrink-0" aria-hidden="true" />
+            <Sparkles className="w-4 h-4 text-[#1E3A8A] flex-shrink-0" aria-hidden="true" />
             <span>
               Course pre-selected: <strong className="font-semibold">{prefilledNotice}</strong>
             </span>
@@ -484,7 +484,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           <button
             type="button"
             onClick={() => setPrefilledNotice(null)}
-            className="text-xs font-medium text-teal-800 hover:text-teal-950 underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 rounded"
+            className="text-xs font-medium text-[#1E3A8A] hover:text-[#1E40AF] underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
           >
             Dismiss
           </button>
@@ -520,7 +520,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
                 'w-full px-3.5 py-2.5 rounded-lg border text-sm transition-colors',
                 errors.parentName
                   ? 'border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500'
-                  : 'border-slate-300 text-slate-900 focus:ring-teal-600 focus:border-teal-600'
+                  : 'border-slate-300 text-slate-900 focus:ring-[#1E3A8A] focus:border-[#1E3A8A]'
               )}
             />
             {errors.parentName && (
@@ -563,7 +563,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
                 'w-full px-3.5 py-2.5 rounded-lg border text-sm transition-colors',
                 errors.contact
                   ? 'border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500'
-                  : 'border-slate-300 text-slate-900 focus:ring-teal-600 focus:border-teal-600'
+                  : 'border-slate-300 text-slate-900 focus:ring-[#1E3A8A] focus:border-[#1E3A8A]'
               )}
             />
             <p id="enquiry-contact-hint" className="mt-1 text-[11px] text-slate-500">
@@ -611,7 +611,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
                 'w-full px-3.5 py-2.5 rounded-lg border text-sm transition-colors',
                 errors.studentAge
                   ? 'border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500'
-                  : 'border-slate-300 text-slate-900 focus:ring-teal-600 focus:border-teal-600'
+                  : 'border-slate-300 text-slate-900 focus:ring-[#1E3A8A] focus:border-[#1E3A8A]'
               )}
             />
             {errors.studentAge && (
@@ -651,7 +651,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
                 'w-full px-3.5 py-2.5 rounded-lg border text-sm transition-colors bg-white',
                 errors.codingExperience
                   ? 'border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500'
-                  : 'border-slate-300 text-slate-900 focus:ring-teal-600 focus:border-teal-600'
+                  : 'border-slate-300 text-slate-900 focus:ring-[#1E3A8A] focus:border-[#1E3A8A]'
               )}
             >
               <option value="">Select experience level...</option>
@@ -699,7 +699,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
               'w-full px-3.5 py-2.5 rounded-lg border text-sm transition-colors bg-white',
               errors.preferredCourse
                 ? 'border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500'
-                : 'border-slate-300 text-slate-900 focus:ring-teal-600 focus:border-teal-600'
+                : 'border-slate-300 text-slate-900 focus:ring-[#1E3A8A] focus:border-[#1E3A8A]'
             )}
           >
             <option value="">Select preferred course...</option>
@@ -745,7 +745,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
               'w-full px-3.5 py-2.5 rounded-lg border text-sm transition-colors',
               errors.notes
                 ? 'border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500'
-                : 'border-slate-300 text-slate-900 focus:ring-teal-600 focus:border-teal-600'
+                : 'border-slate-300 text-slate-900 focus:ring-[#1E3A8A] focus:border-[#1E3A8A]'
             )}
           />
           {errors.notes && (
@@ -769,8 +769,8 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
             className={cn(
               'w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg font-bold text-white text-base transition-all duration-200 shadow-md',
               isSubmitting
-                ? 'bg-teal-700 cursor-not-allowed opacity-80'
-                : 'bg-teal-600 hover:bg-teal-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-teal-600'
+                ? 'bg-slate-400 cursor-not-allowed'
+                : 'bg-[#1E3A8A] hover:bg-[#1E40AF] active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-[#1E3A8A]'
             )}
           >
             {isSubmitting ? (
@@ -788,8 +788,8 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
         </div>
 
         {/* Feature F35: Privacy Assurance & PDPA Compliance */}
-        <div className="mt-8 pt-5 border-t border-slate-200/80 flex items-start gap-2.5 text-xs text-slate-500 leading-relaxed">
-          <Shield className="w-4 h-4 text-teal-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
+        <div className="mt-8 pt-5 border-t border-slate-300 flex items-start gap-2.5 text-xs text-slate-500 leading-relaxed">
+          <Shield className="w-4 h-4 text-[#1E3A8A] flex-shrink-0 mt-0.5" aria-hidden="true" />
           <div>
             <span className="font-semibold text-slate-700">Privacy &amp; Data Protection: </span>
             {siteConfig.enquiryConfig.privacyGuarantee}
