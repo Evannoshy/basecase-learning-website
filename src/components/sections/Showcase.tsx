@@ -58,7 +58,7 @@ export function Showcase({
           </h2>
           <div className="w-12 h-1 bg-[#1E3A8A] mx-auto mt-4" aria-hidden="true" />
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-            Example projects from our Python and Web courses—simple, practical tools that students write and understand themselves.
+            Example projects from our Python and Web courses: simple, practical tools that students write and understand themselves.
           </p>
           <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-50 border border-amber-300 text-amber-950 text-xs sm:text-sm">
             <span className="font-semibold uppercase tracking-wider text-[11px] bg-amber-200 text-amber-950 px-2 py-0.5 rounded">
@@ -179,7 +179,7 @@ export function Showcase({
                     {/* Skills Demonstrated */}
                     <div className="mb-4">
                       <span className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">
-                        Skills Mastered:
+                        Topics Covered:
                       </span>
                       <div className="flex flex-wrap gap-1.5">
                         {project.skillsDemonstrated.map((skill) => (
@@ -195,7 +195,7 @@ export function Showcase({
 
                     {/* Learning Outcome */}
                     <div className="p-3 rounded-lg bg-slate-50 border border-slate-300 text-xs text-slate-800 leading-relaxed mb-4">
-                      <strong className="font-semibold block mb-0.5 text-slate-900">Core Learning Outcome:</strong>
+                      <strong className="font-semibold block mb-0.5 text-slate-900">What Students Learn:</strong>
                       {project.learningOutcome}
                     </div>
 

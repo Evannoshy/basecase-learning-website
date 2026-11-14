@@ -38,20 +38,20 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     topic: 'String Slicing & Boundary Indices',
     difficulty: 'Foundations',
     codeSnippet: `msg = "BaseCase Learning"\nprefix = msg[:8]\nprint(f"prefix: {prefix}")`,
-    prompt: 'What will be printed to the terminal when this script executes?',
+    prompt: 'What gets printed when this code runs?',
     options: [
       { label: 'A', text: 'prefix: BaseCase' },
-      { label: 'B', text: 'prefix: BaseCase ' },
+      { label: 'B', text: 'prefix: BaseCase L' },
       { label: 'C', text: 'prefix: BaseCas' },
       { label: 'D', text: 'IndexError: string slice out of range' },
     ],
     correctOptionIndex: 0,
     explanationCorrect:
-      'Spot on! In Python slicing msg[:8], the start defaults to 0 and the stop index 8 is non-inclusive. Characters at indices 0 through 7 are "B","a","s","e","C","a","s","e" (length 8).',
+      'In Python slicing msg[:8], counting starts at index 0 ("B") and stops right before index 8 (the space), giving "BaseCase" (8 characters).',
     explanationIncorrect:
-      'Remember the non-inclusive rule: msg[:8] extracts indices 0, 1, 2, 3, 4, 5, 6, and 7. The character at index 8 (" ") is excluded.',
+      'Remember the non-inclusive rule: msg[:8] takes characters from index 0 up to index 7 ("BaseCase"), stopping before index 8 (the space).',
     debuggingTip:
-      'Mental Model: In Python, slice [:n] on a 0-indexed sequence yields exactly n characters from the beginning.',
+      'Mental Model: In Python, slice [:n] gives the first n characters from the start of the string.',
     simulatedOutput: 'prefix: BaseCase',
   },
   {
@@ -68,11 +68,11 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     ],
     correctOptionIndex: 1,
     explanationCorrect:
-      'Brilliant debugging! In Python, bonus_scores = scores creates a second reference to the exact same list in heap memory. Appending to bonus_scores mutates the list that scores also references.',
+      'Good catch. Writing bonus_scores = scores does not make a separate copy. Both names point to the same list [85, 92, 78], so appending 100 updates scores to length 4.',
     explanationIncorrect:
-      'Assignment (=) in Python never duplicates a list in memory. Both variables point to the same object, so len(scores) is now 4.',
+      'Common exam trap: using = with a list does not create a new copy. Both variables still point to the same list, so len(scores) is 4.',
     debuggingTip:
-      'Mental Model: Variables hold object references. To create an independent copy, use scores.copy() or scores[:].',
+      'Tip: To make a separate copy of a list that will not change the original, use scores.copy() or scores[:].',
     simulatedOutput: '4',
   },
   {
@@ -80,7 +80,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     topic: 'Boolean Logic & Precedence',
     difficulty: 'Foundations',
     codeSnippet: `status = "ready"\nretry_count = 0\n\nif status == "ready" and not retry_count > 0:\n    print("Launch initiated")\nelse:\n    print("Diagnostics required")`,
-    prompt: 'Which message is output by this conditional evaluation?',
+    prompt: 'Which message gets printed by this if-else check?',
     options: [
       { label: 'A', text: 'Launch initiated' },
       { label: 'B', text: 'Diagnostics required' },
@@ -89,11 +89,11 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     ],
     correctOptionIndex: 0,
     explanationCorrect:
-      'Exact! Relational operators (>) have higher precedence than not. retry_count > 0 is False. not False is True. Both sides of and are True, so the if-block prints "Launch initiated".',
+      'Correct. Python checks > before not: retry_count > 0 is False, so not False becomes True. Since both sides of and are True, it prints "Launch initiated".',
     explanationIncorrect:
-      'Check the precedence: retry_count > 0 evaluates to False. not False evaluates to True. Since status == "ready" is also True, True and True executes the if branch.',
+      'Check the order of operations: retry_count > 0 is False, so not (retry_count > 0) is True. Together with status == "ready", the if-branch runs.',
     debuggingTip:
-      'Mental Model: Comparison operators (> , ==) evaluate before logical operators (not, and, or).',
+      'Tip: Python always works out comparisons (>, ==) before logical words (not, and, or).',
     simulatedOutput: 'Launch initiated',
   },
   {
@@ -110,11 +110,11 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     ],
     correctOptionIndex: 1,
     explanationCorrect:
-      'Well reasoned! range(1, 5) produces 1, 2, 3, and 4 (stopping strictly before 5). The sum is 1 + 2 + 3 + 4 = 10.',
+      'Nice work. range(1, 5) gives 1, 2, 3, and 4 (stopping before 5), so total adds up to 1 + 2 + 3 + 4 = 10.',
     explanationIncorrect:
-      'The upper boundary in range(start, stop) is excluded. The loop iterates for 1, 2, 3, 4 only. 1+2+3+4 = 10 (not 15).',
+      'In range(1, 5), the stop number 5 is not included. The loop only adds 1 + 2 + 3 + 4 = 10 (not 15).',
     debuggingTip:
-      'Mental Model: range(a, b) generates (b - a) numbers starting at a and ending at b - 1.',
+      'Tip: range(start, stop) always stops at stop - 1. Write out the numbers in a quick trace table if unsure.',
     simulatedOutput: 'Total: 10',
   },
 ];
@@ -294,10 +294,10 @@ export function InteractiveProject({
           </p>
           <p className="max-w-md mx-auto text-sm text-slate-600 mb-8 leading-relaxed">
             {score === questions.length
-              ? 'Outstanding! You demonstrated rock-solid mental models for Python variables, slicing, conditionals, and loops.'
+              ? 'Outstanding! You got every trace question right.'
               : score >= questions.length / 2
-              ? 'Great effort! You navigated several tricky edge cases. In our coding courses, we guide students through hands-on tracing exercises to make these concepts second nature.'
-              : 'Good start! Programming is all about forming hypotheses and learning through error messages. Our small-group mentors help you build genuine computational reasoning from day one.'}
+              ? 'Great effort! You navigated several tricky edge cases. Practising trace tables in class makes these edge cases second nature during tests.'
+              : 'Good start! Programming is all about forming hypotheses and testing errors line by line. In our small-group classes, tutors guide students through each bug step by step.'}
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
@@ -481,7 +481,7 @@ export function InteractiveProject({
                     </p>
                     <div className="pt-2 border-t border-slate-200 text-xs">
                       <strong className="font-semibold block mb-0.5 text-slate-900">
-                        Debugging Mental Model:
+                        Exam &amp; Debugging Tip:
                       </strong>
                       <span className="italic text-slate-700">{currentQuestion.debuggingTip}</span>
                     </div>
@@ -502,7 +502,7 @@ export function InteractiveProject({
                   <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block" />
                 </div>
                 <span className="text-[11px] text-slate-300 select-none">
-                  bash — python3 quiz.py
+                  bash: python3 quiz.py
                 </span>
                 <span className="w-10 text-right text-[10px] text-slate-400 select-none">
                   TTY

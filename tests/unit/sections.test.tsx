@@ -152,7 +152,7 @@ describe('Mentors Section Component', () => {
 
   it('renders provisional C Innovators and scholarship placeholders without fabricated awards (NEG-07)', () => {
     render(<Mentors />);
-    const cInnovatorsBadges = screen.getAllByText(/"C Innovators" — official name TBC/i);
+    const cInnovatorsBadges = screen.getAllByText(/"C Innovators", official name TBC/i);
     expect(cInnovatorsBadges.length).toBeGreaterThanOrEqual(2);
 
     expect(screen.getAllByText(/Scholarship details to be confirmed/i).length).toBeGreaterThanOrEqual(2);

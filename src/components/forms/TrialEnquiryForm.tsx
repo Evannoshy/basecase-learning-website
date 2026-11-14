@@ -371,7 +371,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
               Development Preview
             </Badge>
             <h3 className="text-2xl font-bold text-slate-900">
-              Pre-Launch Mode — Client Validation Successful
+              Pre-Launch Mode: Client Validation Successful
             </h3>
           </div>
         </div>

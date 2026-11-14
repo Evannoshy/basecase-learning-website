@@ -721,7 +721,7 @@ describe('Empirical Challenge: Form Validation Boundaries & Accessibility Stress
       await waitFor(() => {
         expect(
           screen.getByRole('heading', {
-            name: /pre-launch mode — client validation successful/i,
+            name: /pre-launch mode: client validation successful/i,
           })
         ).toBeInTheDocument();
       });
@@ -787,7 +787,7 @@ describe('Empirical Challenge: Form Validation Boundaries & Accessibility Stress
       await waitFor(() => {
         expect(
           screen.getByRole('heading', {
-            name: /pre-launch mode — client validation successful/i,
+            name: /pre-launch mode: client validation successful/i,
           })
         ).toBeInTheDocument();
       });

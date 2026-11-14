@@ -23,7 +23,7 @@ export interface DisclaimersConfig {
 }
 
 export interface BrandConfig {
-  /** Provisional academy name — edit here to rebrand across the entire site. */
+  /** Provisional academy name - edit here to rebrand across the entire site. */
   name: string;
   shortName?: string;
   tagline: string;
@@ -399,9 +399,9 @@ export const siteConfig: SiteConfig = {
       codeSnippetPreview: {
         language: "python",
         filename: "quiz_runner.py",
-        code: `def run_quiz(questions):\n    score = 0\n    for idx, q in enumerate(questions, 1):\n        print(f"\\nQuestion {idx}: {q['prompt']}")\n        for opt in q['options']:\n            print(f"  {opt}")\n        answer = input("Your answer: ").strip().upper()\n        if answer == q['correct']:\n            score += 1\n            print("Correct!")\n        else:\n            print(f"Not quite — answer is {q['correct']}.")\n    print(f"\\nFinal score: {score}/{len(questions)}")\n    return score`,
+        code: `def run_quiz(questions):\n    score = 0\n    for idx, q in enumerate(questions, 1):\n        print(f"\\nQuestion {idx}: {q['prompt']}")\n        for opt in q['options']:\n            print(f"  {opt}")\n        answer = input("Your answer: ").strip().upper()\n        if answer == q['correct']:\n            score += 1\n            print("Correct!")\n        else:\n            print(f"Not quite - answer is {q['correct']}.")\n    print(f"\\nFinal score: {score}/{len(questions)}")\n    return score`,
       },
-      studentLevel: "Example — Beginner Python",
+      studentLevel: "Example · Beginner Python",
       learningOutcome: "Combines loops, dictionaries, and user input into a complete playable program.",
     },
     {
@@ -420,9 +420,9 @@ export const siteConfig: SiteConfig = {
       codeSnippetPreview: {
         language: "html",
         filename: "index.html",
-        code: `<main class="site-container">\n  <header class="hero-intro">\n    <h1>Alex Tan — Student Projects</h1>\n    <p>Python scripts and small web tools built in class.</p>\n  </header>\n  <section class="projects-grid" aria-label="Selected Projects">\n    <article class="project-card">\n      <h3>Kinematics Calculator</h3>\n      <p>Quick formula solver for secondary physics revision.</p>\n    </article>\n  </section>\n</main>`,
+        code: `<main class="site-container">\n  <header class="hero-intro">\n    <h1>Alex Tan - Student Projects</h1>\n    <p>Python scripts and small web tools built in class.</p>\n  </header>\n  <section class="projects-grid" aria-label="Selected Projects">\n    <article class="project-card">\n      <h3>Kinematics Calculator</h3>\n      <p>Quick formula solver for secondary physics revision.</p>\n    </article>\n  </section>\n</main>`,
       },
-      studentLevel: "Example — Intro Web Dev",
+      studentLevel: "Example · Intro Web Dev",
       learningOutcome: "Shows how clean HTML and CSS make a fast site that works on both phone and laptop.",
     },
     {
@@ -443,7 +443,7 @@ export const siteConfig: SiteConfig = {
         filename: "timer.js",
         code: `class StudyTimer {\n  constructor(minutes = 25, onTick, onComplete) {\n    this.remainingSeconds = minutes * 60;\n    this.timerId = null;\n    this.onTick = onTick;\n    this.onComplete = onComplete;\n  }\n  start() {\n    if (this.timerId) return;\n    this.timerId = setInterval(() => {\n      this.remainingSeconds--;\n      this.onTick(this.remainingSeconds);\n      if (this.remainingSeconds <= 0) {\n        clearInterval(this.timerId);\n        this.timerId = null;\n        this.onComplete();\n      }\n    }, 1000);\n  }\n}`,
       },
-      studentLevel: "Example — Study Tool",
+      studentLevel: "Example · Study Tool",
       learningOutcome: "Applies JavaScript timers and saved browser state to a tool students actually use.",
     },
   ],
@@ -464,9 +464,9 @@ export const siteConfig: SiteConfig = {
       title: "Guided Class Walkthrough",
       subtitle: "Next 35 Mins · Worked Examples",
       badge: "Step 02",
-      description: "Tutors work through structured class examples live while students build alongside them, learning how to break problems into clear steps.",
+      description: "Tutors walk through class examples live on screen while students code alongside them, breaking each question into clear steps.",
       mentorRole: "Demonstrates clean structure and common pitfalls line by line so no student is left behind.",
-      reasoningFocus: "Translating plain-English requirements into well-structured functions and loops.",
+      reasoningFocus: "Turning question requirements into clean functions and loops.",
       concreteExample: "Building a working grade calculator step by step from sample test cases.",
     },
     {
@@ -507,11 +507,11 @@ export const siteConfig: SiteConfig = {
       institution: "National University of Singapore (Undergraduate)",
       teachingExperience: "Individual teaching experience to be confirmed before launch.",
       scholarships: ["Scholarship details to be confirmed"],
-      innovationBadges: ['Innovation programme ("C Innovators" — official name TBC)'],
+      innovationBadges: ['Innovation programme ("C Innovators", official name TBC)'],
       specializations: ["Python Basics", "Problem Breakdown", "Debugging"],
       bio: "Editable profile template in src/config/siteConfig.ts. Replace with confirmed mentor name, photo, degree, and credentials before launch.",
       avatarPlaceholderText: "FM",
-      statusLabel: "Profile Template — TBC",
+      statusLabel: "Profile Template (TBC)",
       highlightQuote: "Our goal is simple: students should be able to explain every line of code they write.",
     },
     {
@@ -523,11 +523,11 @@ export const siteConfig: SiteConfig = {
       institution: "National University of Singapore (Undergraduate)",
       teachingExperience: "Individual teaching experience to be confirmed before launch.",
       scholarships: ["Scholarship details to be confirmed"],
-      innovationBadges: ['Innovation programme ("C Innovators" — official name TBC)'],
+      innovationBadges: ['Innovation programme ("C Innovators", official name TBC)'],
       specializations: ["HTML & CSS", "JavaScript", "Student Projects"],
       bio: "Editable profile template in src/config/siteConfig.ts. Replace with confirmed mentor name, photo, degree, and credentials before launch.",
       avatarPlaceholderText: "PM",
-      statusLabel: "Profile Template — TBC",
+      statusLabel: "Profile Template (TBC)",
       highlightQuote: "Building a small project you actually care about makes coding concepts stick.",
     },
   ],
@@ -595,7 +595,7 @@ export const siteConfig: SiteConfig = {
         "Trace tables & exam practice",
         "Secondary / JC Maths (planned)",
       ],
-      outcomes: "Targeted school and exam support — not open for booking yet.",
+      outcomes: "Targeted school and exam support (not open for booking yet).",
     },
   ],
 
@@ -664,7 +664,7 @@ export const siteConfig: SiteConfig = {
     coursePreferences: [
       "Beginner Python",
       "Introductory Web Development",
-      "Undecided — Please recommend based on trial",
+      "Undecided (Please recommend during trial)",
     ],
     trialTimelineNotice:
       "We reply to trial enquiries within 24 hours via WhatsApp or email to confirm fit and share timings.",
@@ -687,8 +687,8 @@ export const siteConfig: SiteConfig = {
       },
       {
         id: "unsure",
-        label: "Not sure yet — open to either",
-        recommendedCourse: "Undecided — Please recommend based on trial",
+        label: "Not sure yet (open to either)",
+        recommendedCourse: "Undecided (Please recommend during trial)",
         reason: "We’ll try a short hands-on activity in the trial and recommend whether Python or Web fits better.",
       },
     ],
@@ -701,7 +701,7 @@ export const siteConfig: SiteConfig = {
       {
         step: 2,
         title: "Hands-On Mini Build",
-        description: "A guided coding activity with an NUS Computing mentor—writing and running real code, not watching slides.",
+        description: "A guided coding activity with an NUS Computing tutor, writing and running real code rather than watching slides.",
       },
       {
         step: 3,
@@ -718,13 +718,13 @@ export const siteConfig: SiteConfig = {
     ],
   },
 
-  /* Editable placeholder pricing tiers — update SGD rates and billing cycles below as needed. */
+  /* Editable placeholder pricing tiers - update SGD rates and billing cycles below as needed. */
   pricing: {
     headline: "Tuition Fees & Class Packages",
     subheadline:
       "Transparent, small-group coding tuition and 1-on-1 mentorship rates for secondary, JC, and IB students in Singapore.",
     placeholderNotice:
-      "Sample rate guide shown below — final term schedules and fee details are confirmed with parents during consultation before enrolment.",
+      "Sample rate guide shown below. Final term schedules and fee details are confirmed with parents during consultation before enrolment.",
     tiers: [
       {
         id: "trial-consultation",
@@ -732,7 +732,7 @@ export const siteConfig: SiteConfig = {
         badge: "Start Here",
         price: "S$40",
         billingCycle: "per 60-min session",
-        summary: "Diagnostic coding session & parent debrief — waived upon enrolment.",
+        summary: "Diagnostic coding session and parent debrief (waived upon enrolment).",
         features: [
           "1-on-1 diagnostic coding activity with an NUS Computing tutor",
           "Assess current logic comfort (zero experience needed)",
@@ -749,7 +749,7 @@ export const siteConfig: SiteConfig = {
         badge: "Most Popular",
         price: "S$280",
         billingCycle: "per month (4 lessons)",
-        summary: "Structured weekly 2-hour classes in small groups of 3–6 students.",
+        summary: "Weekly 2-hour classes in small groups of 3–6 students.",
         features: [
           "4 weekly 2-hour coached sessions (Beginner Python or Web Dev)",
           "Small class ratio of 3–6 students per table",
@@ -782,7 +782,7 @@ export const siteConfig: SiteConfig = {
     includedItems: [
       {
         title: "No Registration or Deposit Fees",
-        description: "Pay strictly for classes attended — no hidden admin charges, software fees, or lock-in contracts.",
+        description: "Pay only for classes attended, with no registration fees, software charges, or lock-in contracts.",
       },
       {
         title: "All Free Developer Tools",
@@ -801,7 +801,7 @@ export const siteConfig: SiteConfig = {
       {
         question: "Is the trial fee credited if we enrol?",
         answer:
-          "Yes — if your child continues into our weekly small-group or 1-on-1 programme, the S$40 trial fee is waived against your first month of tuition.",
+          "Yes. If your child continues into our weekly small-group or 1-on-1 classes, the S$40 trial fee is offset against your first month's school fees.",
       },
       {
         question: "What happens if my child misses a weekly lesson due to school or CCA?",

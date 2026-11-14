@@ -70,13 +70,13 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_SG',
     url: siteConfig.brand.url,
-    title: `${siteConfig.brand.name} — ${siteConfig.hero.headline}`,
+    title: `${siteConfig.brand.name} | ${siteConfig.hero.headline}`,
     description: siteConfig.brand.description,
     siteName: siteConfig.brand.name,
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteConfig.brand.name} — ${siteConfig.hero.headline}`,
+    title: `${siteConfig.brand.name} | ${siteConfig.hero.headline}`,
     description: siteConfig.brand.description,
   },
   robots: {

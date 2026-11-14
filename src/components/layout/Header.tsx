@@ -65,7 +65,7 @@ export function Header() {
               className="flex items-center gap-6 whitespace-nowrap pr-6 flex-shrink-0"
             >
               <span className="font-medium text-white">
-                Small-Group Coding Tuition in Singapore (Sec · IB · JC · Pre-U) — Taught by NUS Computing Undergrads
+                Small-Group Coding Tuition in Singapore (Sec · IB · JC · Pre-U) · Taught by NUS Computing Undergrads
               </span>
               <span className="text-blue-200" aria-hidden="true">•</span>
               <span className="bg-[#FACC15] text-slate-950 px-2 py-0.5 rounded font-bold uppercase tracking-wider text-[10px]">

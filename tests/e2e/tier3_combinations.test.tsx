@@ -91,10 +91,10 @@ describe('Tier 3: Cross-Feature Combinations (E2E Integration Verification)', ()
 
       await user.selectOptions(
         courseSelect,
-        'Undecided — Please recommend based on trial'
+        'Undecided (Please recommend during trial)'
       );
       expect(courseSelect).toHaveValue(
-        'Undecided — Please recommend based on trial'
+        'Undecided (Please recommend during trial)'
       );
     });
   });
@@ -191,7 +191,7 @@ describe('Tier 3: Cross-Feature Combinations (E2E Integration Verification)', ()
       await waitFor(() => {
         expect(
           screen.getByRole('heading', {
-            name: /pre-launch mode — client validation successful/i,
+            name: /pre-launch mode: client validation successful/i,
           })
         ).toBeInTheDocument();
       });
@@ -247,7 +247,7 @@ describe('Tier 3: Cross-Feature Combinations (E2E Integration Verification)', ()
       await waitFor(() => {
         expect(
           screen.getByRole('heading', {
-            name: /pre-launch mode — client validation successful/i,
+            name: /pre-launch mode: client validation successful/i,
           })
         ).toBeInTheDocument();
       });

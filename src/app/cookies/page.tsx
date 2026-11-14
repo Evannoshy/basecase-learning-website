@@ -97,7 +97,7 @@ export default function CookiesPage() {
                   Strictly Necessary / Essential
                 </h3>
                 <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                  Required so the website functions reliably—such as remembering your cookie notice selection and keeping interactive forms working cleanly. These cannot be switched off without resetting browser storage.
+                  Required so the website functions reliably, such as remembering your cookie notice selection and keeping interactive forms working cleanly. These cannot be switched off without resetting browser storage.
                 </p>
               </div>
               <div className="rounded-lg border border-slate-300 bg-slate-50 p-5">

@@ -146,7 +146,7 @@ describe('TrialEnquiryForm Component & Accessibility Tests', () => {
     await waitFor(() => {
       expect(
         screen.getByRole('heading', {
-          name: /pre-launch mode — client validation successful/i,
+          name: /pre-launch mode: client validation successful/i,
         })
       ).toBeInTheDocument();
     });
@@ -270,7 +270,7 @@ describe('TrialEnquiryForm Component & Accessibility Tests', () => {
     await user.click(screen.getByRole('button', { name: /request coding trial/i }));
 
     await waitFor(() => {
-      expect(screen.getByText(/pre-launch mode — client validation successful/i)).toBeInTheDocument();
+      expect(screen.getByText(/pre-launch mode: client validation successful/i)).toBeInTheDocument();
     });
 
     const editBtn = screen.getByRole('button', { name: /edit enquiry details/i });

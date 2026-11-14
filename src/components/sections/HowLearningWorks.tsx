@@ -67,7 +67,7 @@ export function HowLearningWorks({
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <p className="text-xs font-bold uppercase tracking-widest text-[#1E3A8A]">
-            Our Teaching Methodology
+            How Classes Run
           </p>
           <h2
             id="how-learning-works-heading"
@@ -77,7 +77,7 @@ export function HowLearningWorks({
           </h2>
           <div className="w-12 h-1 bg-[#1E3A8A] mx-auto mt-4" aria-hidden="true" />
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-            Every 2-hour weekly class follows a structured 4-part tuition format—combining summary notes, worked examples, timed practice drills, and 1-on-1 tutor marking.
+            Every 2-hour weekly lesson follows a clear 4-part tuition format: summary notes, worked examples, timed practice drills, and 1-on-1 tutor marking.
           </p>
         </div>
 

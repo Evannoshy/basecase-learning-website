@@ -104,7 +104,7 @@ describe('Tier 4: Real-World Scenarios (End-to-End User Journeys)', () => {
     await waitFor(() => {
       expect(
         screen.getByRole('heading', {
-          name: /pre-launch mode — client validation successful/i,
+          name: /pre-launch mode: client validation successful/i,
         })
       ).toBeInTheDocument();
     });
@@ -188,7 +188,7 @@ describe('Tier 4: Real-World Scenarios (End-to-End User Journeys)', () => {
     await waitFor(() => {
       expect(
         screen.getByRole('heading', {
-          name: /pre-launch mode — client validation successful/i,
+          name: /pre-launch mode: client validation successful/i,
         })
       ).toBeInTheDocument();
     });
@@ -212,7 +212,7 @@ describe('Tier 4: Real-World Scenarios (End-to-End User Journeys)', () => {
           contact: '91234567',
           studentAge: 16,
           codingExperience: 'Formal School Computing / Elective',
-          preferredCourse: 'Undecided — Please recommend based on trial',
+          preferredCourse: 'Undecided (Please recommend during trial)',
           notes: 'Inquiring about Sec 4 O-Level Computing Syllabus 7155 tuition.',
         },
       }),
@@ -245,7 +245,7 @@ describe('Tier 4: Real-World Scenarios (End-to-End User Journeys)', () => {
     );
     await user.selectOptions(
       screen.getByLabelText(/preferred course/i),
-      'Undecided — Please recommend based on trial'
+      'Undecided (Please recommend during trial)'
     );
     await user.type(
       screen.getByLabelText(/additional notes or questions/i),
@@ -257,7 +257,7 @@ describe('Tier 4: Real-World Scenarios (End-to-End User Journeys)', () => {
     await waitFor(() => {
       expect(
         screen.getByRole('heading', {
-          name: /pre-launch mode — client validation successful/i,
+          name: /pre-launch mode: client validation successful/i,
         })
       ).toBeInTheDocument();
     });
@@ -337,7 +337,7 @@ describe('Tier 4: Real-World Scenarios (End-to-End User Journeys)', () => {
     await waitFor(() => {
       expect(
         screen.getByRole('heading', {
-          name: /pre-launch mode — client validation successful/i,
+          name: /pre-launch mode: client validation successful/i,
         })
       ).toBeInTheDocument();
     });
