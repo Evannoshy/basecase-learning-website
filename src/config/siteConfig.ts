@@ -76,6 +76,12 @@ export interface ExampleFinalProject {
   highlight: string;
 }
 
+export interface CourseCurriculumStage {
+  stage: string;
+  title: string;
+  description: string;
+}
+
 export interface Course {
   id: string;
   title: string;
@@ -85,6 +91,7 @@ export interface Course {
   status: 'active' | 'upcoming';
   intendedLearner: string;
   prerequisites: string;
+  curriculumStages?: CourseCurriculumStage[];
   learningGoals: string[];
   exampleFinalProject: ExampleFinalProject;
   lessonFormat: string;
@@ -319,17 +326,34 @@ export const siteConfig: SiteConfig = {
       id: "beginner-python",
       title: "Beginner Python",
       slug: "beginner-python",
-      tagline: "Core programming logic and terminal projects",
+      tagline: "Functions, data abstraction, memory models, and terminal projects",
       trackBadge: "Foundations Track",
       status: "active",
       intendedLearner: "Secondary, pre-poly/JC, and pre-university students who are new to text-based coding.",
       prerequisites: "None. Comfortable using a laptop and keyboard.",
+      curriculumStages: [
+        {
+          stage: "Stage 01",
+          title: "Functions, Base Cases & Substitution Tracing",
+          description: "Write pure functions with clear inputs and outputs, trace expressions step by step by substitution, and master loops and base cases.",
+        },
+        {
+          stage: "Stage 02",
+          title: "Data Abstraction & Sequences",
+          description: "Model real problems cleanly using Python lists, tuples, dictionaries, and JSON records before writing complex logic.",
+        },
+        {
+          stage: "Stage 03",
+          title: "State, Memory Frames & Terminal Build",
+          description: "Draw memory reference diagrams to understand variable scope and list mutation, then build a complete terminal application.",
+        },
+      ],
       learningGoals: [
-        "Break down problems into clear steps before writing code",
-        "Use variables, if-else branches, loops, lists, and dictionaries",
-        "Write clean functions and handle invalid user input",
-        "Read error messages and trace bugs line by line",
-        "Build and test a complete terminal program from scratch",
+        "Trace expressions step by step using substitution instead of guessing outputs",
+        "Write clean functions with clear inputs, return values, and base cases",
+        "Structure data with lists, dictionaries, and JSON before mutating state",
+        "Draw memory reference diagrams to spot aliasing and scope bugs early",
+        "Build, test, and explain a complete Python terminal project from scratch",
       ],
       exampleFinalProject: {
         title: "Terminal Quiz Game & Score Tracker",
@@ -351,11 +375,28 @@ export const siteConfig: SiteConfig = {
       id: "intro-web-dev",
       title: "Introductory Web Development",
       slug: "intro-web-dev",
-      tagline: "Build and publish your own responsive website",
+      tagline: "DOM structure, event-driven state, and responsive web projects",
       trackBadge: "Applied Track",
       status: "active",
       intendedLearner: "Secondary, pre-poly/JC, and pre-university students who want to build websites and simple web tools.",
       prerequisites: "None. Basic Python helps, but no web experience is needed.",
+      curriculumStages: [
+        {
+          stage: "Stage 01",
+          title: "Document Structure & Box Models",
+          description: "Model page hierarchy cleanly with semantic HTML5 and responsive CSS Flexbox and Grid layouts.",
+        },
+        {
+          stage: "Stage 02",
+          title: "Event Functions & Data-Driven UI",
+          description: "Write modular JavaScript functions that transform structured data arrays into interactive DOM elements.",
+        },
+        {
+          stage: "Stage 03",
+          title: "Browser State & Live Deployment",
+          description: "Manage persistent state with LocalStorage, trace events in DevTools, and publish a live site online.",
+        },
+      ],
       learningGoals: [
         "Structure clean, accessible pages with HTML5",
         "Style mobile-friendly layouts with CSS Flexbox and Grid",
@@ -454,40 +495,40 @@ export const siteConfig: SiteConfig = {
       title: "Concept Breakdown & Notes",
       subtitle: "First 20 Mins · Summary Notes",
       badge: "Step 01",
-      description: "Each topic starts with clear visual diagrams and concise summary notes so students grasp why the logic works before typing code.",
-      mentorRole: "Introduces key principles on the board and checks understanding with quick 'What happens if...?' questions.",
-      reasoningFocus: "Understanding core logic, inputs, and outputs before memorising syntax.",
-      concreteExample: "Tracing list indexes step by step on paper to see why Python counting starts at 0.",
+      description: "Each topic starts with substitution traces, memory-frame diagrams, and concise summary notes so students grasp why the logic works before typing code.",
+      mentorRole: "Sketches substitution steps and memory frames on the board and checks understanding with quick 'What does this evaluate to?' questions.",
+      reasoningFocus: "Understanding pure functions, base cases, and memory references before memorising syntax.",
+      concreteExample: "Drawing a memory frame diagram on paper to see why b = a shares the same Python list.",
     },
     {
       step: 2,
       title: "Guided Class Walkthrough",
       subtitle: "Next 35 Mins · Worked Examples",
       badge: "Step 02",
-      description: "Tutors walk through class examples live on screen while students code alongside them, breaking each question into clear steps.",
-      mentorRole: "Demonstrates clean structure and common pitfalls line by line so no student is left behind.",
-      reasoningFocus: "Turning question requirements into clean functions and loops.",
-      concreteExample: "Building a working grade calculator step by step from sample test cases.",
+      description: "Tutors walk through class examples live on screen while students code alongside them, breaking problems into small functions and clean data structures.",
+      mentorRole: "Demonstrates step-by-step problem decomposition and common state pitfalls line by line so no student is left behind.",
+      reasoningFocus: "Turning question requirements into clean functions, base cases, and data structures.",
+      concreteExample: "Breaking a score calculator into pure helper functions and testing each function with sample inputs.",
     },
     {
       step: 3,
       title: "Independent Practice Drills",
       subtitle: "Next 45 Mins · Graded Worksheets",
       badge: "Step 03",
-      description: "Students tackle progressively harder exercises on their own, practising how to spot bugs and test edge cases systematically.",
-      mentorRole: "Circulates around the small group to nudge stuck students with guiding questions instead of giving answers away.",
-      reasoningFocus: "Independent debugging, reading tracebacks, and verifying outputs against test cases.",
-      concreteExample: "Fixing an off-by-one IndexError on timed in-class worksheet questions.",
+      description: "Students tackle progressively harder worksheet questions on their own, practising substitution tracing, data manipulation, and systematic debugging.",
+      mentorRole: "Circulates around the small group to nudge stuck students to trace their variable frames instead of guessing.",
+      reasoningFocus: "Independent substitution tracing, reading tracebacks, and verifying edge cases against test inputs.",
+      concreteExample: "Tracing a recursive base case and fixing an off-by-one IndexError on timed worksheet questions.",
     },
     {
       step: 4,
       title: "1-on-1 Code Review & Feedback",
       subtitle: "Final 20 Mins · 1-on-1 Marking",
       badge: "Step 04",
-      description: "Every student gets individual marking and verbal feedback in class so mistakes are fixed on the spot before homework is assigned.",
-      mentorRole: "Marks completed exercises 1-on-1 and highlights cleaner habits before wrapping up the lesson.",
-      reasoningFocus: "Refining readability, edge-case handling, and explaining code aloud confidently.",
-      concreteExample: "Simplifying repeated if-else checks into one clean dictionary lookup during review.",
+      description: "Every student gets individual marking and verbal feedback in class so logic and state mistakes are fixed on the spot before homework is assigned.",
+      mentorRole: "Marks completed exercises 1-on-1 and asks students to explain how their functions and data flow work aloud.",
+      reasoningFocus: "Refining abstraction clarity, edge-case handling, and explaining code aloud confidently.",
+      concreteExample: "Refactoring repeated if-else checks into a clean dictionary lookup during 1-on-1 review.",
     },
   ],
 
@@ -553,14 +594,14 @@ export const siteConfig: SiteConfig = {
       isAvailableNow: true,
       status: "available",
       targetAudience: "Secondary 1–4, IB & Pre-U Beginners",
-      description: "Core problem-solving in Python: variables, branching, loops, functions, and basic debugging.",
+      description: "Build rock-solid mental models in Python: pure functions, base cases, substitution tracing, data abstraction with lists and dictionaries, and memory frames.",
       topics: [
-        "Step-by-step logic",
-        "Lists & dictionaries",
-        "Writing clean functions",
-        "Reading error tracebacks",
+        "Functions, base cases & substitution tracing",
+        "Data abstraction with lists & dictionaries",
+        "State & memory reference diagrams",
+        "Reading tracebacks & systematic debugging",
       ],
-      outcomes: "Students write small programs on their own and explain how their code runs.",
+      outcomes: "Students trace code accurately without guessing and build working terminal programs they can explain line by line.",
     },
     {
       level: 2,
@@ -569,14 +610,14 @@ export const siteConfig: SiteConfig = {
       isAvailableNow: true,
       status: "available",
       targetAudience: "Students ready to build",
-      description: "Build working web pages, simple study tools, and interactive terminal programs with mentor feedback.",
+      description: "Apply functional and data abstractions to interactive web apps, study tools, and multi-file Python programs with mentor code reviews.",
       topics: [
-        "HTML, CSS & responsive layout",
-        "Browser events in JavaScript",
-        "Working with JSON data",
-        "End-to-end mini projects",
+        "HTML5 & CSS Flexbox/Grid box models",
+        "Event-driven functions & DOM updates",
+        "Structured JSON data & browser state",
+        "End-to-end guided project builds",
       ],
-      outcomes: "Students finish complete projects they can demo, update, and put in a portfolio.",
+      outcomes: "Students finish complete projects they can demo, update, and include in a portfolio or DSA application.",
     },
     {
       level: 3,
@@ -585,14 +626,14 @@ export const siteConfig: SiteConfig = {
       isAvailableNow: false,
       status: "roadmap",
       targetAudience: "Intermediate Secondary & JC Students",
-      description: "Plan and build larger personal projects from a blank folder, with code reviews along the way.",
+      description: "Design modular software systems from a blank folder, combining custom data structures, APIs, and persistent storage with mentor reviews.",
       topics: [
-        "Choosing data structures",
-        "Basic databases & SQLite",
-        "Hosting & sharing projects",
-        "Personal capstone build",
+        "Modular architecture & abstraction barriers",
+        "Algorithms, trees & SQLite databases",
+        "Full-stack APIs & live deployment",
+        "Personal capstone system build",
       ],
-      outcomes: "Students plan, build, and present their own project independently.",
+      outcomes: "Students architect, test, and present a substantial independent software project.",
     },
     {
       level: 4,

@@ -37,7 +37,7 @@ const stepPhotos = [
 const weeklyDeliverables = [
   {
     title: 'Summary Notes & Cheat Sheets',
-    detail: 'Concise printed and PDF topic sheets covering syntax, logic diagrams, and common pitfalls.',
+    detail: 'Concise printed and PDF topic sheets covering substitution traces, memory-frame diagrams, and common pitfalls.',
   },
   {
     title: 'Graded Practice Worksheets',
@@ -127,6 +127,14 @@ export function HowLearningWorks({
                     <p className="text-sm text-slate-600 leading-relaxed">
                       {stage.description}
                     </p>
+                  </div>
+
+                  {/* Concrete In-Class Example */}
+                  <div className="mt-3 p-2.5 rounded-lg bg-amber-50 border border-amber-300 text-xs text-slate-800 leading-relaxed">
+                    <span className="font-semibold text-amber-950 block mb-0.5">
+                      In-Class Example:
+                    </span>
+                    <span>{stage.concreteExample}</span>
                   </div>
 
                   {/* Tutor's Role Callout */}

@@ -56,7 +56,7 @@ export function Courses({ courses = siteConfig.courses, className }: CoursesProp
         </h2>
         <div className="w-12 h-1 bg-[#1E3A8A] mx-auto mt-4" aria-hidden="true" />
         <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-          For secondary, pre-poly/JC, and pre-university students in Singapore. No coding background needed.
+          Structured around foundational CS mental models (functions, data abstraction, and state) for secondary, JC, and pre-university students in Singapore. No prior coding experience needed.
         </p>
       </div>
 
@@ -111,6 +111,35 @@ export function Courses({ courses = siteConfig.courses, className }: CoursesProp
                       {course.intendedLearner}
                     </div>
                   </div>
+
+                  {/* 3-Stage SICPy-Inspired Curriculum Breakdown */}
+                  {course.curriculumStages && course.curriculumStages.length > 0 && (
+                    <div className="mt-5">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 mb-3">
+                        3-Stage Curriculum Structure
+                      </h4>
+                      <div className="space-y-2.5">
+                        {course.curriculumStages.map((item) => (
+                          <div
+                            key={item.stage}
+                            className="p-3 rounded-lg bg-slate-50 border border-slate-300"
+                          >
+                            <div className="flex items-center gap-2">
+                              <span className="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#1E3A8A] text-white">
+                                {item.stage}
+                              </span>
+                              <span className="text-sm font-bold text-slate-900">
+                                {item.title}
+                              </span>
+                            </div>
+                            <p className="mt-1.5 text-xs text-slate-700 leading-relaxed">
+                              {item.description}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   {/* Core Learning Goals */}
                   <div className="mt-5">

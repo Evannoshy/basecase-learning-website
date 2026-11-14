@@ -55,10 +55,14 @@ describe('Courses Section Component', () => {
     siteConfig.courses.forEach((course) => {
       expect(screen.getByText(course.intendedLearner)).toBeInTheDocument();
       expect(screen.getByText(course.prerequisites)).toBeInTheDocument();
+      course.curriculumStages?.forEach((stage) => {
+        expect(screen.getByText(stage.title)).toBeInTheDocument();
+      });
       course.learningGoals.forEach((goal) => {
         expect(screen.getByText(goal)).toBeInTheDocument();
       });
     });
+    expect(screen.getAllByText('3-Stage Curriculum Structure')).toHaveLength(siteConfig.courses.length);
   });
 
   it('renders example final capstone project and tech stack tags', () => {
@@ -127,6 +131,7 @@ describe('HowLearningWorks Section Component', () => {
     siteConfig.learningStages.forEach((stage) => {
       expect(screen.getByText(stage.subtitle)).toBeInTheDocument();
       expect(screen.getByText(stage.description)).toBeInTheDocument();
+      expect(screen.getByText(stage.concreteExample)).toBeInTheDocument();
     });
   });
 });
@@ -188,7 +193,7 @@ describe('Progression Section Component', () => {
 
   it('renders syllabus focus topics and phased tuition extension notice', () => {
     render(<Progression />);
-    expect(screen.getByText('Step-by-step logic')).toBeInTheDocument();
+    expect(screen.getByText('Functions, base cases & substitution tracing')).toBeInTheDocument();
     expect(screen.getByText('O-Level Computing (7155)')).toBeInTheDocument();
     expect(screen.getByText('A-Level H2 Computing (9569)')).toBeInTheDocument();
 
