@@ -387,6 +387,7 @@ describe('PricingPage Component', () => {
     expect(screen.getByText('S$75')).toBeInTheDocument();
 
     expect(screen.getByRole('link', { name: /back to home/i })).toHaveAttribute('href', '/');
+    expect(screen.getAllByRole('link', { name: /whatsapp enquiry/i })).toHaveLength(3);
     expect(document.getElementById('trial-enquiry')).toBeInTheDocument();
   });
 });

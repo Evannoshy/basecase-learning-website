@@ -34,7 +34,7 @@ const comparisonRows = [
     audience: 'Custom Pace / School Computing / Projects',
     format: 'Private 1-on-1',
     duration: '1.5 – 2 hours / session',
-    rate: 'S$85 / hour',
+    rate: 'S$75 / hour',
   },
 ];
 
@@ -162,7 +162,7 @@ export default function PricingPage() {
                     className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-semibold text-slate-700 hover:text-[#1E3A8A] bg-slate-50 hover:bg-slate-100 border border-slate-300 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] transition-colors"
                   >
                     <MessageCircle className="w-3.5 h-3.5 text-emerald-700" aria-hidden="true" />
-                    <span>WhatsApp {brand.contact.phoneDisplay}</span>
+                    <span>WhatsApp Enquiry</span>
                   </a>
                 </div>
               </article>
