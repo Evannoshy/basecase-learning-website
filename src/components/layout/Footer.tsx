@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { siteConfig } from '@/config/siteConfig';
 
 export function Footer() {
@@ -152,12 +153,21 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Copyright Line */}
-          <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 pt-2">
+          {/* Copyright & Legal Links Line */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500 pt-2">
             <p>&copy; {currentYear} {siteConfig.brand.name}. All rights reserved.</p>
-            <p className="mt-2 sm:mt-0 font-mono text-[11px] text-slate-400">
-              Coding mentorship in Singapore.
-            </p>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/cookies"
+                className="text-slate-300 hover:text-teal-400 underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded transition-colors"
+              >
+                Cookie Policy
+              </Link>
+              <span className="text-slate-700" aria-hidden="true">|</span>
+              <p className="font-mono text-[11px] text-slate-400">
+                Coding mentorship in Singapore.
+              </p>
+            </div>
           </div>
         </div>
       </div>

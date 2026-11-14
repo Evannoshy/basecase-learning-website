@@ -1,31 +1,33 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-
-const COOKIE_CONSENT_KEY = 'basecase_cookie_consent';
-
-type CookieChoice = 'accepted' | 'declined';
+import Link from 'next/link';
+import {
+  COOKIE_CONSENT_EVENT,
+  CookieChoice,
+  getSavedCookieConsent,
+  saveCookieConsent,
+} from '@/lib/cookieConsent';
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    try {
-      const saved = window.localStorage.getItem(COOKIE_CONSENT_KEY);
-      if (!saved) {
+    const syncVisibility = () => {
+      try {
+        setVisible(getSavedCookieConsent() === null);
+      } catch {
         setVisible(true);
       }
-    } catch {
-      setVisible(true);
-    }
+    };
+
+    syncVisibility();
+    window.addEventListener(COOKIE_CONSENT_EVENT, syncVisibility);
+    return () => window.removeEventListener(COOKIE_CONSENT_EVENT, syncVisibility);
   }, []);
 
   const handleConsent = (choice: CookieChoice) => {
-    try {
-      window.localStorage.setItem(COOKIE_CONSENT_KEY, choice);
-    } catch {
-      // Ignore storage failures in restricted browsing modes
-    }
+    saveCookieConsent(choice);
     setVisible(false);
   };
 
@@ -41,7 +43,14 @@ export function CookieBanner() {
     >
       <p className="text-sm font-semibold text-slate-900">Cookies on this site</p>
       <p className="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed">
-        We use cookies to keep the site working properly and understand basic page traffic.
+        We use cookies to keep the site working properly and understand basic page traffic. Read our{' '}
+        <Link
+          href="/cookies"
+          className="font-semibold text-teal-700 hover:text-teal-800 underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 rounded"
+        >
+          Cookie Policy
+        </Link>
+        .
       </p>
       <div className="mt-3.5 flex items-center gap-2.5">
         <button

@@ -11,6 +11,8 @@ import robots from '@/app/robots';
 import sitemap from '@/app/sitemap';
 import HomePage from '@/app/page';
 import PricingPage from '@/app/pricing/page';
+import CookiesPage from '@/app/cookies/page';
+import { CookiePreferencesControl } from '@/components/layout/CookiePreferencesControl';
 
 describe('Header Component', () => {
   it('renders brand identity and logo', () => {
@@ -222,6 +224,7 @@ describe('CookieBanner Component', () => {
     const region = screen.getByRole('region', { name: /cookie notice/i });
     expect(region).toBeInTheDocument();
     expect(screen.getByText('Cookies on this site')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /cookie policy/i })).toHaveAttribute('href', '/cookies');
 
     fireEvent.click(screen.getByRole('button', { name: /accept all/i }));
     expect(window.localStorage.getItem('basecase_cookie_consent')).toBe('accepted');
@@ -257,9 +260,9 @@ describe('SEO Metadata Routes & Structured Data', () => {
     expect(result.sitemap).toBe(`${siteConfig.brand.url}/sitemap.xml`);
   });
 
-  it('generates sitemap.xml with canonical homepage and pricing URLs', () => {
+  it('generates sitemap.xml with canonical homepage, pricing, and cookies URLs', () => {
     const entries = sitemap();
-    expect(entries).toHaveLength(2);
+    expect(entries).toHaveLength(3);
     expect(entries[0].url).toBe(siteConfig.brand.url);
     expect(entries[0].changeFrequency).toBe('weekly');
     expect(entries[0].priority).toBe(1);
@@ -269,6 +272,11 @@ describe('SEO Metadata Routes & Structured Data', () => {
     expect(entries[1].changeFrequency).toBe('weekly');
     expect(entries[1].priority).toBe(0.9);
     expect(entries[1].lastModified).toBeInstanceOf(Date);
+
+    expect(entries[2].url).toBe(`${siteConfig.brand.url}/cookies`);
+    expect(entries[2].changeFrequency).toBe('monthly');
+    expect(entries[2].priority).toBe(0.5);
+    expect(entries[2].lastModified).toBeInstanceOf(Date);
   });
 
   it('renders JSON-LD structured data with EducationalOrganization, Course, and FAQPage schemas on HomePage', () => {
@@ -317,5 +325,36 @@ describe('PricingPage Component', () => {
 
     expect(screen.getByRole('link', { name: /back to home/i })).toHaveAttribute('href', '/');
     expect(document.getElementById('trial-enquiry')).toBeInTheDocument();
+  });
+});
+
+describe('CookiesPage & CookiePreferencesControl', () => {
+  it('renders standard Cookie Policy sections, reference table, and interactive preference control', () => {
+    window.localStorage.removeItem('basecase_cookie_consent');
+    render(<CookiesPage />);
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Cookie Policy' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /back to home/i })).toHaveAttribute('href', '/');
+    expect(screen.getByText('basecase_cookie_consent')).toBeInTheDocument();
+    expect(screen.getByTestId('cookie-consent-status')).toHaveTextContent('No preference saved yet');
+
+    fireEvent.click(screen.getByRole('button', { name: /accept all cookies/i }));
+    expect(window.localStorage.getItem('basecase_cookie_consent')).toBe('accepted');
+    expect(screen.getByTestId('cookie-consent-status')).toHaveTextContent('Accepted All');
+
+    fireEvent.click(screen.getByRole('button', { name: /essential cookies only/i }));
+    expect(window.localStorage.getItem('basecase_cookie_consent')).toBe('declined');
+    expect(screen.getByTestId('cookie-consent-status')).toHaveTextContent('Essential Only');
+
+    fireEvent.click(screen.getByRole('button', { name: /reset preference/i }));
+    expect(window.localStorage.getItem('basecase_cookie_consent')).toBeNull();
+    expect(screen.getByTestId('cookie-consent-status')).toHaveTextContent('No preference saved yet');
+  });
+
+  it('syncs CookiePreferencesControl updates directly with stored choice', () => {
+    window.localStorage.setItem('basecase_cookie_consent', 'accepted');
+    render(<CookiePreferencesControl />);
+    expect(screen.getByTestId('cookie-consent-status')).toHaveTextContent('Accepted All');
+    window.localStorage.removeItem('basecase_cookie_consent');
   });
 });
