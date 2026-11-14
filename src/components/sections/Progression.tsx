@@ -121,7 +121,7 @@ export function Progression({
         {/* Future Plans Notice */}
         <div className="mt-10 text-center text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto">
           <p>
-            * Note: Levels 1 and 2 are available at launch. Independent building and Secondary / JC subject tuition are future plans and are not open for enrolment yet.
+            * Note: Levels 1 and 2 are available. Independent building and Secondary / JC subject tuition are future plans and are not open for enrolment yet.
           </p>
         </div>
       </div>

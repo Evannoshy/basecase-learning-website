@@ -383,7 +383,7 @@ describe('PricingPage Component', () => {
 
     expect(screen.getByText('S$40')).toBeInTheDocument();
     expect(screen.getByText('S$280')).toBeInTheDocument();
-    expect(screen.getByText('S$85')).toBeInTheDocument();
+    expect(screen.getByText('S$75')).toBeInTheDocument();
 
     expect(screen.getByRole('link', { name: /back to home/i })).toHaveAttribute('href', '/');
     expect(document.getElementById('trial-enquiry')).toBeInTheDocument();

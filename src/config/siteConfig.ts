@@ -248,7 +248,7 @@ export const siteConfig: SiteConfig = {
       whatsappNumber: "6593509168",
       whatsappUrl: "https://wa.me/6593509168?text=Hi%20BaseCase%20Learning%2C%20I%20would%20like%20to%20enquire%20about%20a%20coding%20trial.",
       location: "Singapore",
-      locationDetail: "Singapore (Format & location TBC)",
+      locationDetail: "Singapore (North Area)",
     },
     socialLinks: [
       {
@@ -297,7 +297,7 @@ export const siteConfig: SiteConfig = {
     headline: "Learn to code. Build something you’re proud of.",
     subheadline:
       "The best investment for your Child's future",
-    badgeText: "Singapore Coding Academy • Secondary & Pre-U",
+    badgeText: "Secondary & Pre-U",
     primaryCta: {
       text: "Book a coding trial",
       href: "#trial-enquiry",
@@ -648,13 +648,6 @@ export const siteConfig: SiteConfig = {
       question: "What is your policy on ChatGPT and AI coding tools?",
       answer: "Students must write and debug core exercises themselves without AI auto-generating the answers. Once they understand the basics, we show how to check AI-suggested code carefully instead of trusting it blindly.",
     },
-    {
-      id: "faq-operations",
-      category: "operations",
-      categoryLabel: "Schedules & Fees",
-      question: "Why aren't class timings and fees listed on the site yet?",
-      answer: "We are still finalising launch schedules, class sizes, fees, and age groupings. After you submit a trial enquiry, we will share confirmed details and arrange a timing that fits your child's school schedule.",
-    },
   ],
 
   enquiryConfig: {
@@ -778,7 +771,7 @@ export const siteConfig: SiteConfig = {
         id: "private-mentorship",
         name: "1-on-1 Private Mentorship",
         badge: "Custom Pace",
-        price: "S$85",
+        price: "S$75",
         billingCycle: "per hour",
         summary: "Individual coaching for O-Level / A-Level / IB Computing or custom projects.",
         features: [
@@ -794,8 +787,8 @@ export const siteConfig: SiteConfig = {
     ],
     includedItems: [
       {
-        title: "No Registration or Deposit Fees",
-        description: "Pay only for classes attended, with no registration fees, software charges, or lock-in contracts.",
+        title: "Beyond-the-Classroom Guidance",
+        description: "Support beyond weekly lessons, including advice on DSA, university computing applications, portfolios, and tech pathways.",
       },
       {
         title: "All Free Developer Tools",
