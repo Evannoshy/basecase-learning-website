@@ -1,0 +1,27 @@
+# BaseCase Learning
+
+> Small-group coding classes and 1-on-1 O-Level, A-Level H2, and IB Computing tuition in Singapore, led by NUS Computing undergraduates.
+
+## Quick Facts
+- Website: https://basecase-learning-website.vercel.app
+- Pricing & Schedules: https://basecase-learning-website.vercel.app/pricing
+- Book a Coding Trial: https://basecase-learning-website.vercel.app/#trial-enquiry
+- Location: Singapore (North Area) as well as online/hybrid sessions
+- Contact: basecaselearning@gmail.com | +65 9350 9168
+- Target Students: Secondary 1–4, O-Level, Pre-Poly/JC, A-Level, IB, and Pre-University students in Singapore (ages 10–19)
+
+## Programmes Currently Open
+- **Beginner Python** (Small Group, 3–6 students, S$280/month for 4 x 2-hour weekly lessons): Functions, loops, lists, dictionaries, code tracing, debugging, and working terminal projects. No prior experience needed.
+- **Introductory Web Development** (Small Group, 3–6 students, S$280/month for 4 x 2-hour weekly lessons): HTML5, CSS layouts, JavaScript DOM events, LocalStorage, and working web projects.
+- **1-on-1 Private Mentorship** (S$75/hour, 1.5–2h sessions): Individual coaching tailored to **O-Level Computing (7155)**, **A-Level H2 Computing (9569)**, **IB Computer Science**, DSA portfolios, or custom builds.
+- **1-on-1 Trial & Consultation** (S$40 for a 60-minute diagnostic session, deducted from first month's fees upon enrolment): Hands-on coding session with an NUS Computing tutor and plain-English parent debrief.
+
+## Planned Future Tracks (Not Open for Group Enrolment Yet)
+- Level 3 Independent Building (multi-file projects, SQLite, APIs, deployment).
+- Level 4 Weekly Group Academic Tuition (O-Level Computing 7155, A-Level H2 Computing 9569, Secondary / JC Maths).
+
+## Teaching Approach & Policies
+- 4-part lesson rhythm: Summary Notes (20 mins), Guided Worked Examples (35 mins), Independent Practice Drills (45 mins), and 1-on-1 Code Review & Marking (20 mins).
+- Between-lesson WhatsApp homework and debugging support included.
+- Responsible AI policy: students write and debug core exercises independently without auto-generating answers, then learn how to test and verify AI-suggested code later.
+- Independent initiative: BaseCase Learning is an independent tuition initiative run by undergraduate students and is not affiliated with, sponsored by, or endorsed by NUS.

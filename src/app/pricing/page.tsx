@@ -8,11 +8,44 @@ import { cn } from '@/lib/utils';
 export const metadata: Metadata = {
   title: 'Tuition Fees & Pricing',
   description:
-    'Tuition fee tiers for small-group coding classes, 1-on-1 mentorship, and trial sessions at BaseCase Learning in Singapore.',
+    'Coding class and tuition fees in Singapore: S$40 1-on-1 diagnostic trial, S$280/month small-group Python & Web Dev classes, and S$75/hr 1-on-1 O-Level, A-Level & IB Computing mentorship.',
   alternates: {
     canonical: '/pricing',
   },
 };
+
+function buildPricingJsonLd() {
+  const baseUrl = siteConfig.brand.url;
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'OfferCatalog',
+        name: `${siteConfig.brand.name} Coding Classes & Computing Tuition Fees`,
+        url: `${baseUrl}/pricing`,
+        itemListElement: siteConfig.pricing.tiers.map((tier) => ({
+          '@type': 'Offer',
+          name: tier.name,
+          description: tier.summary,
+          price: tier.price.replace(/[^0-9.]/g, ''),
+          priceCurrency: 'SGD',
+          url: `${baseUrl}/pricing`,
+        })),
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: siteConfig.pricing.pricingFaqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer,
+          },
+        })),
+      },
+    ],
+  };
+}
 
 const comparisonRows = [
   {
@@ -40,9 +73,16 @@ const comparisonRows = [
 
 export default function PricingPage() {
   const { pricing, brand } = siteConfig;
+  const pricingJsonLd = buildPricingJsonLd();
 
   return (
     <div className="bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(pricingJsonLd).replace(/</g, '\\u003c'),
+        }}
+      />
       {/* Top Breadcrumb Navigation */}
       <div className="bg-slate-50 border-b border-slate-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4 text-xs sm:text-sm">

@@ -26,16 +26,56 @@ function buildHomeJsonLd() {
     '@context': 'https://schema.org',
     '@graph': [
       {
+        '@type': 'WebSite',
+        '@id': `${baseUrl}/#website`,
+        name: orgName,
+        url: baseUrl,
+        inLanguage: 'en-SG',
+        publisher: {
+          '@id': orgId,
+        },
+      },
+      {
         '@type': 'EducationalOrganization',
         '@id': orgId,
         name: orgName,
         url: baseUrl,
+        logo: `${baseUrl}/images/basecase-logo.png`,
+        image: `${baseUrl}/images/basecase-logo.png`,
         description: sanitizeJsonLdText(siteConfig.brand.description),
         email: siteConfig.brand.contact.email,
         telephone: siteConfig.brand.contact.phone,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Singapore',
+          addressRegion: 'North Area',
+          addressCountry: 'SG',
+        },
         areaServed: {
           '@type': 'Country',
           name: 'Singapore',
+        },
+        sameAs: siteConfig.brand.socialLinks.map((link) => link.url),
+        knowsAbout: [
+          'Python programming',
+          'HTML, CSS and JavaScript web development',
+          'Coding classes for secondary and pre-university students',
+          'O-Level Computing (7155)',
+          'A-Level H2 Computing (9569)',
+          'IB Computer Science',
+          'DSA coding preparation',
+        ],
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'Coding Classes & Computing Tuition',
+          itemListElement: siteConfig.pricing.tiers.map((tier) => ({
+            '@type': 'Offer',
+            name: sanitizeJsonLdText(tier.name),
+            description: sanitizeJsonLdText(tier.summary),
+            price: tier.price.replace(/[^0-9.]/g, ''),
+            priceCurrency: 'SGD',
+            url: `${baseUrl}/pricing`,
+          })),
         },
       },
       {
@@ -49,6 +89,8 @@ function buildHomeJsonLd() {
             '@type': 'Course',
             name: sanitizeJsonLdText(course.title),
             description: sanitizeJsonLdText(`${course.tagline}. ${course.intendedLearner}`),
+            educationalLevel: sanitizeJsonLdText(course.intendedLearner),
+            teaches: course.learningGoals.map((goal) => sanitizeJsonLdText(goal)),
             provider: {
               '@id': orgId,
             },

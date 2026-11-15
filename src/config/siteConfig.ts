@@ -243,8 +243,8 @@ export const siteConfig: SiteConfig = {
   brand: {
     name: "BaseCase Learning",
     shortName: "BaseCase",
-    tagline: "Practical coding classes for secondary, pre-poly/JC, and pre-university students in Singapore.",
-    description: "Small-group coding classes led by NUS Computing undergraduates, focused on clear fundamentals and projects students can explain.",
+    tagline: "Coding Classes & Computing Tuition in Singapore (Sec, IB, JC)",
+    description: "Small-group coding classes and 1-on-1 O-Level, A-Level H2 & IB Computing tuition in Singapore, taught by NUS Computing undergraduates.",
     url: "https://basecase-learning-website.vercel.app",
     foundedYear: 2026,
     targetDemographic: "Secondary, pre-poly/JC, and pre-university students in Singapore",
@@ -688,6 +688,20 @@ export const siteConfig: SiteConfig = {
       categoryLabel: "AI Tools Policy",
       question: "What is your policy on ChatGPT and AI coding tools?",
       answer: "Students write and debug core exercises themselves without AI auto-generating the answers. Once they know the basics, we show them how to test and verify AI-suggested code.",
+    },
+    {
+      id: "faq-olevel-alevel",
+      category: "curriculum",
+      categoryLabel: "O-Level & JC Computing",
+      question: "Do you offer O-Level Computing (7155), A-Level H2 Computing (9569), or IB Computer Science tuition?",
+      answer: "Yes, through 1-on-1 private mentorship (S$75/hr) tailored to O-Level Computing (7155), A-Level H2 Computing (9569), IB Computer Science, or DSA portfolios. Beginners can also start in our small-group Beginner Python class before moving on to school exam practice.",
+    },
+    {
+      id: "faq-singapore-classes",
+      category: "admissions",
+      categoryLabel: "Classes & Location",
+      question: "Where are BaseCase Learning coding classes held in Singapore, and how large are classes?",
+      answer: "We run small-group coding classes of 3 to 6 students per table in Singapore (North Area), as well as online/hybrid and 1-on-1 sessions. New students start with a S$40 60-minute diagnostic trial (deducted from your first month's fees if you enrol).",
     },
   ],
 
