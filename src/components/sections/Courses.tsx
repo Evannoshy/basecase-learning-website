@@ -45,7 +45,7 @@ export function Courses({ courses = siteConfig.courses, className }: CoursesProp
     >
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-12">
-        <p className="text-xs font-bold uppercase tracking-widest text-[#1E3A8A]">
+        <p className="text-xs font-bold uppercase tracking-widest text-[#166534]">
           Our Programmes
         </p>
         <h2
@@ -54,7 +54,7 @@ export function Courses({ courses = siteConfig.courses, className }: CoursesProp
         >
           Starter Coding Courses
         </h2>
-        <div className="w-12 h-1 bg-[#1E3A8A] mx-auto mt-4" aria-hidden="true" />
+        <div className="w-12 h-1 bg-[#166534] mx-auto mt-4" aria-hidden="true" />
         <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
           Step-by-step coding foundations for secondary, JC, and pre-university students in Singapore. No prior experience needed.
         </p>
@@ -74,7 +74,7 @@ export function Courses({ courses = siteConfig.courses, className }: CoursesProp
           return (
             <article
               key={course.id}
-              className="flex flex-col justify-between bg-white rounded-xl border border-slate-300 border-t-4 border-t-[#1E3A8A] shadow-sm hover:shadow-md transition-shadow overflow-hidden"
+              className="flex flex-col justify-between bg-white rounded-xl border border-slate-300 border-t-4 border-t-[#166534] shadow-sm hover:shadow-md transition-shadow overflow-hidden"
             >
               <div>
                 {/* Course Cover Photo Slot */}
@@ -99,7 +99,7 @@ export function Courses({ courses = siteConfig.courses, className }: CoursesProp
                   <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
                     {course.title}
                   </h3>
-                  <p className="mt-1 text-sm font-medium text-[#1E3A8A]">
+                  <p className="mt-1 text-sm font-medium text-[#166534]">
                     {course.tagline}
                   </p>
 
@@ -124,7 +124,7 @@ export function Courses({ courses = siteConfig.courses, className }: CoursesProp
                             key={item.stage}
                             className="py-2 px-3 rounded-lg bg-slate-50 border border-slate-300 flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-xs"
                           >
-                            <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-[#1E3A8A] text-white flex-shrink-0">
+                            <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-[#166534] text-white flex-shrink-0">
                               {item.stage}
                             </span>
                             <span className="font-bold text-slate-900">
@@ -147,7 +147,7 @@ export function Courses({ courses = siteConfig.courses, className }: CoursesProp
                     <ul className="space-y-2 text-sm text-slate-700">
                       {coreGoals.map((goal, idx) => (
                         <li key={idx} className="flex items-start">
-                          <CheckCircle2 className="w-4 h-4 text-[#1E3A8A] mr-2 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                          <CheckCircle2 className="w-4 h-4 text-[#166534] mr-2 mt-0.5 flex-shrink-0" aria-hidden="true" />
                           <span>{goal}</span>
                         </li>
                       ))}
@@ -157,7 +157,7 @@ export function Courses({ courses = siteConfig.courses, className }: CoursesProp
                   {/* Compact Example Final Project Summary */}
                   <div className="mt-5 p-4 rounded-lg bg-slate-50 border border-slate-300">
                     <div className="flex items-center text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                      <FolderGit2 className="w-3.5 h-3.5 text-[#1E3A8A] mr-1.5" aria-hidden="true" />
+                      <FolderGit2 className="w-3.5 h-3.5 text-[#166534] mr-1.5" aria-hidden="true" />
                       Example Final Project
                     </div>
                     <h5 className="text-base font-bold text-slate-900">
@@ -180,7 +180,7 @@ export function Courses({ courses = siteConfig.courses, className }: CoursesProp
 
                   {/* Collapsible Course Details (Prerequisites, Lesson Format, Extra Goals) */}
                   <details className="mt-5 border-t border-slate-200 pt-3">
-                    <summary className="text-xs font-semibold text-[#1E3A8A] cursor-pointer hover:text-[#1E40AF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded">
+                    <summary className="text-xs font-semibold text-[#166534] cursor-pointer hover:text-[#15803D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] rounded">
                       More details (prerequisites &amp; lesson format)
                     </summary>
                     <div className="mt-3 space-y-3 text-sm text-slate-700">
@@ -219,7 +219,7 @@ export function Courses({ courses = siteConfig.courses, className }: CoursesProp
                       preferredCourse: course.title,
                     })
                   }
-                  className="w-full inline-flex items-center justify-center px-5 py-3 text-sm font-semibold text-white bg-[#1E3A8A] hover:bg-[#1E40AF] rounded-md shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] transition-colors"
+                  className="w-full inline-flex items-center justify-center px-5 py-3 text-sm font-semibold text-white bg-[#166534] hover:bg-[#15803D] rounded-md shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] transition-colors"
                 >
                   <span>Book a trial for {course.title}</span>
                   <ArrowRight className="w-4 h-4 ml-1.5" aria-hidden="true" />

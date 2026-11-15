@@ -41,7 +41,7 @@ export function CookiePreferencesControl() {
   };
 
   return (
-    <div className="rounded-xl border border-slate-300 border-t-4 border-t-[#1E3A8A] bg-slate-50 p-5 sm:p-6 space-y-4">
+    <div className="rounded-xl border border-slate-300 border-t-4 border-t-[#166534] bg-slate-50 p-5 sm:p-6 space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
           <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
@@ -73,21 +73,21 @@ export function CookiePreferencesControl() {
         <button
           type="button"
           onClick={() => handleSelect('accepted')}
-          className="px-4 py-2.5 rounded-md bg-[#1E3A8A] hover:bg-[#1E40AF] text-white text-xs sm:text-sm font-semibold shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#1E3A8A] transition-colors"
+          className="px-4 py-2.5 rounded-md bg-[#166534] hover:bg-[#15803D] text-white text-xs sm:text-sm font-semibold shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#166534] transition-colors"
         >
           Accept All Cookies
         </button>
         <button
           type="button"
           onClick={() => handleSelect('declined')}
-          className="px-4 py-2.5 rounded-md bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 text-xs sm:text-sm font-semibold shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#1E3A8A] transition-colors"
+          className="px-4 py-2.5 rounded-md bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 text-xs sm:text-sm font-semibold shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#166534] transition-colors"
         >
           Essential Cookies Only
         </button>
         <button
           type="button"
           onClick={handleReset}
-          className="px-4 py-2.5 rounded-md bg-transparent hover:bg-slate-200 text-slate-700 border border-transparent hover:border-slate-300 text-xs sm:text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#1E3A8A] transition-colors"
+          className="px-4 py-2.5 rounded-md bg-transparent hover:bg-slate-200 text-slate-700 border border-transparent hover:border-slate-300 text-xs sm:text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#166534] transition-colors"
         >
           Reset Preference
         </button>

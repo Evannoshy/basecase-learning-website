@@ -275,7 +275,7 @@ export const siteConfig: SiteConfig = {
       operationalPricing:
         "Schedules, class sizes, fees, and durations are not yet fixed and will be shared during consultation before enrolment.",
       aiUsagePolicySummary:
-        "We expect students to write and debug their own code for core exercises rather than pasting AI-generated answers.",
+        "We expect students to write and debug their own code for core exercises without pasting AI-generated answers.",
     },
   },
 
@@ -315,7 +315,7 @@ export const siteConfig: SiteConfig = {
     },
     highlights: [
       "Clear explanations, step by step",
-      "Projects students actually understand",
+      "Projects students build and can explain",
       "Taught by NUS Computing students",
       "Honest insights on uni & tech paths",
     ],
@@ -443,7 +443,7 @@ export const siteConfig: SiteConfig = {
         code: `def run_quiz(questions):\n    score = 0\n    for idx, q in enumerate(questions, 1):\n        print(f"\\nQuestion {idx}: {q['prompt']}")\n        for opt in q['options']:\n            print(f"  {opt}")\n        answer = input("Your answer: ").strip().upper()\n        if answer == q['correct']:\n            score += 1\n            print("Correct!")\n        else:\n            print(f"Not quite - answer is {q['correct']}.")\n    print(f"\\nFinal score: {score}/{len(questions)}")\n    return score`,
       },
       studentLevel: "Example · Beginner Python",
-      learningOutcome: "Combines loops, dictionaries, and user input into a complete playable program.",
+      learningOutcome: "Students combine loops, dictionaries, and input checks into a playable terminal program.",
     },
     {
       id: "personal-portfolio",
@@ -464,7 +464,7 @@ export const siteConfig: SiteConfig = {
         code: `<main class="site-container">\n  <header class="hero-intro">\n    <h1>Alex Tan - Student Projects</h1>\n    <p>Python scripts and small web tools built in class.</p>\n  </header>\n  <section class="projects-grid" aria-label="Selected Projects">\n    <article class="project-card">\n      <h3>Kinematics Calculator</h3>\n      <p>Quick formula solver for secondary physics revision.</p>\n    </article>\n  </section>\n</main>`,
       },
       studentLevel: "Example · Intro Web Dev",
-      learningOutcome: "Shows how clean HTML and CSS make a fast site that works on both phone and laptop.",
+      learningOutcome: "Students structure a multi-section page with HTML and CSS Grid that fits phones and laptops.",
     },
     {
       id: "study-timer-tool",
@@ -485,7 +485,7 @@ export const siteConfig: SiteConfig = {
         code: `class StudyTimer {\n  constructor(minutes = 25, onTick, onComplete) {\n    this.remainingSeconds = minutes * 60;\n    this.timerId = null;\n    this.onTick = onTick;\n    this.onComplete = onComplete;\n  }\n  start() {\n    if (this.timerId) return;\n    this.timerId = setInterval(() => {\n      this.remainingSeconds--;\n      this.onTick(this.remainingSeconds);\n      if (this.remainingSeconds <= 0) {\n        clearInterval(this.timerId);\n        this.timerId = null;\n        this.onComplete();\n      }\n    }, 1000);\n  }\n}`,
       },
       studentLevel: "Example · Study Tool",
-      learningOutcome: "Applies JavaScript timers and saved browser state to a tool students actually use.",
+      learningOutcome: "Students use JavaScript timers and LocalStorage to build a revision timer that saves progress.",
     },
   ],
 
@@ -495,7 +495,7 @@ export const siteConfig: SiteConfig = {
       title: "Concept Breakdown & Notes",
       subtitle: "First 20 Mins · Summary Notes",
       badge: "Step 01",
-      description: "Clear summary notes and visual traces show how a concept works before students write code.",
+      description: "Tutors walk through summary notes and visual code traces before students write code.",
       mentorRole: "Walks through visual diagrams and quick check-in questions.",
       reasoningFocus: "Understanding functions, base cases, and references before memorising syntax.",
       concreteExample: "Tracing why b = a shares the same Python list on paper.",
@@ -516,7 +516,7 @@ export const siteConfig: SiteConfig = {
       subtitle: "Next 45 Mins · Graded Worksheets",
       badge: "Step 03",
       description: "Students solve graded worksheet problems independently to build speed and debugging habits.",
-      mentorRole: "Prompts stuck students to trace their variables instead of guessing.",
+      mentorRole: "Prompts stuck students to trace their variable values on paper.",
       reasoningFocus: "Independent code tracing, reading tracebacks, and checking edge cases.",
       concreteExample: "Fixing an off-by-one IndexError on timed practice questions.",
     },
@@ -525,7 +525,7 @@ export const siteConfig: SiteConfig = {
       title: "1-on-1 Code Review & Feedback",
       subtitle: "Final 20 Mins · 1-on-1 Marking",
       badge: "Step 04",
-      description: "Individual code marking in class fixes logic gaps on the spot before homework.",
+      description: "Tutors mark each student's code in class so logic mistakes are fixed before homework.",
       mentorRole: "Reviews code 1-on-1 and checks that students can explain their solution.",
       reasoningFocus: "Clean code structure, edge-case checks, and explaining logic aloud.",
       concreteExample: "Simplifying repeated if-else checks into a clean dictionary lookup.",
@@ -553,7 +553,7 @@ export const siteConfig: SiteConfig = {
       bio: "Editable profile template in src/config/siteConfig.ts. Replace with confirmed mentor name, photo, degree, and credentials before launch.",
       avatarPlaceholderText: "FM",
       statusLabel: "Profile Template (TBC)",
-      highlightQuote: "Our goal is simple: students should be able to explain every line of code they write.",
+      highlightQuote: "Students should be able to explain every line of code they write.",
     },
     {
       id: "mentor-template-2",
@@ -626,14 +626,14 @@ export const siteConfig: SiteConfig = {
       isAvailableNow: false,
       status: "roadmap",
       targetAudience: "Intermediate Secondary & JC Students",
-      description: "Design modular software systems from a blank folder, combining custom data structures, APIs, and persistent storage with mentor reviews.",
+      description: "Plan and build larger multi-file projects from scratch using APIs, databases, and mentor code reviews.",
       topics: [
-        "Modular architecture & abstraction barriers",
-        "Algorithms, trees & SQLite databases",
-        "Full-stack APIs & live deployment",
-        "Personal capstone system build",
+        "Multi-file project structure",
+        "SQLite databases & file storage",
+        "Backend APIs & deployment",
+        "End-to-end personal project",
       ],
-      outcomes: "Students architect, test, and present a substantial independent software project.",
+      outcomes: "Students plan, test, and ship a complete project of their own.",
     },
     {
       level: 4,
@@ -687,7 +687,7 @@ export const siteConfig: SiteConfig = {
       category: "pedagogy",
       categoryLabel: "AI Tools Policy",
       question: "What is your policy on ChatGPT and AI coding tools?",
-      answer: "Students must write and debug core exercises themselves without AI auto-generating the answers. Once they understand the basics, we show how to check AI-suggested code carefully instead of trusting it blindly.",
+      answer: "Students write and debug core exercises themselves without AI auto-generating the answers. Once they know the basics, we show them how to test and verify AI-suggested code.",
     },
   ],
 
@@ -724,7 +724,7 @@ export const siteConfig: SiteConfig = {
         id: "logic",
         label: "Logic puzzles, maths, or school Computing",
         recommendedCourse: "Beginner Python",
-        reason: "Beginner Python builds step-by-step problem breakdown and prepares students for school Computing.",
+        reason: "Students learn step-by-step problem breakdown in Python, which also prepares them for school Computing.",
       },
       {
         id: "web",
@@ -748,7 +748,7 @@ export const siteConfig: SiteConfig = {
       {
         step: 2,
         title: "Hands-On Mini Build",
-        description: "A guided coding activity with an NUS Computing tutor, writing and running real code rather than watching slides.",
+        description: "A guided coding activity with an NUS Computing tutor where your child writes and runs Python or web code.",
       },
       {
         step: 3,
@@ -769,7 +769,7 @@ export const siteConfig: SiteConfig = {
   pricing: {
     headline: "Tuition Fees & Class Packages",
     subheadline:
-      "Transparent, small-group coding tuition and 1-on-1 mentorship rates for secondary, JC, and IB students in Singapore.",
+      "Small-group coding classes and 1-on-1 mentorship rates for secondary, JC, and IB students in Singapore.",
     placeholderNotice:
       "Sample rate guide shown below. Final term schedules and fee details are confirmed with parents during consultation before enrolment.",
     tiers: [
@@ -837,7 +837,7 @@ export const siteConfig: SiteConfig = {
       },
       {
         title: "Between-Lesson WhatsApp Support",
-        description: "Students can message their mentor when stuck on practice bugs instead of waiting a full week.",
+        description: "Students can message their mentor on WhatsApp when stuck on homework bugs between classes.",
       },
       {
         title: "Regular Parent Progress Notes",
@@ -848,7 +848,7 @@ export const siteConfig: SiteConfig = {
       {
         question: "Is the trial fee credited if we enrol?",
         answer:
-          "Yes. If your child continues into our weekly small-group or 1-on-1 classes, the S$40 trial fee is offset against your first month's school fees.",
+          "Yes. If your child joins our weekly small-group or 1-on-1 classes, we deduct the S$40 trial fee from your first month's fees.",
       },
       {
         question: "What happens if my child misses a weekly lesson due to school or CCA?",
@@ -858,7 +858,7 @@ export const siteConfig: SiteConfig = {
       {
         question: "How does billing work for months with 5 weeks or public holidays?",
         answer:
-          "Monthly group packages cover 4 scheduled lessons. Any 5th-week sessions or public-holiday reschedules are adjusted transparently in advance during term confirmation.",
+          "Monthly group packages cover 4 scheduled lessons. If a month has a 5th week or a public holiday, we confirm the schedule and fee adjustment in advance.",
       },
     ],
   },

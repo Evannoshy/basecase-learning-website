@@ -27,13 +27,13 @@ export function Showcase({
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'Python':
-        return <Terminal className="w-4 h-4 text-[#1E3A8A]" aria-hidden="true" />;
+        return <Terminal className="w-4 h-4 text-[#166534]" aria-hidden="true" />;
       case 'Web Development':
-        return <Globe className="w-4 h-4 text-[#1E3A8A]" aria-hidden="true" />;
+        return <Globe className="w-4 h-4 text-[#166534]" aria-hidden="true" />;
       case 'Study Tool':
-        return <Clock className="w-4 h-4 text-[#1E3A8A]" aria-hidden="true" />;
+        return <Clock className="w-4 h-4 text-[#166534]" aria-hidden="true" />;
       default:
-        return <Code2 className="w-4 h-4 text-[#1E3A8A]" aria-hidden="true" />;
+        return <Code2 className="w-4 h-4 text-[#166534]" aria-hidden="true" />;
     }
   };
 
@@ -46,7 +46,7 @@ export function Showcase({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#1E3A8A]">
+          <p className="text-xs font-bold uppercase tracking-widest text-[#166534]">
             Student &amp; Curriculum Work
           </p>
           <h2
@@ -55,7 +55,7 @@ export function Showcase({
           >
             What Students Can Build
           </h2>
-          <div className="w-12 h-1 bg-[#1E3A8A] mx-auto mt-4" aria-hidden="true" />
+          <div className="w-12 h-1 bg-[#166534] mx-auto mt-4" aria-hidden="true" />
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
             Example projects from our Python and Web courses: simple, practical tools that students write and understand themselves.
           </p>
@@ -81,9 +81,9 @@ export function Showcase({
                 onClick={() => setActiveTab(tab)}
                 aria-pressed={activeTab === tab}
                 className={cn(
-                  'px-3.5 py-1.5 text-xs font-medium rounded-md transition-colors focus-visible:ring-2 focus-visible:ring-[#1E3A8A] focus-visible:outline-none',
+                  'px-3.5 py-1.5 text-xs font-medium rounded-md transition-colors focus-visible:ring-2 focus-visible:ring-[#166534] focus-visible:outline-none',
                   activeTab === tab
-                    ? 'bg-[#1E3A8A] text-white shadow-sm'
+                    ? 'bg-[#166534] text-white shadow-sm'
                     : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
                 )}
               >
@@ -133,7 +133,7 @@ export function Showcase({
                     </h4>
 
                     {/* Student Level Badge */}
-                    <p className="text-xs font-semibold text-[#1E3A8A] mb-3">
+                    <p className="text-xs font-semibold text-[#166534] mb-3">
                       {project.studentLevel}
                     </p>
 
@@ -169,13 +169,13 @@ export function Showcase({
                     <div className="mt-4">
                       <div className="flex items-center justify-between px-3 py-1.5 bg-[#0F172A] rounded-t-lg border-b border-slate-800 text-xs font-mono text-slate-200">
                         <span className="flex items-center gap-1.5">
-                          <Code2 className="w-3.5 h-3.5 text-blue-300" aria-hidden="true" />
+                          <Code2 className="w-3.5 h-3.5 text-green-300" aria-hidden="true" />
                           {project.codeSnippetPreview.filename}
                         </span>
                         <button
                           type="button"
                           onClick={() => setExpandedCodeId(isCodeExpanded ? null : project.id)}
-                          className="text-[11px] text-white hover:text-blue-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded px-1 flex items-center gap-0.5"
+                          className="text-[11px] text-white hover:text-green-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded px-1 flex items-center gap-0.5"
                           aria-expanded={isCodeExpanded}
                           aria-label={`${isCodeExpanded ? 'Collapse' : 'Expand'} code snippet for ${project.title}`}
                         >
@@ -220,7 +220,7 @@ export function Showcase({
                   </span>
                   <a
                     href="#courses"
-                    className="text-xs font-semibold text-[#1E3A8A] hover:text-[#1E40AF] flex items-center gap-1 focus-visible:ring-2 focus-visible:ring-[#1E3A8A] focus-visible:outline-none rounded"
+                    className="text-xs font-semibold text-[#166534] hover:text-[#15803D] flex items-center gap-1 focus-visible:ring-2 focus-visible:ring-[#166534] focus-visible:outline-none rounded"
                   >
                     <span>Course Details</span>
                     <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />

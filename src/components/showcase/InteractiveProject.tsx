@@ -249,7 +249,7 @@ export function InteractiveProject({
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#0B132B] text-white font-mono text-xs font-semibold shadow-inner">
-            <Sparkles className="w-3.5 h-3.5 text-blue-300" aria-hidden="true" />
+            <Sparkles className="w-3.5 h-3.5 text-green-300" aria-hidden="true" />
             <span>Score: {score} / {questions.length}</span>
           </div>
 
@@ -257,7 +257,7 @@ export function InteractiveProject({
             type="button"
             onClick={handleRestart}
             aria-label="Restart quiz"
-            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-md transition-colors focus-visible:ring-2 focus-visible:ring-[#1E3A8A] focus-visible:outline-none"
+            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-md transition-colors focus-visible:ring-2 focus-visible:ring-[#166534] focus-visible:outline-none"
           >
             <RotateCcw className="w-3 h-3" aria-hidden="true" />
             <span>Reset</span>
@@ -275,7 +275,7 @@ export function InteractiveProject({
         className="w-full bg-slate-200 h-2 rounded-full overflow-hidden mb-8"
       >
         <div
-          className="bg-[#1E3A8A] h-full transition-all duration-300 ease-out"
+          className="bg-[#166534] h-full transition-all duration-300 ease-out"
           style={{ width: `${((currentIndex + (hasSubmitted ? 1 : 0)) / questions.length) * 100}%` }}
         />
       </div>
@@ -290,7 +290,7 @@ export function InteractiveProject({
             Quiz Completed!
           </h4>
           <p className="text-lg text-slate-700 mb-6 font-mono">
-            Final Score: <strong className="text-[#1E3A8A]">{score}</strong> / {questions.length} ({Math.round((score / questions.length) * 100)}%)
+            Final Score: <strong className="text-[#166534]">{score}</strong> / {questions.length} ({Math.round((score / questions.length) * 100)}%)
           </p>
           <p className="max-w-md mx-auto text-sm text-slate-600 mb-8 leading-relaxed">
             {score === questions.length
@@ -304,14 +304,14 @@ export function InteractiveProject({
             <button
               type="button"
               onClick={handleRestart}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-slate-800 bg-white hover:bg-slate-50 border border-slate-300 shadow-sm focus-visible:ring-2 focus-visible:ring-[#1E3A8A] focus-visible:outline-none transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-slate-800 bg-white hover:bg-slate-50 border border-slate-300 shadow-sm focus-visible:ring-2 focus-visible:ring-[#166534] focus-visible:outline-none transition-colors"
             >
               <RotateCcw className="w-4 h-4" aria-hidden="true" />
               <span>Try Again</span>
             </button>
             <a
               href="#courses"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-white bg-[#1E3A8A] hover:bg-[#1E40AF] shadow-sm focus-visible:ring-2 focus-visible:ring-[#1E3A8A] focus-visible:outline-none transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-white bg-[#166534] hover:bg-[#15803D] shadow-sm focus-visible:ring-2 focus-visible:ring-[#166534] focus-visible:outline-none transition-colors"
             >
               <span>Explore Beginner Python</span>
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -327,7 +327,7 @@ export function InteractiveProject({
             <div className="rounded-xl border border-slate-800 bg-[#0B132B] overflow-hidden shadow-md">
               <div className="flex items-center justify-between px-4 py-2 bg-[#111C3D] border-b border-slate-800 text-xs font-mono text-slate-200">
                 <span className="flex items-center gap-2">
-                  <TerminalIcon className="w-4 h-4 text-blue-300" aria-hidden="true" />
+                  <TerminalIcon className="w-4 h-4 text-green-300" aria-hidden="true" />
                   <span>quiz.py</span>
                 </span>
                 <span className="text-[11px] text-slate-300 font-mono">Python 3.12</span>
@@ -371,7 +371,7 @@ export function InteractiveProject({
 
                   let optionStyle = 'border-slate-300 bg-white hover:bg-slate-50 text-slate-800';
                   if (isSelected && !hasSubmitted) {
-                    optionStyle = 'border-[#1E3A8A] bg-slate-100 text-slate-950 ring-1 ring-[#1E3A8A]';
+                    optionStyle = 'border-[#166534] bg-slate-100 text-slate-950 ring-1 ring-[#166534]';
                   } else if (hasSubmitted) {
                     if (isCorrectAnswer) {
                       optionStyle = 'border-emerald-500 bg-emerald-50 text-emerald-950 font-medium ring-1 ring-emerald-500';
@@ -397,7 +397,7 @@ export function InteractiveProject({
                       onClick={() => !hasSubmitted && setSelectedOption(idx)}
                       onKeyDown={(e) => handleKeyDown(e, idx)}
                       className={cn(
-                        'flex items-center gap-3.5 p-3.5 rounded-lg border transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] focus-visible:ring-offset-2',
+                        'flex items-center gap-3.5 p-3.5 rounded-lg border transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] focus-visible:ring-offset-2',
                         hasSubmitted && 'cursor-default',
                         optionStyle
                       )}
@@ -406,7 +406,7 @@ export function InteractiveProject({
                         className={cn(
                           'w-7 h-7 rounded-full flex items-center justify-center font-mono font-bold text-xs shrink-0 transition-colors',
                           isSelected && !hasSubmitted
-                            ? 'bg-[#1E3A8A] text-white'
+                            ? 'bg-[#166534] text-white'
                             : hasSubmitted && isCorrectAnswer
                             ? 'bg-emerald-600 text-white'
                             : hasSubmitted && isSelected && !isCorrectAnswer
@@ -431,9 +431,9 @@ export function InteractiveProject({
                   onClick={handleExecute}
                   disabled={selectedOption === null}
                   className={cn(
-                    'inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all focus-visible:ring-2 focus-visible:ring-[#1E3A8A] focus-visible:outline-none',
+                    'inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all focus-visible:ring-2 focus-visible:ring-[#166534] focus-visible:outline-none',
                     selectedOption !== null
-                      ? 'bg-[#1E3A8A] hover:bg-[#1E40AF] text-white shadow-sm cursor-pointer'
+                      ? 'bg-[#166534] hover:bg-[#15803D] text-white shadow-sm cursor-pointer'
                       : 'bg-slate-200 text-slate-500 cursor-not-allowed'
                   )}
                 >
@@ -444,7 +444,7 @@ export function InteractiveProject({
                 <button
                   type="button"
                   onClick={handleNext}
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold bg-[#0B132B] hover:bg-slate-800 text-white shadow-sm focus-visible:ring-2 focus-visible:ring-[#1E3A8A] focus-visible:outline-none transition-all cursor-pointer"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold bg-[#0B132B] hover:bg-slate-800 text-white shadow-sm focus-visible:ring-2 focus-visible:ring-[#166534] focus-visible:outline-none transition-all cursor-pointer"
                 >
                   <span>
                     {currentIndex + 1 < questions.length ? 'Next Question' : 'View Final Score'}
@@ -517,7 +517,7 @@ export function InteractiveProject({
               >
                 {terminalLogs.map((log, idx) => {
                   let logColor = 'text-slate-200';
-                  if (log.startsWith('$')) logColor = 'text-blue-300 font-bold';
+                  if (log.startsWith('$')) logColor = 'text-green-300 font-bold';
                   else if (log.startsWith('>')) logColor = 'text-amber-300';
                   else if (log.includes('[PASS]')) logColor = 'text-emerald-300 font-bold';
                   else if (log.includes('[LOGIC_ERROR]')) logColor = 'text-rose-300 font-bold';

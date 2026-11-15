@@ -110,13 +110,13 @@ export default function HomePage() {
         className="py-16 sm:py-24 bg-white border-t border-slate-300 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#1E3A8A]">
+          <p className="text-xs font-bold uppercase tracking-widest text-[#166534]">
             Trial Booking
           </p>
           <h2 id="enquiry-heading" className="mt-2 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
             Book a Coding Trial
           </h2>
-          <div className="w-12 h-1 bg-[#1E3A8A] mx-auto mt-4" aria-hidden="true" />
+          <div className="w-12 h-1 bg-[#166534] mx-auto mt-4" aria-hidden="true" />
           <p className="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
             Leave your details below and we’ll follow up to arrange a trial session.
           </p>

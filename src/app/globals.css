@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 :root {
+  /* Font Family Tokens */
+  --font-sans: 'Plus Jakarta Sans';
+  --font-mono: 'JetBrains Mono';
+
   /* Surface Tokens */
   --bg-surface: #FFFFFF;          /* Clean White tuition page background */
   --bg-surface-elevated: #FFFFFF; /* Pure White card / container background */

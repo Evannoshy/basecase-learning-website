@@ -70,9 +70,9 @@ Before deploying publicly, update the following items:
    - Do **not** add NUS or scholarship provider logos unless expressly permitted.
 4. **Operational Course Details (`src/config/siteConfig.ts` -> `siteConfig.courses[*].unconfirmedDetails`)**:
    - Once finalized, update age ranges, schedules, class sizes, fees, and durations, and update `faq-operations` in `siteConfig.faqs`.
-5. **Live Enquiry Delivery Integration (`ENQUIRY_WEBHOOK_URL`)**:
-   - Set `ENQUIRY_WEBHOOK_URL` in `.env.local` (for local testing) or your hosting provider's environment variables (e.g., Vercel / Netlify) pointing to your form backend, CRM webhook, Zapier/Make webhook, or email relay endpoint.
-   - `POST /api/enquiry` sends:
+5. **Live Enquiry Delivery Integration (`RESEND_API_KEY` or `ENQUIRY_WEBHOOK_URL`)**:
+   - **Recommended (Resend)**: Set `RESEND_API_KEY`, `ENQUIRY_TO_EMAIL` (defaults to `basecaselearning@gmail.com`), and `ENQUIRY_FROM_EMAIL` (defaults to `BaseCase Enquiries <onboarding@resend.dev>`) in `.env.local` or Vercel Environment Variables. Note: Resend's default `onboarding@resend.dev` sender can only deliver to the email address registered on your Resend account unless a custom sending domain is verified.
+   - **Optional Webhook Override (`ENQUIRY_WEBHOOK_URL`)**: If set, `POST /api/enquiry` sends the enquiry JSON payload directly to your webhook URL instead of Resend:
      ```json
      {
        "enquiryId": "BC-TR-YYYYMM-XXXXXX",
@@ -89,6 +89,6 @@ Before deploying publicly, update the following items:
        "environment": "production"
      }
      ```
-   - Only when `ENQUIRY_WEBHOOK_URL` is configured and responds with HTTP `2xx` will `/api/enquiry` return `{ "success": true, "status": "DELIVERED" }` and display the confirmation screen to parents.
+   - Only when Resend or `ENQUIRY_WEBHOOK_URL` responds with HTTP `2xx` will `/api/enquiry` return `{ "success": true, "status": "DELIVERED" }` and display the confirmation screen to parents.
 6. **Future Secondary & JC Tuition Expansion**:
    - When ready to launch Secondary or JC subjects, copy entries from `siteConfig.futureNavigation` into `siteConfig.navigation`, update `siteConfig.progressionStages`, and add corresponding course cards to `siteConfig.courses`.

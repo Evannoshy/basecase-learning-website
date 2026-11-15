@@ -56,7 +56,7 @@ export function FloatingContactCta() {
           target="_blank"
           rel="noopener noreferrer"
           tabIndex={isHiddenAtFormOrFooter ? -1 : undefined}
-          className="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-[#1E3A8A] hover:bg-[#1E40AF] text-white text-sm font-semibold shadow-lg border border-blue-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#1E3A8A] transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-[#166534] hover:bg-[#15803D] text-white text-sm font-semibold shadow-lg border border-green-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#166534] transition-colors"
         >
           <MessageSquare className="w-4 h-4 text-white" aria-hidden="true" />
           <span>Ask on WhatsApp</span>
@@ -79,7 +79,7 @@ export function FloatingContactCta() {
           <a
             href={resolveSectionHref('#trial-enquiry', pathname)}
             tabIndex={isHiddenAtFormOrFooter ? -1 : undefined}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-[#1E3A8A] hover:bg-[#1E40AF] text-white text-sm font-semibold shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#1E3A8A] transition-colors"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-[#166534] hover:bg-[#15803D] text-white text-sm font-semibold shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#166534] transition-colors"
           >
             <span>Book a Trial</span>
             <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -89,9 +89,9 @@ export function FloatingContactCta() {
             target="_blank"
             rel="noopener noreferrer"
             tabIndex={isHiddenAtFormOrFooter ? -1 : undefined}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 border border-slate-300 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#1E3A8A] transition-colors"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 border border-slate-300 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#166534] transition-colors"
           >
-            <MessageSquare className="w-4 h-4 text-[#1E3A8A]" aria-hidden="true" />
+            <MessageSquare className="w-4 h-4 text-[#166534]" aria-hidden="true" />
             <span>WhatsApp Us</span>
           </a>
         </div>

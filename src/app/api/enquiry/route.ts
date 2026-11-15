@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { siteConfig } from '@/config/siteConfig';
-import { getDefaultGmailEndpoint } from '@/lib/utils';
 import { validateEnquiryForm, type EnquiryFormData } from '@/lib/validation';
 
 /**
@@ -54,7 +53,7 @@ function generateEnquiryId(): string {
 }
 
 /**
- * Checks whether an active, valid webhook URL is configured, or falls back to Gmail delivery outside tests.
+ * Returns the configured webhook URL, or null when none is set (Resend is then tried).
  */
 function getActiveWebhookUrl(): string | null {
   const url = process.env.ENQUIRY_WEBHOOK_URL?.trim();
@@ -70,15 +69,7 @@ function getActiveWebhookUrl(): string | null {
     return url;
   }
 
-  if (
-    process.env.NODE_ENV === 'test' ||
-    process.env.ENQUIRY_WEBHOOK_URL !== undefined ||
-    process.env.ENQUIRY_PREVIEW_STATUS !== undefined
-  ) {
-    return null;
-  }
-
-  return getDefaultGmailEndpoint();
+  return null;
 }
 
 /**
@@ -119,6 +110,15 @@ export async function POST(request: Request): Promise<NextResponse<EnquiryApiRes
     );
   }
 
+  // Honeypot: bots fill the hidden website field. Pretend success, deliver nothing.
+  const honeypotValue = (rawBody as { website?: unknown }).website;
+  if (typeof honeypotValue === 'string' && honeypotValue.trim() !== '') {
+    return NextResponse.json(
+      { success: true, status: 'DELIVERED', message: 'Enquiry successfully delivered.', enquiryId: generateEnquiryId() },
+      { status: 200 }
+    );
+  }
+
   const validation = validateEnquiryForm(rawBody as Partial<EnquiryFormData>);
   if (!validation.isValid || !validation.sanitizedData) {
     return NextResponse.json(
@@ -139,9 +139,88 @@ export async function POST(request: Request): Promise<NextResponse<EnquiryApiRes
   // 3. Backend Safety Guard (Honest Delivery Protocol)
   const webhookUrl = getActiveWebhookUrl();
 
+  // Case A2: Resend email delivery (server-side API key)
+  if (!webhookUrl && process.env.RESEND_API_KEY?.trim()) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+    const to = process.env.ENQUIRY_TO_EMAIL?.trim() || siteConfig.brand.contact.email;
+    const from = process.env.ENQUIRY_FROM_EMAIL?.trim() || 'BaseCase Enquiries <onboarding@resend.dev>';
+    const isEmailContact = sanitizedData.contact.includes('@');
+    const lines = [
+      `Enquiry ID: ${enquiryId}`,
+      `Submitted: ${submittedAt}`,
+      `Parent / Guardian: ${sanitizedData.parentName}`,
+      `Contact: ${sanitizedData.contact}`,
+      `Student age: ${sanitizedData.studentAge}`,
+      `Coding experience: ${sanitizedData.codingExperience}`,
+      `Preferred course: ${sanitizedData.preferredCourse}`,
+      `Notes: ${sanitizedData.notes || 'None provided'}`,
+    ];
+    try {
+      const resendResponse = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${process.env.RESEND_API_KEY!.trim()}`,
+        },
+        body: JSON.stringify({
+          from,
+          to: [to],
+          subject: `[BaseCase Trial Enquiry] ${sanitizedData.preferredCourse} - ${sanitizedData.parentName}`,
+          text: lines.join('\n'),
+          ...(isEmailContact ? { reply_to: sanitizedData.contact } : {}),
+        }),
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+      if (!resendResponse.ok) {
+        const errText =
+          typeof resendResponse.text === 'function'
+            ? await resendResponse.text().catch(() => '')
+            : '';
+        console.error('[enquiry] Resend rejected request', {
+          status: resendResponse.status,
+          body: errText.slice(0, 500),
+        });
+        return NextResponse.json(
+          {
+            success: false,
+            status: 'DELIVERY_FAILED',
+            message:
+              'The email service returned an error. Please contact us directly via WhatsApp or email.',
+            upstreamStatus: resendResponse.status,
+          },
+          { status: 502 }
+        );
+      }
+      return NextResponse.json(
+        { success: true, status: 'DELIVERED', message: 'Enquiry successfully delivered.', enquiryId },
+        { status: 200 }
+      );
+    } catch (error: unknown) {
+      clearTimeout(timeoutId);
+      const isTimeout = error instanceof Error && error.name === 'AbortError';
+      console.error('[enquiry] Resend request failed', {
+        isTimeout,
+        error: error instanceof Error ? error.message : String(error),
+      });
+      return NextResponse.json(
+        {
+          success: false,
+          status: 'DELIVERY_FAILED',
+          message: isTimeout
+            ? 'Enquiry delivery request timed out. Please try again or reach out via WhatsApp.'
+            : 'Unable to connect to the email service. Please try again or reach out via WhatsApp.',
+        },
+        { status: 502 }
+      );
+    }
+  }
   // Case A: Pre-Launch Preview / Demo Mode (No active backend service configured)
   if (!webhookUrl) {
-    const previewStatus = Number(process.env.ENQUIRY_PREVIEW_STATUS) || 200;
+    const previewStatus =
+      Number(process.env.ENQUIRY_PREVIEW_STATUS) ||
+      (process.env.NODE_ENV === 'production' ? 503 : 200);
     return NextResponse.json(
       {
         success: false,

@@ -25,7 +25,7 @@ export function Faq({ faqs = siteConfig.faqs, className }: FaqProps) {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#1E3A8A]">
+          <p className="text-xs font-bold uppercase tracking-widest text-[#166534]">
             FAQs
           </p>
           <h2
@@ -34,7 +34,7 @@ export function Faq({ faqs = siteConfig.faqs, className }: FaqProps) {
           >
             Parent Questions
           </h2>
-          <div className="w-12 h-1 bg-[#1E3A8A] mx-auto mt-4" aria-hidden="true" />
+          <div className="w-12 h-1 bg-[#166534] mx-auto mt-4" aria-hidden="true" />
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
             Common questions on beginners, laptops, progress updates, and AI tools.
           </p>

@@ -50,6 +50,17 @@ const config: Config = {
           800: '#92400E',
           900: '#78350F',
         },
+        brandGreen: {
+          50: '#F0FDF4',
+          100: '#DCFCE7',
+          200: '#BBF7D0',
+          500: '#22C55E',
+          600: '#16A34A',
+          700: '#15803D',     // Hover green accent (>5:1 contrast)
+          800: '#166534',     // Primary green interactive accent (>7:1 contrast)
+          900: '#14532D',
+          950: '#052E16',
+        },
       },
       fontFamily: {
         sans: [

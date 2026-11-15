@@ -44,7 +44,7 @@ export default function CookiesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4 text-xs sm:text-sm">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 font-medium text-slate-700 hover:text-[#1E3A8A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded transition-colors"
+            className="inline-flex items-center gap-1.5 font-medium text-slate-700 hover:text-[#166534] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] rounded transition-colors"
           >
             <ArrowLeft className="w-4 h-4" aria-hidden="true" />
             <span>Back to Home</span>
@@ -52,7 +52,7 @@ export default function CookiesPage() {
           <div className="flex items-center gap-3 text-slate-500 font-medium">
             <Link
               href="/privacy"
-              className="hover:text-[#1E3A8A] underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
+              className="hover:text-[#166534] underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] rounded"
             >
               Privacy Policy
             </Link>
@@ -67,7 +67,7 @@ export default function CookiesPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           {/* Title Block */}
           <header className="border-b border-slate-200 pb-8">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#1E3A8A]">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#166534]">
               Privacy &amp; Browser Storage
             </p>
             <h1 className="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
@@ -171,14 +171,14 @@ export default function CookiesPage() {
               Under Singapore&apos;s PDPA, any personal information you choose to enter in our trial enquiry form is used solely to reply to your enquiry about classes, as explained in our{' '}
               <Link
                 href="/privacy"
-                className="font-semibold text-[#1E3A8A] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
+                className="font-semibold text-[#166534] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] rounded"
               >
                 Privacy Policy
               </Link>
               . If you have questions about privacy or cookies, contact us at{' '}
               <a
                 href={`mailto:${brand.contact.email}`}
-                className="font-semibold text-[#1E3A8A] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
+                className="font-semibold text-[#166534] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] rounded"
               >
                 {brand.contact.email}
               </a>{' '}
@@ -187,7 +187,7 @@ export default function CookiesPage() {
                 href={brand.contact.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-[#1E3A8A] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
+                className="font-semibold text-[#166534] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] rounded"
               >
                 {brand.contact.phoneDisplay}
               </a>

@@ -26,7 +26,7 @@ export function Mentors({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#1E3A8A]">
+          <p className="text-xs font-bold uppercase tracking-widest text-[#166534]">
             Our Teaching Team
           </p>
           <h2
@@ -35,7 +35,7 @@ export function Mentors({
           >
             Meet the Mentors
           </h2>
-          <div className="w-12 h-1 bg-[#1E3A8A] mx-auto mt-4" aria-hidden="true" />
+          <div className="w-12 h-1 bg-[#166534] mx-auto mt-4" aria-hidden="true" />
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
             Led by NUS Computing students who explain concepts plainly and help students build projects they understand. Individual mentor details and official programme names are placeholders until confirmed before launch.
           </p>
@@ -46,7 +46,7 @@ export function Mentors({
           {mentors.map((mentor) => (
             <article
               key={mentor.id}
-              className="flex flex-col justify-between bg-white rounded-xl border border-slate-300 border-t-4 border-t-[#1E3A8A] shadow-sm p-6 sm:p-7"
+              className="flex flex-col justify-between bg-white rounded-xl border border-slate-300 border-t-4 border-t-[#166534] shadow-sm p-6 sm:p-7"
             >
               <div>
                 {mentor.statusLabel && (
@@ -84,7 +84,7 @@ export function Mentors({
                     <h3 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
                       {mentor.name}
                     </h3>
-                    <p className="text-sm font-semibold text-[#1E3A8A] mt-0.5">
+                    <p className="text-sm font-semibold text-[#166534] mt-0.5">
                       {mentor.role}
                     </p>
                     <p className="text-xs text-slate-500 font-medium mt-1">
@@ -121,7 +121,7 @@ export function Mentors({
                 {/* Teaching Experience */}
                 <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-300 mb-5 text-xs text-slate-700">
                   <div className="flex items-start">
-                    <BookOpen className="w-4 h-4 text-[#1E3A8A] mr-2 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                    <BookOpen className="w-4 h-4 text-[#166534] mr-2 mt-0.5 flex-shrink-0" aria-hidden="true" />
                     <div>
                       <strong className="text-slate-900 font-semibold block mb-0.5">
                         Teaching &amp; Mentorship Experience:
@@ -152,7 +152,7 @@ export function Mentors({
               {/* Teaching Approach Quote */}
               {mentor.highlightQuote && (
                 <div className="pt-4 border-t border-slate-200 italic text-xs text-slate-600 flex items-start">
-                  <Quote className="w-3.5 h-3.5 text-[#1E3A8A] mr-1.5 mt-0.5 flex-shrink-0 rotate-180" aria-hidden="true" />
+                  <Quote className="w-3.5 h-3.5 text-[#166534] mr-1.5 mt-0.5 flex-shrink-0 rotate-180" aria-hidden="true" />
                   <span>&ldquo;{mentor.highlightQuote}&rdquo;</span>
                 </div>
               )}

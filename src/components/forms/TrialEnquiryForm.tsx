@@ -29,45 +29,8 @@ import {
   validateNotes,
   validateEnquiryForm,
 } from '@/lib/validation';
-import { cn, buildEnquiryMailtoUrl, getDefaultGmailEndpoint } from '@/lib/utils';
+import { cn, buildEnquiryMailtoUrl } from '@/lib/utils';
 import { Badge } from '@/components/ui/Badge';
-
-async function submitViaBrowserFormSubmit(
-  data: EnquiryFormData,
-  enquiryId: string
-): Promise<boolean> {
-  try {
-    const response = await fetch(getDefaultGmailEndpoint(), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          enquiryId,
-          _subject: `[BaseCase Trial Enquiry] ${data.preferredCourse} - ${data.parentName}`,
-          _template: 'table',
-          _captcha: 'false',
-          parentName: data.parentName,
-          contact: data.contact,
-          studentAge: data.studentAge,
-          codingExperience: data.codingExperience,
-          preferredCourse: data.preferredCourse,
-          notes: data.notes || 'None provided',
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      return false;
-    }
-
-    const payload = (await response.json()) as { success?: boolean | string };
-    return payload.success === true || payload.success === 'true';
-  } catch {
-    return false;
-  }
-}
 
 export interface TrialEnquiryFormProps {
   className?: string;
@@ -97,6 +60,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
   const [touched, setTouched] = useState<Partial<Record<keyof EnquiryFormData, boolean>>>({});
   const [submission, setSubmission] = useState<SubmissionState>({ status: 'idle' });
   const [prefilledNotice, setPrefilledNotice] = useState<string | null>(null);
+  const [honeypot, setHoneypot] = useState('');
 
   // DOM element references for accessible focus management
   const parentNameRef = useRef<HTMLInputElement>(null);
@@ -226,30 +190,6 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
     }
   };
 
-  // Fallback delivery helper for non-test environments when server webhook returns non-DELIVERED or errors
-  const completeLiveFallback = async (
-    sanitized: EnquiryFormData,
-    fallbackId: string
-  ) => {
-    const deliveredViaBrowser = await submitViaBrowserFormSubmit(
-      sanitized,
-      fallbackId
-    );
-    if (!deliveredViaBrowser) {
-      window.location.href = buildEnquiryMailtoUrl(sanitized, fallbackId);
-    }
-
-    setSubmission({
-      status: 'delivered',
-      enquiryId: fallbackId,
-      message: 'Enquiry successfully delivered.',
-      data: sanitized,
-    });
-    if (onSuccess) {
-      onSuccess(sanitized);
-    }
-  };
-
   // Form submission handler
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -283,7 +223,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(sanitized),
+        body: JSON.stringify({ ...sanitized, website: honeypot }),
       });
 
       const result = await response.json();
@@ -309,16 +249,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
         return;
       }
 
-      if (process.env.NODE_ENV !== 'test') {
-        const fallbackId =
-          result?.enquiryId ||
-          result?.previewPayload?.enquiryId ||
-          'BC-TR-' + Date.now().toString(36).toUpperCase();
-        await completeLiveFallback(sanitized, fallbackId);
-        return;
-      }
-
-      if (result.status === 'BACKEND_NOT_CONFIGURED') {
+      if (result.status === 'BACKEND_NOT_CONFIGURED' && process.env.NODE_ENV !== 'production') {
         // Pre-launch / Development Preview Mode: Explicitly NOT a false success!
         setSubmission({
           status: 'preview_mode',
@@ -336,12 +267,6 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
         });
       }
     } catch {
-      if (process.env.NODE_ENV !== 'test') {
-        const fallbackId = 'BC-TR-' + Date.now().toString(36).toUpperCase();
-        await completeLiveFallback(sanitized, fallbackId);
-        return;
-      }
-
       setSubmission({
         status: 'error',
         message:
@@ -373,12 +298,12 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
     return (
       <div
         className={cn(
-          'p-8 sm:p-10 rounded-2xl bg-white border border-slate-300 border-t-4 border-t-[#1E3A8A] shadow-sm max-w-2xl mx-auto',
+          'p-8 sm:p-10 rounded-2xl bg-white border border-slate-300 border-t-4 border-t-[#166534] shadow-sm max-w-2xl mx-auto',
           className
         )}
       >
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-[#1E3A8A]">
+          <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-[#166534]">
             <CheckCircle2 className="w-7 h-7" aria-hidden="true" />
           </div>
           <div>
@@ -393,7 +318,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
 
         <p className="text-slate-700 leading-relaxed mb-6">
           Thank you, <span className="font-semibold">{submission.data.parentName}</span>. Your trial request for{' '}
-          <span className="font-semibold text-[#1E3A8A]">{submission.data.preferredCourse}</span> has been logged with our admissions team.
+          <span className="font-semibold text-[#166534]">{submission.data.preferredCourse}</span> has been logged with our admissions team.
         </p>
 
         {/* Post-submission Next Steps */}
@@ -403,7 +328,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           </h4>
 
           <div className="flex items-start gap-3 text-sm text-slate-800">
-            <Clock className="w-5 h-5 text-[#1E3A8A] flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <Clock className="w-5 h-5 text-[#166534] flex-shrink-0 mt-0.5" aria-hidden="true" />
             <div>
               <span className="font-semibold">24-Hour Review: </span>
               {siteConfig.enquiryConfig.trialTimelineNotice}
@@ -411,7 +336,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           </div>
 
           <div className="flex items-start gap-3 text-sm text-slate-800">
-            <MessageSquare className="w-5 h-5 text-[#1E3A8A] flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <MessageSquare className="w-5 h-5 text-[#166534] flex-shrink-0 mt-0.5" aria-hidden="true" />
             <div>
               <span className="font-semibold">Consultation &amp; Placement: </span>
               A mentor will contact your preferred channel ({submission.data.contact}) to confirm readiness, address any questions, and arrange scheduling.
@@ -419,7 +344,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           </div>
 
           <div className="flex items-start gap-3 text-sm text-slate-800">
-            <Laptop className="w-5 h-5 text-[#1E3A8A] flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <Laptop className="w-5 h-5 text-[#166534] flex-shrink-0 mt-0.5" aria-hidden="true" />
             <div>
               <span className="font-semibold">Hardware Preparation: </span>
               Students only need a standard laptop (Windows, Mac, or Chromebook) with Google Chrome. No prior software installation is necessary.
@@ -431,7 +356,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           <button
             type="button"
             onClick={handleReset}
-            className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-[#1E3A8A] bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-[#166534] bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-colors"
           >
             <RotateCcw className="w-4 h-4" aria-hidden="true" />
             Submit Another Enquiry
@@ -440,7 +365,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
             href={buildEnquiryMailtoUrl(submission.data, submission.enquiryId)}
             className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 transition-colors"
           >
-            <Mail className="w-4 h-4 text-[#1E3A8A]" aria-hidden="true" />
+            <Mail className="w-4 h-4 text-[#166534]" aria-hidden="true" />
             Email {siteConfig.brand.contact.email}
           </a>
         </div>
@@ -491,11 +416,11 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
             Production User Journey (When Live Webhook is Connected):
           </div>
           <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4 text-[#1E3A8A] flex-shrink-0" aria-hidden="true" />
+            <Clock className="w-4 h-4 text-[#166534] flex-shrink-0" aria-hidden="true" />
             <span>Reply within 24 hours via WhatsApp or email</span>
           </div>
           <div className="flex items-center gap-2">
-            <Laptop className="w-4 h-4 text-[#1E3A8A] flex-shrink-0" aria-hidden="true" />
+            <Laptop className="w-4 h-4 text-[#166534] flex-shrink-0" aria-hidden="true" />
             <span>Laptop-ready online / hybrid session confirmed with parent</span>
           </div>
         </div>
@@ -511,16 +436,16 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           <button
             type="button"
             onClick={handleReset}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-[#1E3A8A] bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-[#166534] bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-colors"
           >
             Reset Form
           </button>
           <div className="flex flex-wrap items-center gap-2.5 ml-auto">
             <a
               href={buildEnquiryMailtoUrl(submission.previewPayload)}
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-[#1E3A8A] bg-slate-50 hover:bg-slate-100 border border-slate-300 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-[#166534] bg-slate-50 hover:bg-slate-100 border border-slate-300 transition-colors"
             >
-              <Mail className="w-4 h-4 text-[#1E3A8A]" aria-hidden="true" />
+              <Mail className="w-4 h-4 text-[#166534]" aria-hidden="true" />
               Email {siteConfig.brand.contact.email}
             </a>
             <a
@@ -587,7 +512,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           className="mb-6 px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-300 flex items-center justify-between gap-3 text-xs sm:text-sm text-slate-900"
         >
           <span className="inline-flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-[#1E3A8A] flex-shrink-0" aria-hidden="true" />
+            <Sparkles className="w-4 h-4 text-[#166534] flex-shrink-0" aria-hidden="true" />
             <span>
               Course pre-selected: <strong className="font-semibold">{prefilledNotice}</strong>
             </span>
@@ -595,7 +520,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           <button
             type="button"
             onClick={() => setPrefilledNotice(null)}
-            className="text-xs font-medium text-[#1E3A8A] hover:text-[#1E40AF] underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
+            className="text-xs font-medium text-[#166534] hover:text-[#15803D] underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] rounded"
           >
             Dismiss
           </button>
@@ -631,7 +556,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
                 'w-full px-3.5 py-2.5 rounded-lg border text-sm transition-colors',
                 errors.parentName
                   ? 'border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500'
-                  : 'border-slate-300 text-slate-900 focus:ring-[#1E3A8A] focus:border-[#1E3A8A]'
+                  : 'border-slate-300 text-slate-900 focus:ring-[#166534] focus:border-[#166534]'
               )}
             />
             {errors.parentName && (
@@ -674,7 +599,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
                 'w-full px-3.5 py-2.5 rounded-lg border text-sm transition-colors',
                 errors.contact
                   ? 'border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500'
-                  : 'border-slate-300 text-slate-900 focus:ring-[#1E3A8A] focus:border-[#1E3A8A]'
+                  : 'border-slate-300 text-slate-900 focus:ring-[#166534] focus:border-[#166534]'
               )}
             />
             <p id="enquiry-contact-hint" className="mt-1 text-[11px] text-slate-500">
@@ -722,7 +647,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
                 'w-full px-3.5 py-2.5 rounded-lg border text-sm transition-colors',
                 errors.studentAge
                   ? 'border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500'
-                  : 'border-slate-300 text-slate-900 focus:ring-[#1E3A8A] focus:border-[#1E3A8A]'
+                  : 'border-slate-300 text-slate-900 focus:ring-[#166534] focus:border-[#166534]'
               )}
             />
             {errors.studentAge && (
@@ -762,7 +687,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
                 'w-full px-3.5 py-2.5 rounded-lg border text-sm transition-colors bg-white',
                 errors.codingExperience
                   ? 'border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500'
-                  : 'border-slate-300 text-slate-900 focus:ring-[#1E3A8A] focus:border-[#1E3A8A]'
+                  : 'border-slate-300 text-slate-900 focus:ring-[#166534] focus:border-[#166534]'
               )}
             >
               <option value="">Select experience level...</option>
@@ -810,7 +735,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
               'w-full px-3.5 py-2.5 rounded-lg border text-sm transition-colors bg-white',
               errors.preferredCourse
                 ? 'border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500'
-                : 'border-slate-300 text-slate-900 focus:ring-[#1E3A8A] focus:border-[#1E3A8A]'
+                : 'border-slate-300 text-slate-900 focus:ring-[#166534] focus:border-[#166534]'
             )}
           >
             <option value="">Select preferred course...</option>
@@ -856,7 +781,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
               'w-full px-3.5 py-2.5 rounded-lg border text-sm transition-colors',
               errors.notes
                 ? 'border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500'
-                : 'border-slate-300 text-slate-900 focus:ring-[#1E3A8A] focus:border-[#1E3A8A]'
+                : 'border-slate-300 text-slate-900 focus:ring-[#166534] focus:border-[#166534]'
             )}
           />
           {errors.notes && (
@@ -871,6 +796,14 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           )}
         </div>
 
+        {/* Honeypot: hidden from people, filled by bots */}
+        <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+          <label>
+            Leave this field empty
+            <input type="text" name="website" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
+          </label>
+        </div>
+
         {/* Submit Button & Clear Status */}
         <div className="pt-2">
           <button
@@ -881,7 +814,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
               'w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg font-bold text-white text-base transition-all duration-200 shadow-md',
               isSubmitting
                 ? 'bg-slate-400 cursor-not-allowed'
-                : 'bg-[#1E3A8A] hover:bg-[#1E40AF] active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-[#1E3A8A]'
+                : 'bg-[#166534] hover:bg-[#15803D] active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-[#166534]'
             )}
           >
             {isSubmitting ? (
@@ -900,7 +833,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
 
         {/* Feature F35: Privacy Assurance & PDPA Compliance */}
         <div className="mt-8 pt-5 border-t border-slate-300 flex items-start gap-2.5 text-xs text-slate-500 leading-relaxed">
-          <Shield className="w-4 h-4 text-[#1E3A8A] flex-shrink-0 mt-0.5" aria-hidden="true" />
+          <Shield className="w-4 h-4 text-[#166534] flex-shrink-0 mt-0.5" aria-hidden="true" />
           <div>
             <span className="font-semibold text-slate-700">Privacy &amp; Data Protection: </span>
             <span>{siteConfig.enquiryConfig.privacyGuarantee}</span>{' '}
@@ -908,14 +841,14 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
               Read our{' '}
               <Link
                 href="/privacy"
-                className="font-semibold text-[#1E3A8A] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
+                className="font-semibold text-[#166534] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] rounded"
               >
                 Privacy Policy
               </Link>{' '}
               and{' '}
               <Link
                 href="/cookies"
-                className="font-semibold text-[#1E3A8A] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
+                className="font-semibold text-[#166534] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] rounded"
               >
                 Cookie Policy
               </Link>

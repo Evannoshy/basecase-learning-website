@@ -1,25 +1,17 @@
 import type { Metadata, Viewport } from 'next';
-import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
+import '@fontsource/plus-jakarta-sans/400.css';
+import '@fontsource/plus-jakarta-sans/500.css';
+import '@fontsource/plus-jakarta-sans/600.css';
+import '@fontsource/plus-jakarta-sans/700.css';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/500.css';
+import '@fontsource/jetbrains-mono/600.css';
 import './globals.css';
 import { siteConfig } from '@/config/siteConfig';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { FloatingContactCta } from '@/components/layout/FloatingContactCta';
 import { CookieBanner } from '@/components/layout/CookieBanner';
-
-const fontSans = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  variable: '--font-sans',
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
-});
-
-const fontMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-  weight: ['400', '500', '600'],
-});
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -108,9 +100,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fontSans.variable} ${fontMono.variable} scroll-smooth`}
+      className="scroll-smooth"
     >
-      <body className="min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-blue-100 selection:text-blue-950">
+      <body className="min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-green-100 selection:text-green-950">
         {/* WCAG AA Visible Skip-to-Main-Content Anchor */}
         <a
           href="#main-content"

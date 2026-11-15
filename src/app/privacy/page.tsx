@@ -23,7 +23,7 @@ export default function PrivacyPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4 text-xs sm:text-sm">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 font-medium text-slate-700 hover:text-[#1E3A8A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded transition-colors"
+            className="inline-flex items-center gap-1.5 font-medium text-slate-700 hover:text-[#166534] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] rounded transition-colors"
           >
             <ArrowLeft className="w-4 h-4" aria-hidden="true" />
             <span>Back to Home</span>
@@ -31,7 +31,7 @@ export default function PrivacyPage() {
           <div className="flex items-center gap-3 text-slate-500 font-medium">
             <Link
               href="/cookies"
-              className="hover:text-[#1E3A8A] underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
+              className="hover:text-[#166534] underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] rounded"
             >
               Cookie Policy
             </Link>
@@ -46,7 +46,7 @@ export default function PrivacyPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           {/* Title Block */}
           <header className="border-b border-slate-200 pb-8">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#1E3A8A]">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#166534]">
               Privacy &amp; Data Protection (Singapore PDPA)
             </p>
             <h1 className="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
@@ -145,7 +145,7 @@ export default function PrivacyPage() {
               Essential storage keeps site forms working properly and remembers your cookie banner choice. For a breakdown of keys and durations, read our{' '}
               <Link
                 href="/cookies"
-                className="font-semibold text-[#1E3A8A] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
+                className="font-semibold text-[#166534] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] rounded"
               >
                 Cookie Policy
               </Link>
@@ -163,7 +163,7 @@ export default function PrivacyPage() {
               If you have any questions about this Privacy Policy, or wish to access, update, or delete your enquiry details under Singapore&apos;s PDPA, reach us at{' '}
               <a
                 href={`mailto:${brand.contact.email}`}
-                className="font-semibold text-[#1E3A8A] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
+                className="font-semibold text-[#166534] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] rounded"
               >
                 {brand.contact.email}
               </a>{' '}
@@ -172,7 +172,7 @@ export default function PrivacyPage() {
                 href={brand.contact.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-[#1E3A8A] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded"
+                className="font-semibold text-[#166534] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] rounded"
               >
                 {brand.contact.phoneDisplay}
               </a>
