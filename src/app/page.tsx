@@ -45,6 +45,14 @@ function buildHomeJsonLd() {
         description: sanitizeJsonLdText(siteConfig.brand.description),
         email: siteConfig.brand.contact.email,
         telephone: siteConfig.brand.contact.phone,
+        contactPoint: {
+          '@type': 'ContactPoint',
+          telephone: siteConfig.brand.contact.phone,
+          email: siteConfig.brand.contact.email,
+          contactType: 'admissions',
+          areaServed: 'SG',
+          availableLanguage: 'English',
+        },
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Singapore',
@@ -55,7 +63,6 @@ function buildHomeJsonLd() {
           '@type': 'Country',
           name: 'Singapore',
         },
-        sameAs: siteConfig.brand.socialLinks.map((link) => link.url),
         knowsAbout: [
           'Python programming',
           'HTML, CSS and JavaScript web development',

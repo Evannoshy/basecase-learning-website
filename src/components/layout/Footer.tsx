@@ -159,6 +159,13 @@ export function Footer() {
             <p>&copy; {currentYear} {siteConfig.brand.name}. All rights reserved.</p>
             <div className="flex items-center gap-4">
               <Link
+                href="/contact"
+                className="text-slate-200 hover:text-white underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
+              >
+                Contact
+              </Link>
+              <span className="text-slate-700" aria-hidden="true">|</span>
+              <Link
                 href="/privacy"
                 className="text-slate-200 hover:text-white underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
               >
