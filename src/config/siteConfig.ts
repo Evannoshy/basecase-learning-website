@@ -98,6 +98,20 @@ export interface Course {
   unconfirmedDetails: UnconfirmedCourseDetails;
 }
 
+export interface CodingClass {
+  id: string;
+  title: string;
+  shortDescription: string;
+  trackBadge: string;
+  targetLevel: string;
+  prerequisites: string;
+  format: string;
+  overview: string;
+  topics: string[];
+  lessonApproach: string;
+  outcomes: string[];
+}
+
 export interface CodeSnippetPreview {
   language: 'python' | 'html' | 'javascript' | 'typescript';
   filename: string;
@@ -229,6 +243,7 @@ export interface SiteConfig {
   /** Ready-to-enable navigation entries for future Secondary & JC academic tuition expansion. */
   futureNavigation?: NavigationLink[];
   hero: HeroConfig;
+  classes: CodingClass[];
   courses: Course[];
   showcaseProjects: ShowcaseProject[];
   learningStages: LearningStage[];
@@ -243,11 +258,11 @@ export const siteConfig: SiteConfig = {
   brand: {
     name: "BaseCase Learning",
     shortName: "BaseCase",
-    tagline: "Coding Classes & Computing Tuition in Singapore (Sec, IB, JC)",
-    description: "Small-group coding classes and 1-on-1 O-Level, A-Level H2 & IB Computing tuition in Singapore, taught by NUS Computing undergraduates.",
+    tagline: "Coding Classes & Computing Tuition near Yishun MRT (Pri, Sec, IB, JC)",
+    description: "Small-group coding classes and 1-on-1 O-Level, A-Level H2 & IB Computing tuition near Yishun MRT (Singapore) and online, taught by NUS Computing undergraduates.",
     url: "https://basecase-learning-website.vercel.app",
     foundedYear: 2026,
-    targetDemographic: "Secondary, pre-poly/JC, and pre-university students in Singapore",
+    targetDemographic: "Upper Primary, Secondary, IB, JC, and Poly-bound students in Singapore",
     contact: {
       email: "basecaselearning@gmail.com",
       phone: "+65 9350 9168",
@@ -255,7 +270,7 @@ export const siteConfig: SiteConfig = {
       whatsappNumber: "6593509168",
       whatsappUrl: "https://wa.me/6593509168?text=Hi%20BaseCase%20Learning%2C%20I%20would%20like%20to%20enquire%20about%20a%20coding%20trial.",
       location: "Singapore",
-      locationDetail: "Singapore (North Area)",
+      locationDetail: "Near Yishun MRT · Online options available",
     },
     socialLinks: [
       {
@@ -280,11 +295,9 @@ export const siteConfig: SiteConfig = {
   },
 
   navigation: [
-    { label: "Courses", href: "#courses" },
-    { label: "Projects", href: "#projects" },
-    { label: "How Learning Works", href: "#how-learning-works" },
+    { label: "Classes", href: "/classes" },
+    { label: "Projects", href: "/projects" },
     { label: "Mentors", href: "#mentors" },
-    { label: "Progression", href: "#progression" },
     { label: "Pricing", href: "/pricing" },
     { label: "FAQs", href: "#faqs" },
     { label: "Book a coding trial", href: "#trial-enquiry", isCta: true },
@@ -303,121 +316,224 @@ export const siteConfig: SiteConfig = {
   hero: {
     headline: "Learn to code. Build something you’re proud of.",
     subheadline:
-      "The best investment for your Child's future",
-    badgeText: "Secondary & Pre-U",
+      "Small-group coding classes and 1-on-1 O-Level, A-Level & IB Computing tuition near Yishun MRT and online — taught step by step by NUS Computing tutors.",
+    badgeText: "Upper Pri · Sec · IB · JC",
     primaryCta: {
       text: "Book a coding trial",
       href: "#trial-enquiry",
     },
     secondaryCta: {
-      text: "Explore courses",
-      href: "#courses",
+      text: "Explore classes",
+      href: "#classes",
     },
     highlights: [
-      "Clear explanations, step by step",
-      "Projects students build and can explain",
-      "Taught by NUS Computing students",
-      "Honest insights on uni & tech paths",
+      "Small groups (3–6 students per table)",
+      "Taught by NUS Computing tutors",
+      "Zero coding experience needed to start",
+      "Supports O-Level, H2 & IB Computing",
     ],
   },
+
+  classes: [
+    {
+      id: "scratch",
+      title: "Scratch",
+      shortDescription: "Visual drag-and-drop coding that builds logic and problem-solving for younger beginners (Upper Pri – Lower Sec).",
+      trackBadge: "Foundational Logic",
+      targetLevel: "Upper Primary (P4–P6) & Lower Secondary Beginners",
+      prerequisites: "No coding experience needed. Great for students new to coding logic.",
+      format: "Small-group coaching (3–6 students) or 1-on-1 · Near Yishun MRT / Online",
+      overview:
+        "Scratch removes typing and spelling mistakes so younger students can focus on how instructions work together. Students learn to break problems into clear steps, spot why something behaves unexpectedly, and build strong thinking habits before moving to typed code.",
+      topics: [
+        "Step-by-step instructions, screen coordinates, and game events",
+        "Repeating actions cleanly with loops and stop conditions",
+        "Making decisions using if / else rules",
+        "Tracking scores, lives, and changing game states",
+        "Organising bigger projects into tidy reusable blocks",
+      ],
+      lessonApproach:
+        "Tutors ask students to predict what their blocks will do before pressing run — building careful step-by-step thinking instead of random guessing.",
+      outcomes: [
+        "Think clearly through loops, conditions, and game logic",
+        "Spot and fix mistakes calmly without guessing",
+        "Transition smoothly into typed Python or school Computing later",
+      ],
+    },
+    {
+      id: "sicpy",
+      title: "SICP in Python (SICPY)",
+      shortDescription: "Deeper problem-solving in Python — ideal for strong learners, IP students, and DSA preparation.",
+      trackBadge: "CS Fundamentals",
+      targetLevel: "Secondary, IP & Pre-University Students",
+      prerequisites: "Comfortable with basic Python variables, loops, and simple functions.",
+      format: "Small-group coaching (3–6 students) or 1-on-1 · Near Yishun MRT / Online",
+      overview:
+        "Based on NUS's foundational Computer Science approach taught in Python, this class goes beyond memorising commands. Students learn how to break down unfamiliar problems cleanly, use recursion with confidence, and pick faster, neater ways to solve tough questions.",
+      topics: [
+        "Writing clean, reusable functions that simplify complex tasks",
+        "Solving multi-step problems with recursion and tracing them on paper",
+        "Comparing faster vs. slower ways to solve a problem",
+        "Organising structured data clearly using lists and tree-like patterns",
+        "Choosing the right coding style for larger problems",
+      ],
+      lessonApproach:
+        "Instead of rushing through syntax, tutors walk through tricky examples on paper and screen, then review every line your child writes.",
+      outcomes: [
+        "Solve unfamiliar, multi-step problems cleanly without guessing",
+        "Trace complex code on paper and spot efficiency bottlenecks",
+        "Build strong foundations ahead of JC Computing, DSA, or university CS",
+      ],
+    },
+    {
+      id: "o-level-computing",
+      title: "O-Level Computing (7155)",
+      shortDescription: "Structured Paper 1 theory and Paper 2 Python practice for Sec 3–4 students.",
+      trackBadge: "MOE O-Level Syllabus",
+      targetLevel: "Secondary 3 & Secondary 4 Computing (7155) Students",
+      prerequisites: "Taking or preparing for GCE O-Level Computing (7155).",
+      format: "1-on-1 private coaching or small-group exam prep · Near Yishun MRT / Online",
+      overview:
+        "Focused coaching matched to the SEAB O-Level Computing (7155) syllabus across Paper 1 (written theory) and Paper 2 (Python and spreadsheet practical). We close weak topics early and train reliable exam technique.",
+      topics: [
+        "Number systems (binary, hexadecimal, text encoding) and logic gates",
+        "Computer systems, networks, cybersecurity, and computing ethics",
+        "Flowcharts, pseudocode, and completing trace tables accurately",
+        "Paper 2 Python tasks: reading files, input checks, searching, and sorting",
+        "Excel spreadsheet formulas, lookup tables, and data checks",
+      ],
+      lessonApproach:
+        "Weekly lessons alternate between Paper 1 written answers (checking exact marking-scheme phrasing) and timed Paper 2 coding drills where students check their logic on paper first.",
+      outcomes: [
+        "Complete trace tables accurately under exam time pressure",
+        "Score consistently on Paper 1 definitions, logic gates, and pseudocode",
+        "Find and fix Paper 2 Python bugs calmly during practical exams",
+      ],
+    },
+    {
+      id: "a-level-computing",
+      title: "A-Level H2 Computing (9569)",
+      shortDescription: "Concept-first JC tuition covering algorithms, databases, and timed Paper 2 prep.",
+      trackBadge: "MOE A-Level H2 Syllabus",
+      targetLevel: "JC 1 & JC 2 H2 Computing (9569) Students",
+      prerequisites: "Taking GCE A-Level H2 Computing (9569) in Junior College.",
+      format: "1-on-1 private coaching or targeted JC revision · Near Yishun MRT / Online",
+      overview:
+        "Structured preparation for A-Level H2 Computing (9569) covering algorithms, data structures, databases, web concepts, and Paper 2 practical execution. Built for JC students who want clear first-principles explanations rather than rote memorisation.",
+      topics: [
+        "Core data structures: stacks, queues, linked lists, trees, and hash tables",
+        "Recursion, sorting, searching, and comparing algorithm speed",
+        "Structuring larger Python programs cleanly and testing edge cases",
+        "Databases, organising tables cleanly (1NF–3NF), and SQL queries",
+        "Networking, cybersecurity, and timed Paper 2 practical mastery",
+      ],
+      lessonApproach:
+        "Tutors unpack difficult JC lecture topics from scratch, break down past prelim and A-Level questions, and check code correctness and edge cases line by line.",
+      outcomes: [
+        "Write and trace core data structures cleanly from scratch",
+        "Approach unfamiliar Paper 1 & Paper 2 questions with a clear plan",
+        "Avoid common boundary, loop, and SQL database mistakes",
+      ],
+    },
+  ],
 
   courses: [
     {
       id: "beginner-python",
       title: "Beginner Python",
       slug: "beginner-python",
-      tagline: "Functions, data structures, and terminal projects",
+      tagline: "Functions, data lists, and working terminal projects",
       trackBadge: "Foundations Track",
       status: "active",
-      intendedLearner: "Secondary, pre-poly/JC, and pre-university students who are new to text-based coding.",
+      intendedLearner: "Secondary, JC, IB, and Poly-bound students who are new to typed coding.",
       prerequisites: "None. Comfortable using a laptop and keyboard.",
       curriculumStages: [
         {
           stage: "Stage 01",
           title: "Functions & Tracing",
-          description: "Inputs, outputs, loops, and step-by-step code tracing.",
+          description: "Inputs, loops, and reading code step by step.",
         },
         {
           stage: "Stage 02",
-          title: "Data Structures",
-          description: "Lists, tuples, dictionaries, and JSON records.",
+          title: "Organising Data",
+          description: "Storing and updating lists, tables, and saved files.",
         },
         {
           stage: "Stage 03",
-          title: "State & Terminal Build",
-          description: "Variable scope, references, and a complete terminal app.",
+          title: "Complete Mini App",
+          description: "Putting everything together into a working terminal app.",
         },
       ],
       learningGoals: [
         "Trace code step by step without guessing",
         "Write clean functions with clear inputs and outputs",
-        "Model problems with lists, dictionaries, and JSON",
-        "Spot scope and reference bugs early",
-        "Build and explain a complete terminal project",
+        "Organise real data with Python lists, dictionaries, and saved files",
+        "Spot variable and logic mistakes early",
+        "Build and explain a complete terminal project from scratch",
       ],
       exampleFinalProject: {
         title: "Terminal Quiz Game & Score Tracker",
-        description: "A command-line quiz app that loads questions from JSON, checks answers, and tracks scores.",
-        techStack: ["Python 3", "JSON", "Standard Library"],
+        description: "A command-line quiz app that loads questions from a saved file, checks answers, and tracks scores.",
+        techStack: ["Python 3", "Saved Data Files", "Built-in Tools"],
         highlight: "Students write the logic themselves and can explain how every part works.",
       },
-      lessonFormat: "Live walkthroughs, guided coding, short solo challenges, and code feedback.",
+      lessonFormat: "Live walkthroughs, guided coding, short solo challenges, and 1-on-1 code feedback.",
       unconfirmedDetails: {
-        ageRangeNotice: "Exact age groupings TBC before launch",
-        scheduleNotice: "Timings arranged upon consultation (TBC)",
-        feeNotice: "Fees shared upon consultation (TBC)",
-        classSizeNotice: "Class sizes TBC before launch",
-        durationNotice: "Course length TBC before launch",
-        disclaimer: "Ages, fees, schedules, class sizes, and durations are unconfirmed and will be shared during consultation.",
+        ageRangeNotice: "Age groupings confirmed before term start",
+        scheduleNotice: "Class timings confirmed during trial consultation",
+        feeNotice: "Fees confirmed during trial consultation",
+        classSizeNotice: "3–6 students per table",
+        durationNotice: "Term length confirmed before launch",
+        disclaimer: "Exact timings, age groupings, and term details are unconfirmed and will be shared during consultation.",
       },
     },
     {
       id: "intro-web-dev",
       title: "Introductory Web Development",
       slug: "intro-web-dev",
-      tagline: "HTML/CSS layouts, JavaScript events, and live web projects",
+      tagline: "Page layouts, interactive buttons, and live web projects",
       trackBadge: "Applied Track",
       status: "active",
-      intendedLearner: "Secondary, pre-poly/JC, and pre-university students who want to build websites and simple web tools.",
+      intendedLearner: "Secondary, JC, IB, and Poly-bound students who want to build websites and practical web tools.",
       prerequisites: "None. Basic Python helps, but no web experience is needed.",
       curriculumStages: [
         {
           stage: "Stage 01",
-          title: "HTML & CSS Layout",
-          description: "Semantic HTML5, Flexbox, and responsive Grid.",
+          title: "Page Layout & Design",
+          description: "Clean page structure that fits both phones and laptops.",
         },
         {
           stage: "Stage 02",
-          title: "JavaScript & Events",
-          description: "Functions, button events, and dynamic DOM updates.",
+          title: "Interactive Buttons",
+          description: "Using JavaScript so clicks and inputs update the page live.",
         },
         {
           stage: "Stage 03",
-          title: "State & Deployment",
-          description: "LocalStorage state and live web publishing.",
+          title: "Saving & Publishing",
+          description: "Saving user progress in the browser and sharing a live link.",
         },
       ],
       learningGoals: [
-        "Build clean pages with semantic HTML5",
-        "Style mobile-friendly layouts with Flexbox and Grid",
-        "Add interactive features with JavaScript events",
-        "Update page content dynamically via the DOM",
-        "Publish a live website online",
+        "Structure clean web pages with HTML",
+        "Style mobile-friendly layouts that look neat on any screen",
+        "Add working buttons, timers, and interactive features with JavaScript",
+        "Update what appears on screen dynamically from user input",
+        "Publish a live website your child can open and share on their phone",
       ],
       exampleFinalProject: {
         title: "Personal Study Timer & Checklist",
-        description: "A web-based Pomodoro timer and to-do list that saves progress in the browser.",
-        techStack: ["HTML5", "CSS / Flexbox", "JavaScript", "GitHub Pages"],
+        description: "A web-based Pomodoro timer and to-do list that remembers progress right in the browser.",
+        techStack: ["HTML & CSS", "Mobile Layout", "JavaScript", "Live Web Link"],
         highlight: "Students leave with a live site they can open and use on their phone.",
       },
-      lessonFormat: "Live layout demos, guided building, independent tasks, and mentor code review.",
+      lessonFormat: "Live layout demos, guided building, solo tasks, and 1-on-1 tutor code review.",
       unconfirmedDetails: {
-        ageRangeNotice: "Exact age groupings TBC before launch",
-        scheduleNotice: "Timings arranged upon consultation (TBC)",
-        feeNotice: "Fees shared upon consultation (TBC)",
-        classSizeNotice: "Class sizes TBC before launch",
-        durationNotice: "Course length TBC before launch",
-        disclaimer: "Ages, fees, schedules, class sizes, and durations are unconfirmed and will be shared during consultation.",
+        ageRangeNotice: "Age groupings confirmed before term start",
+        scheduleNotice: "Class timings confirmed during trial consultation",
+        feeNotice: "Fees confirmed during trial consultation",
+        classSizeNotice: "3–6 students per table",
+        durationNotice: "Term length confirmed before launch",
+        disclaimer: "Exact timings, age groupings, and term details are unconfirmed and will be shared during consultation.",
       },
     },
   ],
@@ -428,12 +544,12 @@ export const siteConfig: SiteConfig = {
       title: "Python Quiz Game",
       category: "Python",
       categoryBadge: "Interactive Example",
-      description: "A simple trivia game in Python showing loops, dictionaries, score tracking, and input checks.",
+      description: "A simple trivia game in Python showing loops, score tracking, and checking user answers.",
       skillsDemonstrated: [
         "If-Else & Loops",
-        "Dictionaries & Lists",
+        "Data Lists & Tables",
         "Score Tracking",
-        "Input Checks",
+        "Answer Checks",
       ],
       isInteractive: true,
       interactiveComponentId: "python-quiz-runner",
@@ -443,19 +559,19 @@ export const siteConfig: SiteConfig = {
         code: `def run_quiz(questions):\n    score = 0\n    for idx, q in enumerate(questions, 1):\n        print(f"\\nQuestion {idx}: {q['prompt']}")\n        for opt in q['options']:\n            print(f"  {opt}")\n        answer = input("Your answer: ").strip().upper()\n        if answer == q['correct']:\n            score += 1\n            print("Correct!")\n        else:\n            print(f"Not quite - answer is {q['correct']}.")\n    print(f"\\nFinal score: {score}/{len(questions)}")\n    return score`,
       },
       studentLevel: "Example · Beginner Python",
-      learningOutcome: "Students combine loops, dictionaries, and input checks into a playable terminal program.",
+      learningOutcome: "Students combine loops, data tables, and answer checks into a playable terminal program.",
     },
     {
       id: "personal-portfolio",
       title: "Personal Website",
       category: "Web Development",
       categoryBadge: "Example Project",
-      description: "A clean personal page displaying school projects, hobbies, and notes with HTML and CSS Grid.",
+      description: "A clean personal website showcasing school projects, hobbies, and notes that fits phones and laptops.",
       skillsDemonstrated: [
-        "HTML5 Structure",
-        "CSS Grid & Flexbox",
-        "Mobile Layout",
-        "Readable Type",
+        "Page Structure",
+        "Responsive Layout",
+        "Mobile View",
+        "Clean Styling",
       ],
       isInteractive: false,
       codeSnippetPreview: {
@@ -464,19 +580,19 @@ export const siteConfig: SiteConfig = {
         code: `<main class="site-container">\n  <header class="hero-intro">\n    <h1>Alex Tan - Student Projects</h1>\n    <p>Python scripts and small web tools built in class.</p>\n  </header>\n  <section class="projects-grid" aria-label="Selected Projects">\n    <article class="project-card">\n      <h3>Kinematics Calculator</h3>\n      <p>Quick formula solver for secondary physics revision.</p>\n    </article>\n  </section>\n</main>`,
       },
       studentLevel: "Example · Intro Web Dev",
-      learningOutcome: "Students structure a multi-section page with HTML and CSS Grid that fits phones and laptops.",
+      learningOutcome: "Students design a multi-section webpage that displays neatly on both mobile phones and laptops.",
     },
     {
       id: "study-timer-tool",
       title: "Pomodoro Study Timer",
       category: "Study Tool",
       categoryBadge: "Example Project",
-      description: "A 25-minute revision timer that tracks focus sessions in the browser with no external libraries.",
+      description: "A 25-minute revision timer that saves focus sessions right in the browser.",
       skillsDemonstrated: [
         "Button Click Events",
-        "JavaScript Timers",
-        "Local Storage",
-        "Accessible Status Updates",
+        "Countdown Timers",
+        "Saving Progress",
+        "Clear Screen Updates",
       ],
       isInteractive: false,
       codeSnippetPreview: {
@@ -485,7 +601,7 @@ export const siteConfig: SiteConfig = {
         code: `class StudyTimer {\n  constructor(minutes = 25, onTick, onComplete) {\n    this.remainingSeconds = minutes * 60;\n    this.timerId = null;\n    this.onTick = onTick;\n    this.onComplete = onComplete;\n  }\n  start() {\n    if (this.timerId) return;\n    this.timerId = setInterval(() => {\n      this.remainingSeconds--;\n      this.onTick(this.remainingSeconds);\n      if (this.remainingSeconds <= 0) {\n        clearInterval(this.timerId);\n        this.timerId = null;\n        this.onComplete();\n      }\n    }, 1000);\n  }\n}`,
       },
       studentLevel: "Example · Study Tool",
-      learningOutcome: "Students use JavaScript timers and LocalStorage to build a revision timer that saves progress.",
+      learningOutcome: "Students use JavaScript timers and browser storage to build a revision timer that remembers progress.",
     },
   ],
 
@@ -495,40 +611,40 @@ export const siteConfig: SiteConfig = {
       title: "Concept Breakdown & Notes",
       subtitle: "First 20 Mins · Summary Notes",
       badge: "Step 01",
-      description: "Tutors walk through summary notes and visual code traces before students write code.",
-      mentorRole: "Walks through visual diagrams and quick check-in questions.",
-      reasoningFocus: "Understanding functions, base cases, and references before memorising syntax.",
-      concreteExample: "Tracing why b = a shares the same Python list on paper.",
+      description: "Tutors walk through summary notes and simple paper diagrams before students write code.",
+      mentorRole: "Explains the big picture with visual diagrams and quick check-in questions.",
+      reasoningFocus: "Understanding how functions and data work before memorising syntax.",
+      concreteExample: "Using simple box-and-arrow diagrams on paper to show how Python stores data.",
     },
     {
       step: 2,
       title: "Guided Class Walkthrough",
       subtitle: "Next 35 Mins · Worked Examples",
       badge: "Step 02",
-      description: "Tutors code worked examples live while students build alongside them step by step.",
-      mentorRole: "Models problem breakdown line by line so no one falls behind.",
-      reasoningFocus: "Turning problem requirements into small functions and clean data structures.",
-      concreteExample: "Splitting a score calculator into small helper functions.",
+      description: "Tutors build worked examples live while students follow along step by step.",
+      mentorRole: "Models how to break a big question into small steps so no one falls behind.",
+      reasoningFocus: "Turning problem requirements into small steps and clear functions.",
+      concreteExample: "Splitting a score calculator into small, easy-to-test helper steps.",
     },
     {
       step: 3,
       title: "Independent Practice Drills",
       subtitle: "Next 45 Mins · Graded Worksheets",
       badge: "Step 03",
-      description: "Students solve graded worksheet problems independently to build speed and debugging habits.",
-      mentorRole: "Prompts stuck students to trace their variable values on paper.",
-      reasoningFocus: "Independent code tracing, reading tracebacks, and checking edge cases.",
-      concreteExample: "Fixing an off-by-one IndexError on timed practice questions.",
+      description: "Students work through graded practice questions on their own to build speed and confidence.",
+      mentorRole: "Prompts stuck students to check their values on paper instead of guessing.",
+      reasoningFocus: "Reading error messages calmly and checking tricky edge cases.",
+      concreteExample: "Catching common loop and counting errors during timed practice.",
     },
     {
       step: 4,
       title: "1-on-1 Code Review & Feedback",
       subtitle: "Final 20 Mins · 1-on-1 Marking",
       badge: "Step 04",
-      description: "Tutors mark each student's code in class so logic mistakes are fixed before homework.",
-      mentorRole: "Reviews code 1-on-1 and checks that students can explain their solution.",
-      reasoningFocus: "Clean code structure, edge-case checks, and explaining logic aloud.",
-      concreteExample: "Simplifying repeated if-else checks into a clean dictionary lookup.",
+      description: "Tutors check each student's code in class so mistakes are fixed before homework.",
+      mentorRole: "Marks work 1-on-1 and checks that your child can explain their solution clearly.",
+      reasoningFocus: "Clean, readable code and explaining logic aloud.",
+      concreteExample: "Showing how to turn messy 20-line code into 5 clean lines.",
     },
   ],
 
@@ -542,15 +658,15 @@ export const siteConfig: SiteConfig = {
     {
       id: "mentor-template-1",
       name: "Founding Mentor 01 (Profile TBC)",
-      role: "Python & Foundations Mentor",
+      role: "Python & Foundations Tutor",
       photoUrl: undefined,
       degreeProgram: "NUS Computing Student (Degree programme TBC)",
       institution: "National University of Singapore (Undergraduate)",
-      teachingExperience: "Individual teaching experience to be confirmed before launch.",
+      teachingExperience: "Individual teaching background to be confirmed before term intake.",
       scholarships: ["Scholarship details to be confirmed"],
       innovationBadges: ['Innovation programme ("C Innovators", official name TBC)'],
       specializations: ["Python Basics", "Problem Breakdown", "Debugging"],
-      bio: "Editable profile template in src/config/siteConfig.ts. Replace with confirmed mentor name, photo, degree, and credentials before launch.",
+      bio: "Second founding NUS Computing tutor profile — full name and background to be confirmed before term intake.",
       avatarPlaceholderText: "FM",
       statusLabel: "Profile Template (TBC)",
       highlightQuote: "Students should be able to explain every line of code they write.",
@@ -558,12 +674,12 @@ export const siteConfig: SiteConfig = {
     {
       id: "mentor-template-2",
       name: "Evan Tan",
-      role: "Co-Founder · Python, AI & Projects Mentor",
+      role: "Co-Founder · Python, AI & Exam Prep Tutor",
       photoUrl: "/images/evan-tan.jpg",
       degreeProgram: "Double Degree: BComp (Computer Science) & BBA (Finance)",
       institution: "National University of Singapore (Undergraduate)",
       teachingExperience:
-        "Over 4 years of teaching N-Levels, O-Levels, and A-Levels, NUS Product Club Curriculum Design team, Experience in real world software systems.",
+        "Over 4 years tutoring N-Level, O-Level, and A-Level students, NUS Product Club Curriculum Design team, and hands-on industry software experience.",
       scholarships: [
         "Residential College 4 (RC4)",
         "NUS Venture Initiation Programme",
@@ -573,16 +689,16 @@ export const siteConfig: SiteConfig = {
         "ML Tech Lead (NUS FinTech Society)",
       ],
       specializations: [
-        "Python & FastAPI",
+        "Python & Web Apps",
         "AI & Machine Learning",
-        "Web & Data Projects",
+        "O-Level & H2 Computing",
         "Exam Summary Notes",
       ],
-      bio: "NUS Computer Science and Business (Double Degree) undergraduate. Previously built enterprise AI and Python systems at RAiD (RSAF), ML pipelines at 10x.ai, and software at Dibs under NUS C-Innovators.",
+      bio: "NUS Computer Science and Business (Double Degree) student with 4+ years of teaching N-Level, O-Level, and A-Level students. Previously built AI and software systems at RAiD (RSAF), 10x.ai, and Dibs under NUS C-Innovators.",
       avatarPlaceholderText: "ET",
       statusLabel: "Co-Founder",
       highlightQuote:
-        "Good summary notes and building projects you actually care about make tough concepts click.",
+        "Clear summary notes and building projects students actually care about make tough concepts click.",
     },
   ],
 
@@ -659,54 +775,62 @@ export const siteConfig: SiteConfig = {
       category: "admissions",
       categoryLabel: "Beginners",
       question: "My child has never coded before. Is this suitable?",
-      answer: "Yes. Both Beginner Python and Introductory Web Development start from zero experience. We explain each idea clearly with examples before expecting students to write code.",
+      answer: "Yes. Scratch, Beginner Python, and Introductory Web Development all start from zero experience. We explain each idea clearly with examples before expecting students to write code.",
     },
     {
       id: "faq-hardware",
       category: "technology",
       categoryLabel: "Laptop & Tools",
       question: "What laptop does my child need?",
-      answer: "Any working Windows, Mac, or Chromebook/Linux laptop with a browser (Chrome, Edge, or Firefox) is enough. All tools we use, such as Python 3 and VS Code, are free, and mentors help set everything up.",
+      answer: "Any working Windows, Mac, or Chromebook laptop with a web browser (Chrome, Edge, or Firefox) is enough. All tools we use are free, and tutors help set everything up during the trial.",
     },
     {
       id: "faq-selection",
       category: "curriculum",
       categoryLabel: "Choosing a Course",
       question: "Should we pick Beginner Python or Introductory Web Development?",
-      answer: "Beginner Python suits students who like logic puzzles, maths, or plan to take school Computing. Web Development suits students who want to design pages they can open and share on their phone. If you're unsure, pick 'Undecided' in the form and we'll advise during the trial.",
+      answer: "Beginner Python suits students who enjoy logic puzzles, maths, or plan to take school Computing. Web Development suits students who want to design pages and tools they can open on their phone. If you're unsure, pick 'Undecided' in the form and we'll advise during the trial.",
     },
     {
       id: "faq-feedback",
       category: "pedagogy",
       categoryLabel: "Progress Feedback",
       question: "How will parents know how their child is doing?",
-      answer: "Mentors share regular updates on what concepts your child has understood, where they get stuck, and what they built. Students also walk through their finished project at the end of a module.",
+      answer: "Tutors share regular updates on what concepts your child has mastered, where they get stuck, and what they built. Students also walk parents through their finished project at the end of each module.",
     },
     {
       id: "faq-ai-tools",
       category: "pedagogy",
       categoryLabel: "AI Tools Policy",
       question: "What is your policy on ChatGPT and AI coding tools?",
-      answer: "Students write and debug core exercises themselves without AI auto-generating the answers. Once they know the basics, we show them how to test and verify AI-suggested code.",
+      answer: "Students write and fix core exercises themselves without letting AI generate the answers. Once they grasp the basics, we teach them how to check and verify AI-suggested code safely.",
     },
     {
       id: "faq-olevel-alevel",
       category: "curriculum",
       categoryLabel: "O-Level & JC Computing",
       question: "Do you offer O-Level Computing (7155), A-Level H2 Computing (9569), or IB Computer Science tuition?",
-      answer: "Yes, through 1-on-1 private mentorship (S$75/hr) tailored to O-Level Computing (7155), A-Level H2 Computing (9569), IB Computer Science, or DSA portfolios. Beginners can also start in our small-group Beginner Python class before moving on to school exam practice.",
+      answer: "Yes — through 1-on-1 private coaching (S$75/hr) or targeted exam prep tailored to O-Level Computing (7155), A-Level H2 Computing (9569), and IB Computer Science. Beginners can also build foundations in Scratch or Beginner Python first.",
+    },
+    {
+      id: "faq-dsa-online",
+      category: "admissions",
+      categoryLabel: "DSA & Lesson Format",
+      question: "Do you help with DSA coding portfolios, and are classes in-person or online?",
+      answer: "Yes. We coach students preparing DSA coding portfolios for Secondary and JC admissions, and offer both in-person lessons near Yishun MRT and live online sessions.",
     },
     {
       id: "faq-singapore-classes",
       category: "admissions",
-      categoryLabel: "Classes & Location",
+      categoryLabel: "Location & Class Size",
       question: "Where are BaseCase Learning coding classes held in Singapore, and how large are classes?",
-      answer: "We run small-group coding classes of 3 to 6 students per table in Singapore (North Area), as well as online/hybrid and 1-on-1 sessions. New students start with a S$40 60-minute diagnostic trial (deducted from your first month's fees if you enrol).",
+      answer: "In-person small-group classes (3 to 6 students per table) are held near Yishun MRT, alongside live online and 1-on-1 options. New students start with a S$40 60-minute trial (credited toward your first month's fees if you enrol).",
     },
   ],
 
   enquiryConfig: {
     studentLevels: [
+      "Primary 4–6",
       "Secondary 1",
       "Secondary 2",
       "Secondary 3",
@@ -720,19 +844,23 @@ export const siteConfig: SiteConfig = {
       "Complete Beginner (Never coded before)",
       "Block Coding Only (Scratch / Micro:bit)",
       "Some Self-Taught Python or Web Basics",
-      "Formal School Computing / Elective",
+      "Taking School Computing (O-Level / A-Level / IB)",
     ],
     coursePreferences: [
+      "Scratch (Upper Pri – Lower Sec)",
+      "SICP in Python (SICPY)",
+      "O-Level Computing (7155)",
+      "A-Level H2 Computing (9569)",
       "Beginner Python",
       "Introductory Web Development",
       "Undecided (Please recommend during trial)",
     ],
     trialTimelineNotice:
-      "We reply to trial enquiries within 24 hours via WhatsApp or email to confirm fit and share timings.",
+      "We reply to trial enquiries within 24 hours via WhatsApp or email to confirm fit and share timings near Yishun MRT or online.",
     privacyGuarantee:
       "We only use these details to reply to your trial enquiry. Nothing is shared with third parties.",
     demoModeNotice:
-      "Pre-launch preview: form checks work, but enquiries are not submitted yet until our enquiry webhook is connected.",
+      "Preview mode: form checks work, and live enquiry delivery is being finalised. Please WhatsApp us directly at +65 9350 9168 if you'd like to book right away.",
     recommenderGoals: [
       {
         id: "logic",
@@ -750,7 +878,7 @@ export const siteConfig: SiteConfig = {
         id: "unsure",
         label: "Not sure yet (open to either)",
         recommendedCourse: "Undecided (Please recommend during trial)",
-        reason: "We’ll try a short hands-on activity in the trial and recommend whether Python or Web fits better.",
+        reason: "We’ll try a short hands-on activity in the trial and recommend whether Classes or Project Courses fit better.",
       },
     ],
     trialSteps: [
@@ -762,20 +890,20 @@ export const siteConfig: SiteConfig = {
       {
         step: 2,
         title: "Hands-On Mini Build",
-        description: "A guided coding activity with an NUS Computing tutor where your child writes and runs Python or web code.",
+        description: "A guided coding activity with an NUS Computing tutor where your child tries writing and running code.",
       },
       {
         step: 3,
         title: "Parent Debrief & Next Steps",
-        description: "Plain-English feedback on how your child did and which starting track fits best.",
+        description: "Plain-English feedback on how your child did and which starting class or course fits best.",
       },
     ],
     trialLogisticsNote:
-      "Trial format, duration, and any trial fee details are unconfirmed and will be shared during consultation when we arrange your slot.",
+      "Exact timings near Yishun MRT or online are arranged during consultation when we confirm your trial slot.",
     betweenLessonSupport: [
-      "WhatsApp help when stuck on code between lessons",
+      "WhatsApp help when stuck on homework between lessons",
       "Clear summary notes & reference code after each topic",
-      "Small-group pace with direct mentor feedback",
+      "Small-group pace (3–6 students) with direct tutor feedback",
     ],
   },
 
@@ -783,9 +911,9 @@ export const siteConfig: SiteConfig = {
   pricing: {
     headline: "Tuition Fees & Class Packages",
     subheadline:
-      "Small-group coding classes and 1-on-1 mentorship rates for secondary, JC, and IB students in Singapore.",
+      "Small-group coding classes near Yishun MRT & online, plus 1-on-1 mentorship for Primary, Secondary, JC, and IB students.",
     placeholderNotice:
-      "Sample rate guide shown below. Final term schedules and fee details are confirmed with parents during consultation before enrolment.",
+      "Standard rate guide below. Exact class slots near Yishun MRT or online are confirmed with parents before enrolment.",
     tiers: [
       {
         id: "trial-consultation",
@@ -793,12 +921,12 @@ export const siteConfig: SiteConfig = {
         badge: "Start Here",
         price: "S$40",
         billingCycle: "per 60-min session",
-        summary: "Diagnostic coding session and parent debrief (waived upon enrolment).",
+        summary: "Diagnostic coding session and parent debrief (credited to your first month's fees if you enrol).",
         features: [
-          "1-on-1 diagnostic coding activity with an NUS Computing tutor",
-          "Assess current logic comfort (zero experience needed)",
-          "Laptop and Python / VS Code environment setup check",
-          "Plain-English parent feedback & track recommendation",
+          "1-on-1 diagnostic coding session with an NUS Computing tutor",
+          "See how your child approaches problem-solving (no experience needed)",
+          "Free software setup on your child's laptop so they're ready to code",
+          "Plain-English parent feedback & recommended class or course",
         ],
         ctaText: "Book a coding trial",
         ctaHref: "#trial-enquiry",
@@ -810,13 +938,13 @@ export const siteConfig: SiteConfig = {
         badge: "Most Popular",
         price: "S$280",
         billingCycle: "per month (4 lessons)",
-        summary: "Weekly 2-hour classes in small groups of 3–6 students.",
+        summary: "Weekly 2-hour classes in small groups of 3–6 students near Yishun MRT or online.",
         features: [
-          "4 weekly 2-hour coached sessions (Beginner Python or Web Dev)",
+          "4 weekly 2-hour coached sessions (Classes or Project Courses)",
           "Small class ratio of 3–6 students per table",
-          "Step-by-step practice sheets & guided debugging reviews",
+          "Summary notes, graded practice sheets & 1-on-1 marking in class",
           "WhatsApp homework and project Q&A between lessons",
-          "End-of-module working project walkthrough for parents",
+          "Regular parent progress updates & end-of-module walkthrough",
         ],
         ctaText: "Enquire for group slots",
         ctaHref: "#trial-enquiry",
@@ -828,12 +956,12 @@ export const siteConfig: SiteConfig = {
         badge: "Custom Pace",
         price: "S$75",
         billingCycle: "per hour",
-        summary: "Individual coaching for O-Level / A-Level / IB Computing or custom projects.",
+        summary: "Personalised coaching for O-Level / A-Level / IB Computing, DSA portfolios, or custom projects.",
         features: [
-          "Dedicated 1-on-1 NUS Computing mentor matched to goals",
-          "Flexible pacing for school Computing or portfolio builds",
-          "Focused trace-table, algorithm, and code-review coaching",
-          "Flexible lesson timing around CCA and exam schedules",
+          "Dedicated 1-on-1 NUS Computing tutor matched to your child's goals",
+          "Custom pacing for school Computing exams or DSA portfolios",
+          "Targeted exam prep: trace tables, algorithms, and step-by-step code review",
+          "Flexible timing around CCA and school exam schedules",
         ],
         ctaText: "Request 1-on-1 coaching",
         ctaHref: "#trial-enquiry",
@@ -842,20 +970,20 @@ export const siteConfig: SiteConfig = {
     ],
     includedItems: [
       {
-        title: "Beyond-the-Classroom Guidance",
-        description: "Support beyond weekly lessons, including advice on DSA, university computing applications, portfolios, and tech pathways.",
+        title: "DSA & Uni Pathway Advice",
+        description: "Practical guidance beyond weekly lessons on DSA portfolios, poly/JC computing choices, and university CS paths.",
       },
       {
-        title: "All Free Developer Tools",
-        description: "Students learn on standard tools (Python 3, VS Code, HTML/CSS/JS) with zero paid subscriptions required.",
+        title: "No Extra Software Costs",
+        description: "Students use free, industry-standard coding tools — zero paid subscriptions required.",
       },
       {
         title: "Between-Lesson WhatsApp Support",
-        description: "Students can message their mentor on WhatsApp when stuck on homework bugs between classes.",
+        description: "Students can message their tutor on WhatsApp when stuck on homework bugs between classes.",
       },
       {
         title: "Regular Parent Progress Notes",
-        description: "Short written updates on topics mastered, debugging habits, and upcoming module goals.",
+        description: "Short written updates on topics mastered, problem-solving habits, and upcoming goals.",
       },
     ],
     pricingFaqs: [

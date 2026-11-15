@@ -41,11 +41,13 @@ describe('Header Component', () => {
     const mainNav = screen.getByRole('navigation', { name: /main navigation/i });
     expect(mainNav).toBeInTheDocument();
 
-    // Check presence of coding-focused navigation links (no unavailable tuition classes advertised in top nav)
-    expect(screen.getAllByText('Courses').length).toBeGreaterThan(0);
+    // Check presence of coding-focused navigation links (Courses is not in top nav)
+    expect(screen.getAllByText('Classes').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Projects').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Pricing').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Mentors').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('Progression').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('FAQs').length).toBeGreaterThan(0);
+    expect(screen.queryByText('Courses')).not.toBeInTheDocument();
     expect(screen.queryByText('Academic Tuition')).not.toBeInTheDocument();
 
     // Check CTA button
@@ -83,9 +85,9 @@ describe('Header Component', () => {
     expect(drawer).not.toHaveClass('hidden');
 
     // Find a link inside the drawer and click it
-    const coursesLinks = screen.getAllByText('Courses');
+    const classesLinks = screen.getAllByText('Classes');
     // The mobile link is inside the drawer
-    fireEvent.click(coursesLinks[coursesLinks.length - 1]);
+    fireEvent.click(classesLinks[classesLinks.length - 1]);
 
     expect(toggleButton).toHaveAttribute('aria-expanded', 'false');
     expect(drawer).toHaveClass('hidden');
@@ -318,28 +320,38 @@ describe('SEO Metadata Routes, Icons & Structured Data', () => {
     expect(result.sitemap).toBe(`${siteConfig.brand.url}/sitemap.xml`);
   });
 
-  it('generates sitemap.xml with canonical homepage, pricing, cookies, and privacy URLs', () => {
+  it('generates sitemap.xml with canonical homepage, classes, projects, pricing, cookies, and privacy URLs', () => {
     const entries = sitemap();
-    expect(entries).toHaveLength(4);
+    expect(entries).toHaveLength(6);
     expect(entries[0].url).toBe(siteConfig.brand.url);
     expect(entries[0].changeFrequency).toBe('weekly');
     expect(entries[0].priority).toBe(1);
     expect(entries[0].lastModified).toBeInstanceOf(Date);
 
-    expect(entries[1].url).toBe(`${siteConfig.brand.url}/pricing`);
+    expect(entries[1].url).toBe(`${siteConfig.brand.url}/classes`);
     expect(entries[1].changeFrequency).toBe('weekly');
     expect(entries[1].priority).toBe(0.9);
     expect(entries[1].lastModified).toBeInstanceOf(Date);
 
-    expect(entries[2].url).toBe(`${siteConfig.brand.url}/cookies`);
-    expect(entries[2].changeFrequency).toBe('monthly');
-    expect(entries[2].priority).toBe(0.5);
+    expect(entries[2].url).toBe(`${siteConfig.brand.url}/projects`);
+    expect(entries[2].changeFrequency).toBe('weekly');
+    expect(entries[2].priority).toBe(0.9);
     expect(entries[2].lastModified).toBeInstanceOf(Date);
 
-    expect(entries[3].url).toBe(`${siteConfig.brand.url}/privacy`);
-    expect(entries[3].changeFrequency).toBe('monthly');
-    expect(entries[3].priority).toBe(0.5);
+    expect(entries[3].url).toBe(`${siteConfig.brand.url}/pricing`);
+    expect(entries[3].changeFrequency).toBe('weekly');
+    expect(entries[3].priority).toBe(0.9);
     expect(entries[3].lastModified).toBeInstanceOf(Date);
+
+    expect(entries[4].url).toBe(`${siteConfig.brand.url}/cookies`);
+    expect(entries[4].changeFrequency).toBe('monthly');
+    expect(entries[4].priority).toBe(0.5);
+    expect(entries[4].lastModified).toBeInstanceOf(Date);
+
+    expect(entries[5].url).toBe(`${siteConfig.brand.url}/privacy`);
+    expect(entries[5].changeFrequency).toBe('monthly');
+    expect(entries[5].priority).toBe(0.5);
+    expect(entries[5].lastModified).toBeInstanceOf(Date);
   });
 
   it('renders JSON-LD structured data with EducationalOrganization, Course, and FAQPage schemas on HomePage', () => {

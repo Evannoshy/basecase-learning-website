@@ -3,6 +3,8 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import HomePage from '@/app/page';
+import ProjectsPage from '@/app/projects/page';
+import { Showcase } from '@/components/sections/Showcase';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { siteConfig } from '@/config/siteConfig';
@@ -48,13 +50,13 @@ describe('Tier 3: Cross-Feature Combinations (E2E Integration Verification)', ()
       const targetEnquiry = document.getElementById('trial-enquiry');
       expect(targetEnquiry).toBeInTheDocument();
 
-      // Secondary CTA: Explore courses -> #courses
+      // Secondary CTA: Explore classes -> #classes
       const secondaryCta = within(hero).getByRole('link', {
         name: new RegExp(siteConfig.hero.secondaryCta.text, 'i'),
       });
-      expect(secondaryCta).toHaveAttribute('href', '#courses');
-      const targetCourses = document.getElementById('courses');
-      expect(targetCourses).toBeInTheDocument();
+      expect(secondaryCta).toHaveAttribute('href', '#classes');
+      const targetClasses = document.getElementById('classes');
+      expect(targetClasses).toBeInTheDocument();
     });
   });
 
@@ -65,6 +67,7 @@ describe('Tier 3: Cross-Feature Combinations (E2E Integration Verification)', ()
     it('maps course card CTA destination to the enquiry form and verifies dropdown options', async () => {
       const user = userEvent.setup();
       renderFullSite();
+      render(<ProjectsPage />);
       const coursesSection = document.getElementById('courses')!;
 
       // Course cards have booking CTAs pointing to #trial-enquiry
@@ -103,7 +106,7 @@ describe('Tier 3: Cross-Feature Combinations (E2E Integration Verification)', ()
   // =========================================================================
   describe('3. Project Showcase Filtering & Course Details Navigation', () => {
     it('filters project showcase by track, expands code preview, and links to courses', () => {
-      renderFullSite();
+      render(<Showcase />);
       const projects = document.getElementById('projects')!;
       const filterGroup = within(projects).getByRole('group', { name: /filter projects by track/i });
 

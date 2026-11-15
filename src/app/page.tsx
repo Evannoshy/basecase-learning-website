@@ -1,10 +1,8 @@
 import React from 'react';
 import { Hero } from '@/components/sections/Hero';
-import { Courses } from '@/components/sections/Courses';
-import { Showcase } from '@/components/sections/Showcase';
+import { Classes } from '@/components/sections/Classes';
 import { HowLearningWorks } from '@/components/sections/HowLearningWorks';
 import { Mentors } from '@/components/sections/Mentors';
-import { Progression } from '@/components/sections/Progression';
 import { Faq } from '@/components/sections/Faq';
 import { TrialEnquiryForm } from '@/components/forms/TrialEnquiryForm';
 import { PhotoPlaceholder } from '@/components/ui/PhotoPlaceholder';
@@ -56,7 +54,7 @@ function buildHomeJsonLd() {
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Singapore',
-          addressRegion: 'North Area',
+          addressRegion: 'Yishun',
           addressCountry: 'SG',
         },
         areaServed: {
@@ -131,25 +129,19 @@ export default function HomePage() {
           __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
         }}
       />
-      {/* 1. Hero Section + Why BaseCase 4-Card Visual Strip */}
+      {/* 1. Hero Section */}
       <Hero />
 
-      {/* 2. Course Options (Image-Topped Programme Cards) */}
-      <Courses />
+      {/* 2. Classes (theory & exam prep, separate from Courses & Projects) */}
+      <Classes />
 
-      {/* 3. Project Showcase & Interactive Lab */}
-      <Showcase />
-
-      {/* 4. How Learning Works Pedagogy */}
-      <HowLearningWorks />
-
-      {/* 5. Meet the Mentors (3:4 Headshot Portrait Cards) */}
+      {/* 3. Mentors (trust) */}
       <Mentors />
 
-      {/* 6. Learning Progression Pathway */}
-      <Progression />
+      {/* 4. How learning works */}
+      <HowLearningWorks />
 
-      {/* 7. Parent FAQs */}
+      {/* 5. FAQs */}
       <Faq />
 
       {/* 8. Trial Enquiry Section (2-Column: Consultation Photo + Enquiry Form) */}

@@ -4,6 +4,10 @@ import { render, screen, fireEvent, within } from '@testing-library/react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import HomePage from '@/app/page';
+import ClassesPage from '@/app/classes/page';
+import ProjectsPage from '@/app/projects/page';
+import { Showcase } from '@/components/sections/Showcase';
+import { Progression } from '@/components/sections/Progression';
 import { siteConfig } from '@/config/siteConfig';
 
 /**
@@ -44,14 +48,12 @@ describe('Tier 1: Feature Coverage (E2E Full Platform Verification)', () => {
       expect(main).toBeInTheDocument();
       expect(screen.getByRole('contentinfo')).toBeInTheDocument(); // <footer>
 
-      // All 8 sections are present with proper IDs
+      // All 6 sections are present with proper IDs
       const expectedSections = [
         'hero',
-        'courses',
-        'projects',
-        'how-learning-works',
+        'classes',
         'mentors',
-        'progression',
+        'how-learning-works',
         'faqs',
         'trial-enquiry',
       ];
@@ -68,7 +70,7 @@ describe('Tier 1: Feature Coverage (E2E Full Platform Verification)', () => {
 
       // Section H2 headings
       const h2Elements = screen.getAllByRole('heading', { level: 2 });
-      expect(h2Elements.length).toBeGreaterThanOrEqual(7);
+      expect(h2Elements.length).toBeGreaterThanOrEqual(5);
     });
   });
 
@@ -86,20 +88,21 @@ describe('Tier 1: Feature Coverage (E2E Full Platform Verification)', () => {
 
       // Desktop navigation links inside header
       const header = screen.getByRole('banner');
-      const coursesLinks = within(header).getAllByRole('link', { name: /courses/i });
-      expect(coursesLinks.some((l) => l.getAttribute('href') === '#courses')).toBe(true);
+      const classesLinks = within(header).getAllByRole('link', { name: /classes/i });
+      expect(classesLinks.some((l) => l.getAttribute('href') === '/classes')).toBe(true);
 
       const projectsLinks = within(header).getAllByRole('link', { name: /projects/i });
-      expect(projectsLinks.some((l) => l.getAttribute('href') === '#projects')).toBe(true);
+      expect(projectsLinks.some((l) => l.getAttribute('href') === '/projects')).toBe(true);
 
-      const howItWorksLinks = within(header).getAllByRole('link', { name: /how learning works/i });
-      expect(howItWorksLinks.some((l) => l.getAttribute('href') === '#how-learning-works')).toBe(true);
+      expect(within(header).queryByRole('link', { name: /^courses$/i })).not.toBeInTheDocument();
+
+      const pricingLinks = within(header).getAllByRole('link', { name: /pricing/i });
+      expect(pricingLinks.some((l) => l.getAttribute('href') === '/pricing')).toBe(true);
+
 
       const mentorsLinks = within(header).getAllByRole('link', { name: /mentors/i });
       expect(mentorsLinks.some((l) => l.getAttribute('href') === '#mentors')).toBe(true);
 
-      const progressionLinks = within(header).getAllByRole('link', { name: /^progression$/i });
-      expect(progressionLinks.some((l) => l.getAttribute('href') === '#progression')).toBe(true);
 
       // Primary navigation stays focused on coding (does not advertise unavailable tuition classes)
       expect(within(header).queryByRole('link', { name: /academic tuition/i })).not.toBeInTheDocument();
@@ -165,9 +168,9 @@ describe('Tier 1: Feature Coverage (E2E Full Platform Verification)', () => {
   // =========================================================================
   // 4. Section 2: Course Options
   // =========================================================================
-  describe('4. Course Options (#courses)', () => {
+  describe('4. Course Options (#courses on ProjectsPage)', () => {
     it('renders all courses with audience, prerequisites, learning goals, and unconfirmed badges', () => {
-      renderFullSite();
+      render(<ProjectsPage />);
       const section = document.getElementById('courses')!;
 
       siteConfig.courses.forEach((course) => {
@@ -188,6 +191,20 @@ describe('Tier 1: Feature Coverage (E2E Full Platform Verification)', () => {
         expect(disclaimers.length).toBeGreaterThanOrEqual(1);
       });
     });
+
+    it('renders dedicated ClassesPage with in-depth syllabus explanations and no links to projects/courses', () => {
+      render(<ClassesPage />);
+      expect(screen.getByRole('heading', { level: 1, name: /coding classes & syllabuses/i })).toBeInTheDocument();
+
+      siteConfig.classes.forEach((cls) => {
+        expect(screen.getByRole('heading', { level: 2, name: cls.title })).toBeInTheDocument();
+        expect(screen.getByText(cls.overview)).toBeInTheDocument();
+        expect(screen.getByRole('link', { name: `Enquire about ${cls.title}` })).toHaveAttribute(
+          'href',
+          '/#trial-enquiry'
+        );
+      });
+    });
   });
 
   // =========================================================================
@@ -195,7 +212,7 @@ describe('Tier 1: Feature Coverage (E2E Full Platform Verification)', () => {
   // =========================================================================
   describe('5. Project Showcase & Interactive Widget (#projects)', () => {
     it('renders category filter buttons and authenticity badge', () => {
-      renderFullSite();
+      render(<Showcase />);
       const section = document.getElementById('projects')!;
       const filterGroup = within(section).getByRole('group', { name: /filter projects by track/i });
 
@@ -206,12 +223,12 @@ describe('Tier 1: Feature Coverage (E2E Full Platform Verification)', () => {
 
       // Authenticity transparency notice badge
       expect(
-        within(section).getByText(/sample curriculum projects to show what classes aim toward/i)
+        within(section).getByText(/curriculum project samples — showing what our courses help students build step by step/i)
       ).toBeInTheDocument();
     });
 
     it('filters project cards by category selection', () => {
-      renderFullSite();
+      render(<Showcase />);
       const section = document.getElementById('projects')!;
       const filterGroup = within(section).getByRole('group', { name: /filter projects by track/i });
 
@@ -227,7 +244,7 @@ describe('Tier 1: Feature Coverage (E2E Full Platform Verification)', () => {
     });
 
     it('expands and collapses student project code snippet preview', () => {
-      renderFullSite();
+      render(<Showcase />);
       const section = document.getElementById('projects')!;
 
       const expandBtns = within(section).getAllByRole('button', { name: /expand code snippet/i });
@@ -242,7 +259,7 @@ describe('Tier 1: Feature Coverage (E2E Full Platform Verification)', () => {
     });
 
     it('renders sample project gallery without the interactive Python Logic Quiz widget', () => {
-      renderFullSite();
+      render(<Showcase />);
       const section = document.getElementById('projects')!;
       expect(within(section).queryByRole('heading', { name: /interactive python logic quiz/i })).not.toBeInTheDocument();
       expect(within(section).getByRole('heading', { name: /sample project gallery/i })).toBeInTheDocument();
@@ -300,7 +317,7 @@ describe('Tier 1: Feature Coverage (E2E Full Platform Verification)', () => {
   // =========================================================================
   describe('8. Learning Progression Pathway (#progression)', () => {
     it('renders 4 progression levels and distinguishes available courses from roadmap', () => {
-      renderFullSite();
+      render(<Progression />);
       const section = document.getElementById('progression')!;
 
       siteConfig.progressionStages.forEach((stage) => {

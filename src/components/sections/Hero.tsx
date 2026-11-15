@@ -20,41 +20,6 @@ export interface HeroProps {
   className?: string;
 }
 
-const whyChooseItems = [
-  {
-    title: 'Small-Group Coaching',
-    description:
-      '3–6 students per table so mentors can spot logic gaps early and coach each student directly.',
-    photoTitle: 'Small-Group Table Photo',
-    shotGuide: '3–4 students around a table with a mentor walking through a problem.',
-    fileHint: 'public/images/why-small-group.jpg',
-  },
-  {
-    title: 'NUS Computing Mentors',
-    description:
-      'Taught directly by computing undergraduates who break concepts down into clear everyday steps.',
-    photoTitle: 'Mentor Explaining Concept',
-    shotGuide: 'Tutor sketching a diagram or logic flow on a whiteboard or iPad for a student.',
-    fileHint: 'public/images/why-mentors.jpg',
-  },
-  {
-    title: 'Hands-On Projects',
-    description:
-      'Every module ends with a working Python or web project students build and can explain line by line.',
-    photoTitle: 'Student Project on Screen',
-    shotGuide: 'Over-the-shoulder shot of a student testing their Python app or web page.',
-    fileHint: 'public/images/why-projects.jpg',
-  },
-  {
-    title: 'Step-by-Step Debugging',
-    description:
-      'Students learn to read tracebacks, check variable values, and fix bugs step by step.',
-    photoTitle: '1-on-1 Code Review',
-    shotGuide: 'Mentor sitting next to a student helping them trace and fix an error.',
-    fileHint: 'public/images/why-debugging.jpg',
-  },
-];
-
 export function Hero({
   headline,
   subheadline,
@@ -141,41 +106,6 @@ export function Hero({
           </div>
         </div>
 
-        {/* Bottom 4-Card "Why BaseCase Learning" Visual Grid (Zenith / EduFirst style) */}
-        <div className="mt-14 pt-12 border-t border-slate-200">
-          <div className="text-center max-w-2xl mx-auto mb-8">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#166534]">
-              The BaseCase Approach
-            </p>
-            <h2 className="mt-1.5 text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-              Why Parents &amp; Students Choose Us
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {whyChooseItems.map((item) => (
-              <div
-                key={item.title}
-                className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden flex flex-col"
-              >
-                <PhotoPlaceholder
-                  title={item.photoTitle}
-                  aspectRatio="16:10"
-                  dimensions="800 × 500 px"
-                  shotGuide={item.shotGuide}
-                  fileHint={item.fileHint}
-                  className="rounded-none border-0 border-b-2 border-dashed border-slate-300"
-                />
-                <div className="p-4 flex-1">
-                  <h3 className="text-base font-bold text-slate-900">{item.title}</h3>
-                  <p className="mt-1.5 text-sm text-slate-600 leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

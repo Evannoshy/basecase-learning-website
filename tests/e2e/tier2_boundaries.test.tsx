@@ -7,6 +7,7 @@ import path from 'path';
 import { Header } from '@/components/layout/Header';
 import { TrialEnquiryForm } from '@/components/forms/TrialEnquiryForm';
 import HomePage from '@/app/page';
+import ProjectsPage from '@/app/projects/page';
 import {
   validateParentName,
   validateContact,
@@ -74,10 +75,10 @@ describe('Tier 2: Boundary & Corner Cases (E2E Boundary Verification)', () => {
       expect(heroGrid).toHaveClass('grid-cols-1');
       expect(heroGrid).toHaveClass('lg:grid-cols-12');
 
-      // Courses 2-column grid
-      const coursesGrid = container.querySelector('#courses .grid');
-      expect(coursesGrid).toHaveClass('grid-cols-1');
-      expect(coursesGrid).toHaveClass('lg:grid-cols-2');
+      // Classes 4-column grid on HomePage
+      const classesGrid = container.querySelector('#classes .grid');
+      expect(classesGrid).toHaveClass('grid-cols-1');
+      expect(classesGrid).toHaveClass('lg:grid-cols-4');
 
       // Mentors 2-column grid
       const mentorsGrid = container.querySelector('#mentors .grid');
@@ -89,10 +90,11 @@ describe('Tier 2: Boundary & Corner Cases (E2E Boundary Verification)', () => {
       expect(learningGrid).toHaveClass('grid-cols-1');
       expect(learningGrid).toHaveClass('lg:grid-cols-4');
 
-      // Progression 4-column grid
-      const progressionGrid = container.querySelector('#progression .grid');
-      expect(progressionGrid).toHaveClass('grid-cols-1');
-      expect(progressionGrid).toHaveClass('lg:grid-cols-4');
+      // Courses 2-column grid on ProjectsPage
+      const { container: projectsContainer } = render(<ProjectsPage />);
+      const coursesGrid = projectsContainer.querySelector('#courses .grid');
+      expect(coursesGrid).toHaveClass('grid-cols-1');
+      expect(coursesGrid).toHaveClass('lg:grid-cols-2');
     });
 
     it('verifies that no fixed-width pixel containers exceed 375px mobile viewport without max-w constraint', () => {

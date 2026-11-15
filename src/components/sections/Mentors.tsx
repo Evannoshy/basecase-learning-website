@@ -37,7 +37,7 @@ export function Mentors({
           </h2>
           <div className="w-12 h-1 bg-[#166534] mx-auto mt-4" aria-hidden="true" />
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-            Led by NUS Computing students who explain concepts plainly and help students build projects they understand. Individual mentor details and official programme names are placeholders until confirmed before launch.
+            Taught by NUS Computing undergraduates who explain tough concepts plainly and guide students in small groups.
           </p>
         </div>
 

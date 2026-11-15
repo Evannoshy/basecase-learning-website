@@ -17,10 +17,10 @@ export function Footer() {
       className="bg-[#0F172A] text-slate-100 pt-16 pb-12 border-t border-slate-800"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* 3-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+        {/* 4-Column Tuition-Centre Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
           {/* Column 1: Brand & Academy Overview */}
-          <div className="space-y-4">
+          <div className="space-y-4 lg:col-span-4">
             <div className="flex items-center">
               <BrandLogoMark className="h-10 w-auto mr-2.5 flex-shrink-0" />
               <span className="font-bold text-white tracking-tight text-lg">
@@ -32,43 +32,62 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Column 2: Navigation & Learning Pathways */}
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-200 mb-4">
-              Programmes
-            </h3>
-            <nav aria-label="Footer Navigation">
+          {/* Columns 2 & 3: Grouped Footer Navigation */}
+          <nav
+            aria-label="Footer Navigation"
+            className="grid grid-cols-2 gap-8 md:col-span-1 lg:col-span-5"
+          >
+            <div>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-4">
+                Programmes
+              </h3>
               <ul className="space-y-2.5 text-sm text-slate-300">
                 <li>
-                  <a
-                    href={resolveSectionHref('#courses', pathname)}
+                  <Link
+                    href="/classes"
                     className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
-                    Beginner Python
-                  </a>
+                    Coding Classes
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href={resolveSectionHref('#courses', pathname)}
+                  <Link
+                    href="/classes#o-level-computing"
                     className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
-                    Introductory Web Dev
-                  </a>
+                    O-Level &amp; H2 Computing
+                  </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/projects#courses"
+                    className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
+                  >
+                    Project Courses
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/projects"
+                    className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
+                  >
+                    Example Projects
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-4">
+                Parents &amp; Info
+              </h3>
+              <ul className="space-y-2.5 text-sm text-slate-300">
                 <li>
                   <a
                     href={resolveSectionHref('#how-learning-works', pathname)}
                     className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
                     How Learning Works
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={resolveSectionHref('#projects', pathname)}
-                    className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
-                  >
-                    Example Projects
                   </a>
                 </li>
                 <li>
@@ -80,12 +99,12 @@ export function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/pricing"
                     className="hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded transition-colors"
                   >
                     Tuition Fees &amp; Pricing
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a
@@ -96,12 +115,12 @@ export function Footer() {
                   </a>
                 </li>
               </ul>
-            </nav>
-          </div>
+            </div>
+          </nav>
 
-          {/* Column 3: Contact & Operations */}
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-200 mb-4">
+          {/* Column 4: Contact & Operations */}
+          <div className="lg:col-span-3">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-4">
               Enquiries
             </h3>
             <ul className="space-y-2.5 text-xs text-slate-300">

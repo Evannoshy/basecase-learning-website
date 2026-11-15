@@ -200,7 +200,7 @@ describe('TrialEnquiryForm Component & Accessibility Tests', () => {
 
     expect(screen.getByText(/BC-TR-TEST-999/)).toBeInTheDocument();
     expect(screen.getByText(/24-hour review/i)).toBeInTheDocument();
-    expect(screen.getByText(/hardware preparation/i)).toBeInTheDocument();
+    expect(screen.getByText(/laptop setup/i)).toBeInTheDocument();
   });
 
   it('displays error banner and preserves inputs when API returns server error', async () => {

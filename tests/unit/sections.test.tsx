@@ -16,13 +16,13 @@ describe('Hero Section Component', () => {
     expect(heading).toHaveAttribute('id', 'hero-heading');
   });
 
-  it('renders primary CTA linking to #trial-enquiry and secondary CTA linking to #courses', () => {
+  it('renders primary CTA linking to #trial-enquiry and secondary CTA linking to #classes', () => {
     render(<Hero />);
     const primaryCta = screen.getByRole('link', { name: /book a coding trial/i });
     expect(primaryCta).toHaveAttribute('href', '#trial-enquiry');
 
-    const secondaryCta = screen.getByRole('link', { name: /explore courses/i });
-    expect(secondaryCta).toHaveAttribute('href', '#courses');
+    const secondaryCta = screen.getByRole('link', { name: /explore classes/i });
+    expect(secondaryCta).toHaveAttribute('href', '#classes');
   });
 
   it('renders all 4 value proposition highlights', () => {
@@ -35,7 +35,7 @@ describe('Hero Section Component', () => {
   it('renders classroom hero photo placeholder without external img tags', () => {
     const { container } = render(<Hero />);
     expect(screen.getByRole('img', { name: /Classroom & Mentorship Hero Photo/i })).toBeInTheDocument();
-    expect(screen.getByText('Why Parents & Students Choose Us')).toBeInTheDocument();
+    expect(screen.queryByText('Why Parents & Students Choose Us')).not.toBeInTheDocument();
 
     // Verify zero generic stock img tags in Hero
     const images = container.querySelectorAll('img');
@@ -70,15 +70,15 @@ describe('Courses Section Component', () => {
     expect(screen.getByText('Terminal Quiz Game & Score Tracker')).toBeInTheDocument();
     expect(screen.getByText('Personal Study Timer & Checklist')).toBeInTheDocument();
     expect(screen.getByText('Python 3')).toBeInTheDocument();
-    expect(screen.getByText('GitHub Pages')).toBeInTheDocument();
+    expect(screen.getByText('Live Web Link')).toBeInTheDocument();
   });
 
   it('renders operational transparency notices and enforces no invented pricing, ages, durations, or class sizes (NEG-04)', () => {
     render(<Courses />);
     // Notices for unconfirmed operational details rendered in the shared TBC bar
     expect(screen.getAllByText(/shared during consultation/i).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/Fees shared upon consultation/i).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/Exact age groupings TBC before launch/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/Fees confirmed during trial consultation/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/Age groupings confirmed before term start/i).length).toBeGreaterThanOrEqual(1);
 
     // Guardrail against rigid fabricated numbers
     expect(screen.queryByText(/\$480/)).toBeNull();

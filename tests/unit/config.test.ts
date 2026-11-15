@@ -19,7 +19,7 @@ describe('Central siteConfig Integrity and Completeness', () => {
 
   it('should keep top navigation focused on coding and reserve academic tuition in futureNavigation', () => {
     const links = siteConfig.navigation;
-    expect(links.length).toBeGreaterThanOrEqual(6);
+    expect(links.length).toBeGreaterThanOrEqual(5);
     expect(links.some((l) => /academic tuition/i.test(l.label))).toBe(false);
 
     const futureLinks = siteConfig.futureNavigation || [];

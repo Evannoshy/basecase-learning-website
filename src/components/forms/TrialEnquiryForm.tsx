@@ -346,8 +346,8 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           <div className="flex items-start gap-3 text-sm text-slate-800">
             <Laptop className="w-5 h-5 text-[#166534] flex-shrink-0 mt-0.5" aria-hidden="true" />
             <div>
-              <span className="font-semibold">Hardware Preparation: </span>
-              Students only need a standard laptop (Windows, Mac, or Chromebook) with Google Chrome. No prior software installation is necessary.
+              <span className="font-semibold">Laptop Setup: </span>
+              Students only need a working Windows, Mac, or Chromebook laptop with Google Chrome. No prior software installation is needed.
             </div>
           </div>
         </div>
@@ -421,7 +421,7 @@ export function TrialEnquiryForm({ className, onSuccess }: TrialEnquiryFormProps
           </div>
           <div className="flex items-center gap-2">
             <Laptop className="w-4 h-4 text-[#166534] flex-shrink-0" aria-hidden="true" />
-            <span>Laptop-ready online / hybrid session confirmed with parent</span>
+            <span>In-person (near Yishun MRT) or online trial confirmed with parent</span>
           </div>
         </div>
 

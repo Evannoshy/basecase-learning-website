@@ -49,23 +49,23 @@ function buildPricingJsonLd() {
 
 const comparisonRows = [
   {
-    programme: 'Beginner Python',
-    audience: 'Sec 1–4, IB & Pre-U Beginners',
-    format: 'Small Group (3–6 students)',
+    programme: 'Coding Classes (Scratch / SICPY / O- & A-Level)',
+    audience: 'Upper Pri, Sec, IB & JC Students',
+    format: 'Small Group (3–6) · Yishun MRT or Online',
     duration: '2 hours / week (4 lessons)',
     rate: 'S$280 / month',
   },
   {
-    programme: 'Introductory Web Development',
-    audience: 'Sec 1–4, IB, JC & Pre-U',
-    format: 'Small Group (3–6 students)',
+    programme: 'Project Courses (Beginner Python / Web Dev)',
+    audience: 'Sec 1–4, IB, JC & Poly-bound',
+    format: 'Small Group (3–6) · Yishun MRT or Online',
     duration: '2 hours / week (4 lessons)',
     rate: 'S$280 / month',
   },
   {
     programme: '1-on-1 Private Mentorship',
-    audience: 'Custom Pace / School Computing / Projects',
-    format: 'Private 1-on-1',
+    audience: 'Custom Pace / School Exams / DSA Portfolios',
+    format: 'Private 1-on-1 · Yishun MRT or Online',
     duration: '1.5 – 2 hours / session',
     rate: 'S$75 / hour',
   },

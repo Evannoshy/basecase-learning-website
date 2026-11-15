@@ -338,16 +338,14 @@ describe('Empirical Challenge: Mobile Viewport (375px) Scaling & Zero Horizontal
     expect(codeContainersWithoutOverflow).toEqual([]);
   });
 
-  it('verifies all 8 homepage sections render with responsive horizontal padding (px-4 or container mx-auto)', () => {
+  it('verifies all 6 homepage sections render with responsive horizontal padding (px-4 or container mx-auto)', () => {
     render(<HomePage />);
 
     const sectionIds = [
       'hero',
-      'courses',
-      'projects',
-      'how-learning-works',
+      'classes',
       'mentors',
-      'progression',
+      'how-learning-works',
       'faqs',
       'trial-enquiry',
     ];
@@ -375,7 +373,7 @@ describe('Empirical Challenge: Mobile Viewport (375px) Scaling & Zero Horizontal
     render(<Hero />);
 
     const primaryCta = screen.getByRole('link', { name: /book a coding trial/i });
-    const secondaryCta = screen.getByRole('link', { name: /explore courses/i });
+    const secondaryCta = screen.getByRole('link', { name: /explore classes/i });
 
     expect(primaryCta.parentElement).toHaveClass('flex');
     expect(primaryCta.parentElement).toHaveClass('flex-col');
@@ -421,16 +419,16 @@ describe('Empirical Challenge: Mobile Viewport (375px) Scaling & Zero Horizontal
 });
 
 describe('Empirical Challenge: CTA Scroll Anchors & Keyboard Focus Transfer', () => {
-  it('confirms the physical existence of #trial-enquiry and #courses targets in the DOM', () => {
+  it('confirms the physical existence of #trial-enquiry and #classes targets in the DOM', () => {
     render(<HomePage />);
 
     const trialEnquirySection = document.getElementById('trial-enquiry');
     expect(trialEnquirySection).toBeInTheDocument();
     expect(trialEnquirySection?.tagName.toLowerCase()).toBe('section');
 
-    const coursesSection = document.getElementById('courses');
-    expect(coursesSection).toBeInTheDocument();
-    expect(coursesSection?.tagName.toLowerCase()).toBe('section');
+    const classesSection = document.getElementById('classes');
+    expect(classesSection).toBeInTheDocument();
+    expect(classesSection?.tagName.toLowerCase()).toBe('section');
   });
 
   it('verifies every CTA button and navigation link points to a valid destination ID', () => {
@@ -444,7 +442,7 @@ describe('Empirical Challenge: CTA Scroll Anchors & Keyboard Focus Transfer', ()
 
     // Find all links whose href starts with '#'
     const anchorLinks = Array.from(document.querySelectorAll('a[href^="#"]'));
-    expect(anchorLinks.length).toBeGreaterThan(15);
+    expect(anchorLinks.length).toBeGreaterThanOrEqual(10);
 
     const brokenAnchors: { text: string; href: string }[] = [];
 
@@ -462,14 +460,14 @@ describe('Empirical Challenge: CTA Scroll Anchors & Keyboard Focus Transfer', ()
     expect(brokenAnchors).toEqual([]);
   });
 
-  it('confirms Hero primary CTA links to #trial-enquiry and secondary CTA links to #courses', () => {
+  it('confirms Hero primary CTA links to #trial-enquiry and secondary CTA links to #classes', () => {
     render(<Hero />);
 
     const primary = screen.getByRole('link', { name: /book a coding trial/i });
     expect(primary).toHaveAttribute('href', '#trial-enquiry');
 
-    const secondary = screen.getByRole('link', { name: /explore courses/i });
-    expect(secondary).toHaveAttribute('href', '#courses');
+    const secondary = screen.getByRole('link', { name: /explore classes/i });
+    expect(secondary).toHaveAttribute('href', '#classes');
   });
 
   it('confirms Courses card CTAs both link to #trial-enquiry with clear descriptive accessible names', () => {
@@ -499,13 +497,16 @@ describe('Empirical Challenge: CTA Scroll Anchors & Keyboard Focus Transfer', ()
       <div>
         <Header />
         <HomePage />
+        <Courses />
       </div>
     );
 
     const trialSection = document.getElementById('trial-enquiry');
+    const classesSection = document.getElementById('classes');
     const coursesSection = document.getElementById('courses');
 
     expect(trialSection).not.toBeNull();
+    expect(classesSection).not.toBeNull();
     expect(coursesSection).not.toBeNull();
 
     // Adversarial Investigation: Can a browser or screen reader programmatically focus the target section?
@@ -513,16 +514,21 @@ describe('Empirical Challenge: CTA Scroll Anchors & Keyboard Focus Transfer', ()
     trialSection?.focus();
     const trialFocused = document.activeElement === trialSection;
 
+    classesSection?.focus();
+    const classesFocused = document.activeElement === classesSection;
+
     coursesSection?.focus();
     const coursesFocused = document.activeElement === coursesSection;
 
-    // Both sections currently do NOT have tabIndex={-1}
+    // Sections currently do NOT have tabIndex={-1}
     expect(trialSection).not.toHaveAttribute('tabindex');
+    expect(classesSection).not.toHaveAttribute('tabindex');
     expect(coursesSection).not.toHaveAttribute('tabindex');
 
     // Document empirical reality:
     // Calling .focus() on an untabindexed section does not make it activeElement
     expect(trialFocused).toBe(false);
+    expect(classesFocused).toBe(false);
     expect(coursesFocused).toBe(false);
 
     // Verify whether interactive children exist inside #courses to receive subsequent tab navigation

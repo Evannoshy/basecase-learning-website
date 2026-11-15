@@ -3,6 +3,9 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import HomePage from '@/app/page';
+import { Showcase } from '@/components/sections/Showcase';
+import { Courses } from '@/components/sections/Courses';
+import { Progression } from '@/components/sections/Progression';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { siteConfig } from '@/config/siteConfig';
@@ -57,6 +60,7 @@ describe('Tier 4: Real-World Scenarios (End-to-End User Journeys)', () => {
     });
 
     renderFullSite();
+    render(<Courses />);
 
     // 1. Inspects Hero headline and confirms no stock photos
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(siteConfig.hero.headline);
@@ -137,6 +141,7 @@ describe('Tier 4: Real-World Scenarios (End-to-End User Journeys)', () => {
     });
 
     renderFullSite();
+    render(<Showcase />);
 
     // 1. Filters projects by Python and expands code preview
     const projects = document.getElementById('projects')!;
@@ -193,7 +198,7 @@ describe('Tier 4: Real-World Scenarios (End-to-End User Journeys)', () => {
           parentName: 'Mdm Kelly Koh',
           contact: '91234567',
           studentAge: 16,
-          codingExperience: 'Formal School Computing / Elective',
+          codingExperience: 'Taking School Computing (O-Level / A-Level / IB)',
           preferredCourse: 'Undecided (Please recommend during trial)',
           notes: 'Inquiring about Sec 4 O-Level Computing Syllabus 7155 tuition.',
         },
@@ -201,11 +206,12 @@ describe('Tier 4: Real-World Scenarios (End-to-End User Journeys)', () => {
     });
 
     renderFullSite();
+    render(<Progression />);
 
-    // 1. Locates Progression link in Header (keeping top nav focused on coding)
+    // 1. Locates Pricing link in Header (keeping top nav focused on coding)
     const header = screen.getByRole('banner');
-    const progressionLinks = within(header).getAllByRole('link', { name: /progression/i });
-    expect(progressionLinks.some((l) => l.getAttribute('href') === '#progression')).toBe(true);
+    const pricingLinks = within(header).getAllByRole('link', { name: /pricing/i });
+    expect(pricingLinks.some((l) => l.getAttribute('href') === '/pricing')).toBe(true);
 
     // 2. Inspects Level 04 card in progression section
     const progression = document.getElementById('progression')!;
@@ -223,7 +229,7 @@ describe('Tier 4: Real-World Scenarios (End-to-End User Journeys)', () => {
     await user.type(screen.getByLabelText(/student age/i), '16');
     await user.selectOptions(
       screen.getByLabelText(/coding experience/i),
-      'Formal School Computing / Elective'
+      'Taking School Computing (O-Level / A-Level / IB)'
     );
     await user.selectOptions(
       screen.getByLabelText(/preferred course/i),

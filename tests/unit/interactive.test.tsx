@@ -21,7 +21,7 @@ describe('Showcase Section Component', () => {
     expect(exampleProjectBadges.length).toBeGreaterThanOrEqual(siteConfig.showcaseProjects.length);
 
     expect(
-      screen.getByText(/sample curriculum projects to show what classes aim toward/i)
+      screen.getByText(/curriculum project samples — showing what our courses help students build step by step/i)
     ).toBeInTheDocument();
   });
 
@@ -35,8 +35,8 @@ describe('Showcase Section Component', () => {
   it('renders skills demonstrated for each showcase project', () => {
     render(<Showcase />);
     expect(screen.getByText('If-Else & Loops')).toBeInTheDocument();
-    expect(screen.getByText('HTML5 Structure')).toBeInTheDocument();
-    expect(screen.getByText('Local Storage')).toBeInTheDocument();
+    expect(screen.getByText('Page Structure')).toBeInTheDocument();
+    expect(screen.getByText('Saving Progress')).toBeInTheDocument();
   });
 
   it('renders code snippet preview with line numbers and filename', () => {

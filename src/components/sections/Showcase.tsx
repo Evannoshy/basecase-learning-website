@@ -63,7 +63,7 @@ export function Showcase({
             <span className="font-semibold uppercase tracking-wider text-[11px] bg-amber-200 text-amber-950 px-2 py-0.5 rounded">
               Example Projects
             </span>
-            <span>Sample curriculum projects to show what classes aim toward (not past student work).</span>
+            <span>Curriculum project samples — showing what our courses help students build step by step.</span>
           </div>
         </div>
 

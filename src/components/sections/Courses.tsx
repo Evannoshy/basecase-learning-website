@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { usePathname } from 'next/navigation';
 import {
   GraduationCap,
   Sparkles,
@@ -13,7 +14,7 @@ import {
 import { siteConfig, Course } from '@/config/siteConfig';
 import { Badge } from '@/components/ui/Badge';
 import { PhotoPlaceholder } from '@/components/ui/PhotoPlaceholder';
-import { cn } from '@/lib/utils';
+import { cn, resolveSectionHref } from '@/lib/utils';
 import { dispatchTrialSelection } from '@/lib/trialSelection';
 
 export interface CoursesProps {
@@ -35,6 +36,7 @@ const coursePhotoMeta: Record<string, { title: string; shotGuide: string; fileHi
 };
 
 export function Courses({ courses = siteConfig.courses, className }: CoursesProps) {
+  const pathname = usePathname();
   const sharedDetails = courses[0]?.unconfirmedDetails;
 
   return (
@@ -213,7 +215,7 @@ export function Courses({ courses = siteConfig.courses, className }: CoursesProp
               {/* Course Booking CTA Link */}
               <div className="px-6 sm:px-7 pb-6 pt-4 border-t border-slate-200">
                 <a
-                  href="#trial-enquiry"
+                  href={resolveSectionHref('#trial-enquiry', pathname)}
                   onClick={() =>
                     dispatchTrialSelection({
                       preferredCourse: course.title,
