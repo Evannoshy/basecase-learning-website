@@ -316,7 +316,7 @@ export const siteConfig: SiteConfig = {
   hero: {
     headline: "Learn to code. Build something you’re proud of.",
     subheadline:
-      "Small-group coding classes and 1-on-1 O-Level, A-Level & IB Computing tuition near Yishun MRT and online — taught step by step by NUS Computing tutors.",
+      "Small-group coding classes and 1-on-1 O-Level, A-Level & IB, taught step by step by NUS Computing tutors.",
     badgeText: "Upper Pri · Sec · IB · JC",
     primaryCta: {
       text: "Book a coding trial",
@@ -328,63 +328,11 @@ export const siteConfig: SiteConfig = {
     },
     highlights: [
       "Small groups (3–6 students per table)",
-      "Taught by NUS Computing tutors",
       "Zero coding experience needed to start",
-      "Supports O-Level, H2 & IB Computing",
     ],
   },
 
   classes: [
-    {
-      id: "scratch",
-      title: "Scratch",
-      shortDescription: "Visual drag-and-drop coding that builds logic and problem-solving for younger beginners (Upper Pri – Lower Sec).",
-      trackBadge: "Foundational Logic",
-      targetLevel: "Upper Primary (P4–P6) & Lower Secondary Beginners",
-      prerequisites: "No coding experience needed. Great for students new to coding logic.",
-      format: "Small-group coaching (3–6 students) or 1-on-1 · Near Yishun MRT / Online",
-      overview:
-        "Scratch removes typing and spelling mistakes so younger students can focus on how instructions work together. Students learn to break problems into clear steps, spot why something behaves unexpectedly, and build strong thinking habits before moving to typed code.",
-      topics: [
-        "Step-by-step instructions, screen coordinates, and game events",
-        "Repeating actions cleanly with loops and stop conditions",
-        "Making decisions using if / else rules",
-        "Tracking scores, lives, and changing game states",
-        "Organising bigger projects into tidy reusable blocks",
-      ],
-      lessonApproach:
-        "Tutors ask students to predict what their blocks will do before pressing run — building careful step-by-step thinking instead of random guessing.",
-      outcomes: [
-        "Think clearly through loops, conditions, and game logic",
-        "Spot and fix mistakes calmly without guessing",
-        "Transition smoothly into typed Python or school Computing later",
-      ],
-    },
-    {
-      id: "sicpy",
-      title: "SICP in Python (SICPY)",
-      shortDescription: "Deeper problem-solving in Python — ideal for strong learners, IP students, and DSA preparation.",
-      trackBadge: "CS Fundamentals",
-      targetLevel: "Secondary, IP & Pre-University Students",
-      prerequisites: "Comfortable with basic Python variables, loops, and simple functions.",
-      format: "Small-group coaching (3–6 students) or 1-on-1 · Near Yishun MRT / Online",
-      overview:
-        "Based on NUS's foundational Computer Science approach taught in Python, this class goes beyond memorising commands. Students learn how to break down unfamiliar problems cleanly, use recursion with confidence, and pick faster, neater ways to solve tough questions.",
-      topics: [
-        "Writing clean, reusable functions that simplify complex tasks",
-        "Solving multi-step problems with recursion and tracing them on paper",
-        "Comparing faster vs. slower ways to solve a problem",
-        "Organising structured data clearly using lists and tree-like patterns",
-        "Choosing the right coding style for larger problems",
-      ],
-      lessonApproach:
-        "Instead of rushing through syntax, tutors walk through tricky examples on paper and screen, then review every line your child writes.",
-      outcomes: [
-        "Solve unfamiliar, multi-step problems cleanly without guessing",
-        "Trace complex code on paper and spot efficiency bottlenecks",
-        "Build strong foundations ahead of JC Computing, DSA, or university CS",
-      ],
-    },
     {
       id: "o-level-computing",
       title: "O-Level Computing (7155)",
@@ -433,6 +381,56 @@ export const siteConfig: SiteConfig = {
         "Write and trace core data structures cleanly from scratch",
         "Approach unfamiliar Paper 1 & Paper 2 questions with a clear plan",
         "Avoid common boundary, loop, and SQL database mistakes",
+      ],
+    },
+    {
+      id: "scratch",
+      title: "Scratch",
+      shortDescription: "Visual drag-and-drop coding that builds logic and problem-solving for younger beginners (Upper Pri – Lower Sec).",
+      trackBadge: "Foundational Logic",
+      targetLevel: "Upper Primary (P4–P6) & Lower Secondary Beginners",
+      prerequisites: "No coding experience needed. Great for students new to coding logic.",
+      format: "Small-group coaching (3–6 students) or 1-on-1 · Near Yishun MRT / Online",
+      overview:
+        "Scratch removes typing and spelling mistakes so younger students can focus on how instructions work together. Students learn to break problems into clear steps, spot why something behaves unexpectedly, and build strong thinking habits before moving to typed code.",
+      topics: [
+        "Step-by-step instructions, screen coordinates, and game events",
+        "Repeating actions cleanly with loops and stop conditions",
+        "Making decisions using if / else rules",
+        "Tracking scores, lives, and changing game states",
+        "Organising bigger projects into tidy reusable blocks",
+      ],
+      lessonApproach:
+        "Tutors ask students to predict what their blocks will do before pressing run — building careful step-by-step thinking instead of random guessing.",
+      outcomes: [
+        "Think clearly through loops, conditions, and game logic",
+        "Spot and fix mistakes calmly without guessing",
+        "Transition smoothly into typed Python or school Computing later",
+      ],
+    },
+    {
+      id: "sicpy",
+      title: "SICP in Python (SICPY)",
+      shortDescription: "Follows the foundational computer science curriculum used by MIT — deeper problem-solving in Python for strong learners, IP students, and DSA prep.",
+      trackBadge: "CS Fundamentals",
+      targetLevel: "Secondary, IP & Pre-University Students",
+      prerequisites: "Comfortable with basic Python variables, loops, and simple functions.",
+      format: "Small-group coaching (3–6 students) or 1-on-1 · Near Yishun MRT / Online",
+      overview:
+        "Adapted from the foundational Computer Science curriculum used by MIT (and taught at NUS) into Python, this class goes beyond memorising commands. Students learn how to break down unfamiliar problems cleanly, use recursion with confidence, and pick faster, neater ways to solve tough questions.",
+      topics: [
+        "Writing clean, reusable functions that simplify complex tasks",
+        "Solving multi-step problems with recursion and tracing them on paper",
+        "Comparing faster vs. slower ways to solve a problem",
+        "Organising structured data clearly using lists and tree-like patterns",
+        "Choosing the right coding style for larger problems",
+      ],
+      lessonApproach:
+        "Instead of rushing through syntax, tutors walk through tricky examples on paper and screen, then review every line your child writes.",
+      outcomes: [
+        "Solve unfamiliar, multi-step problems cleanly without guessing",
+        "Trace complex code on paper and spot efficiency bottlenecks",
+        "Build strong foundations ahead of JC Computing, DSA, or university CS",
       ],
     },
   ],

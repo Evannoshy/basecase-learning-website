@@ -25,7 +25,7 @@ describe('Hero Section Component', () => {
     expect(secondaryCta).toHaveAttribute('href', '#classes');
   });
 
-  it('renders all 4 value proposition highlights', () => {
+  it('renders all value proposition highlights', () => {
     render(<Hero />);
     siteConfig.hero.highlights.forEach((highlight) => {
       expect(screen.getByText(highlight)).toBeInTheDocument();

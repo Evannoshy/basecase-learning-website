@@ -16,7 +16,7 @@ import { Badge } from '@/components/ui/Badge';
 export const metadata: Metadata = {
   title: 'Coding Classes & Syllabuses',
   description:
-    'In-depth guide to theory and exam-prep coding classes at BaseCase Learning: Scratch, SICP in Python (SICPY), O-Level Computing (7155), and A-Level H2 Computing (9569).',
+    'In-depth guide to theory and exam-prep coding classes at BaseCase Learning: O-Level Computing (7155), A-Level H2 Computing (9569), Scratch, and SICP in Python (SICPY).',
   alternates: {
     canonical: '/classes',
   },
